@@ -24,7 +24,8 @@ function App() {
   });
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/combined-data/")
+    const API_URL = process.env.REACT_APP_API_URL;
+    fetch(API_URL)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error("Error fetching data:", error));
