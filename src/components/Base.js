@@ -30,26 +30,6 @@ function Base() {
         <li>
           <NavLink to="/about">About</NavLink>
         </li>
-        <li>
-          <NavLink to="/workshops">Workshops</NavLink>
-        </li>
-
-        <li class="dropdown-menu">
-          <NavLink to="/resources" class="Resources">
-            Resources
-            <img src={downArrowImg} />
-          </NavLink>
-          <ul class="dropdown">
-            <li>
-              <a href="{% url 'resources' %}#publications">Publications</a>
-            </li>
-            <li>
-              <a href="{% url 'resources' %}#training_manuals">
-                Training manuals
-              </a>
-            </li>
-          </ul>
-        </li>
         <li class="dropdown-menu">
           <NavLink to="/team" class="/team">
             Team
@@ -77,6 +57,65 @@ function Base() {
             </li>
           </ul>
         </li>
+        <li>
+          <NavLink to="/workshops">Workshops</NavLink>
+        </li>
+
+        <li class="dropdown-menu">
+          <NavLink to="/resources" class="Resources">
+            Resources
+            <img src={downArrowImg} />
+          </NavLink>
+          <ul class="dropdown">
+            <li>
+              <a href="{% url 'resources' %}#publications">Publications</a>
+            </li>
+            <li>
+              <a href="{% url 'resources' %}#training_manuals">
+                Training manuals
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown-menu">
+          <NavLink to="/themes" id="themes-dropdown">
+            Themes
+            <img src={downArrowImg} />
+          </NavLink>
+          <ul class="dropdown">
+            <li>
+              <a href="{% url 'themes' %}#publications">
+                Theme 1- Review of Climate Change and Disaster Risk{" "}
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'resources' %}#training_manuals">
+                Theme 2- Review of Gender Inequality
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'resources' %}#training_manuals">
+                Theme 3- Gender wise determination of CC Impact
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'resources' %}#training_manuals">
+                Theme 4- Gender wise determination of Disaster Risk
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'resources' %}#training_manuals">
+                Theme 5- Development of Strategies for CC adaptation
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'resources' %}#training_manuals">
+                Theme 6- Development of Strategies for Disaster Risk Reduction
+              </a>
+            </li>
+          </ul>
+        </li>
+
         <li>
           <NavLink to="/gallery">Gallery</NavLink>
         </li>

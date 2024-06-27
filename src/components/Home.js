@@ -1,9 +1,10 @@
 import React from "react";
 import "./global.css";
 import "./style.css";
-import logo7Img from "../images/logo/7.png";
-import logo8Img from "../images/logo/8.png";
-import logo9Img from "../images/logo/9.png";
+import nitbhopal_logo from "../images/logo/bhopal.png";
+import science_hub_logo from "../images/logo/science_hub_logo.png";
+import rika_logo from "../images/logo/rika_logo.png";
+import colombo_logo from "../images/logo/colombo.png";
 import oneImg from "../images/1.png";
 import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
@@ -42,6 +43,8 @@ import IITRImg from "../images/logo/IITR.png";
 import mapImg from "../images/map.png";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
+import Carousel from "./logo_carousel";
+import Click_Carousel from "./click_carousel";
 
 function Home({ data }) {
   const videoRef = useRef(null);
@@ -59,11 +62,14 @@ function Home({ data }) {
           >
             <source src={videoSrc} type="video/mp4" />
           </video>
+
           <div class="header-content">
             <div class="goal">GoAL</div>
             <div class="goal-desc">
               <p class="full-form">
-                Gender-Orientated Adaptive Transformation cross-Learning
+                Gender oriented Adaptive Transformation cross-Learning for
+                Climate Change and Disaster Risk Resilience among India, Nepal,
+                Sri Lanka and Japan
               </p>
               <p class="funder">An APN Funded Project | IIT Roorkee</p>
               <a href="#about-home">
@@ -79,19 +85,7 @@ function Home({ data }) {
           <div class="collabs">
             <h5>Collaborating Institutes</h5>
 
-            <div class="collab- s">
-              <ul class="logos">
-                <li class="logo">
-                  <img src={apnLogo1Img} alt="logo" />
-                </li>
-                <li class="logo">
-                  <img src={apnLogo1Img} alt="logo" />
-                </li>
-                <li class="logo">
-                  <img src={apnLogo1Img} alt="logo" />
-                </li>
-              </ul>
-            </div>
+            <Carousel />
           </div>
         </div>
         <a href="#hero">
@@ -239,8 +233,8 @@ function Home({ data }) {
             <div class="obj-card">
               <img src={oneImg} alt="" />
               <p>
-                Build case studies on Gender-sensitive adaptive transformation
-                in CCA & DRR& prepare training resource
+                Co-designing of Case Study Framework & Training of community
+                Trainers
               </p>
             </div>
             <div class="obj-card">
@@ -252,10 +246,7 @@ function Home({ data }) {
             </div>
             <div class="obj-card">
               <img src={threeImg} alt="" />
-              <p>
-                Build case studies on Gender-sensitive adaptive transformation
-                in CCA & DRR& prepare training resource
-              </p>
+              <p>Knowledge sharing & co-leaming</p>
             </div>
           </div>
           <img src={designrightImg} alt="" class="designright" />
@@ -307,29 +298,7 @@ function Home({ data }) {
               </div>
               <h2>Hear from the people themselves</h2>
             </div>
-            <div class="stories-body">
-              <div class="left-right-icons">
-                <img src={leftArrowImg} class="left-arrow" alt="" />
-                <img src={rightArrowImg} alt="" />
-              </div>
-              <div class="stories">
-                <ul class="stories-list">
-                  <li class="story">
-                    <img src={story1Img} alt="" />
-                  </li>
-                  <li class="story">
-                    <img src={story2Img} alt="" />
-                  </li>
-                  <li class="story">
-                    <img src={story3Img} alt="" />
-                  </li>
-                </ul>
-              </div>
-              <div class="dots">
-                <img src={selected_dot} alt="" />
-                <img src={unselected_dot} alt="" />
-              </div>
-            </div>
+            <Click_Carousel />
           </div>
         </div>
         <div class="funding-agency">
@@ -366,27 +335,27 @@ function Home({ data }) {
             </div>
           </div>
         </div>
-        <div class="logos">
+        <div class="logos" style={{ margin: "auto", marginTop: "90px" }}>
           <ul>
             <li class="logo">
-              <img src={apnLogo1Img} alt="" />
+              <img src={colombo_logo} alt="" />
               <p>university of colombo</p>
             </li>
             <li class="logo">
-              <img src={logo7Img} alt="" />
+              <img src={nitbhopal_logo} alt="" />
               <p>NIT Bhopal</p>
             </li>
             <li class="logo">
-              <img src={logo8Img} alt="" />
+              <img src={science_hub_logo} alt="" />
               <p>Science Hub</p>
             </li>
             <li class="logo">
-              <img src={logo9Img} alt="" />
-              <p></p>
+              <img src={rika_logo} alt="" />
+              <p>Rika</p>
             </li>
             <li class="logo">
               <img src={apnLogo1Img} alt="" />
-              <p></p>
+              <p>APN</p>
             </li>
             <li class="logo">
               <img src={IITRImg} alt="" />

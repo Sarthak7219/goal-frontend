@@ -14,6 +14,7 @@ import About from "./components/About";
 import SearchPage from "./components/SearchPage";
 import PageNotFound from "./components/PageNotFound";
 import { Routes, Route } from "react-router-dom";
+import Theme from "./components/Themes";
 
 function App() {
   const [data, setData] = useState({
@@ -73,6 +74,8 @@ function App() {
         />
 
         <Route path="/search" element={<SearchPage />} />
+
+        <Route path="/themes" element={<Theme />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Routes>
