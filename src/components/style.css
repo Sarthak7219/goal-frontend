@@ -616,11 +616,10 @@ right: 0px;
     color: var(--text-black);
 }
 
-.about p, .case_studies p, .themes p{
+.about p, .case_studies p, .themes p, .left-container p{
     color: #666;
-    font-family: Poppins;
     font-size: 15px;
-    font-weight: 300;
+    line-height: 26px;
 }
 
 .about, .case_studies{
@@ -785,7 +784,6 @@ background-color: var(--text-pink);
 .workshop-container{
 display: flex;
 width: 978px;
-height: 1052.25px;
 justify-content: center;
 align-items: flex-start;
 margin-top: 36px;
@@ -795,7 +793,6 @@ gap: 21.75px;
 
 .workshop-container .left-container{
 width: 642px;
-height: 1052.25px;
 
 }
 .workshop-container .right-container{
@@ -803,7 +800,6 @@ height: 1052.25px;
     flex-direction: column;
     gap: 42px;
 width: 314.25px;
-height: 988.5px;
 }
 .left-container img{
     display: block;
@@ -811,27 +807,14 @@ height: 988.5px;
     height: 298.5px;
 
 }
-.left-container .about-workshop{
-    display: flex;
-width: 623.25px;
-flex-direction: column;
-margin-top: 37.5px;
+.left-container > div{
+width: 625px;
+margin-top: 40px;
 gap: 17.75px;
 }
-.left-container .registration-detail{
-    width: 625.5px;
-height: 221.25px;
-margin-top: 54px;
-}
-.left-container .accomodation{
-width: 623.25px;
-padding-bottom: 1.25px;
-margin-top: 40.5px;
-gap: 17.5px;
-}
-.accomodation p{
-    margin-top: 17.5px;
-}
+
+
+
 .right-container .workshop-detail{
 
     display: flex;
@@ -866,11 +849,7 @@ text-transform: capitalize;
 }
 .left-container p{
     width: 623.25px;
-    color: #666;
-font-family: Montserrat;
-font-size: 13.5px;
-font-weight: 400;
-line-height: 21px; /* 155.556% */
+    margin-top: 12px;
 }
 .left-container h4{
     color: #EC028C;
