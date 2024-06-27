@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import iconImg from "../images/icon.png";
 import "./global.css";
 import "./style.css";
@@ -14,6 +14,40 @@ function Themes() {
       cleanup();
     };
   }, []);
+
+  const [activeOption, setActiveOption] = useState(0);
+
+  const options = [
+    {
+      title: "Case-study-1",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+    },
+    {
+      title: "Case-study-2",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor...",
+    },
+    {
+      title: "Case-study-3",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor...",
+    },
+    {
+      title: "Case-study-4",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor...",
+    },
+    {
+      title: "Case-study-5",
+      description:
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor...",
+    },
+  ];
+
+  const handleClick = (index) => {
+    setActiveOption(index);
+  };
 
   return (
     <div className="themes-page">
@@ -85,45 +119,18 @@ function Themes() {
           <section className="themes" id="theme-case-studies">
             <div className="theme-cs-box">
               <div className="cs-select">
-                <div className="cs active">
-                  <p>Case-study-1</p>
-                </div>
-                <div className="cs">
-                  <p>Case-study-2</p>
-                </div>
-                <div className="cs">
-                  <p>Case-study-3</p>
-                </div>
-                <div className="cs">
-                  <p>Case-study-4</p>
-                </div>
-                <div className="cs">
-                  <p>Case-study-5</p>
-                </div>
+                {options.map((option, index) => (
+                  <div
+                    key={index}
+                    className={`cs ${index === activeOption ? "active" : ""}`}
+                    onClick={() => handleClick(index)}
+                  >
+                    <p>{option.title}</p>
+                  </div>
+                ))}
               </div>
               <div className="theme-cs-desc">
-                <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                  nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                  nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet.Lorem
-                  ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                  nonumy eirmod tempor invidunt ut labore et dolore magna
-                  aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                  justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-                  sea takimata sanctus est Lorem ipsum dolor sit amet.
-                </p>
+                <p>{options[activeOption].description}</p>
               </div>
             </div>
           </section>

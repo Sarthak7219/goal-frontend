@@ -86,7 +86,7 @@ function Gallery() {
           <p>Gampaha District, Western Province</p>
         </div>
       </div>
-      <div className="container" id="">
+      <div className="container" id="gal-container">
         <div className="quick-link-box" id="gallery-sidebox">
           <a href="#visit-pics" className="quicklink">
             - Visit Photos
