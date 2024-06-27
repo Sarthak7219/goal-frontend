@@ -5,6 +5,9 @@ import { NavLink } from "react-router-dom";
 import iconImg from "../images/icon.png";
 
 function WorkshopList({ workshops }) {
+  useEffect(() => {
+    console.log("workshopss Data:", workshops); // Log the case_studies prop to inspect its structure
+  }, [workshops]);
   return (
     <div className="workshops-page">
       <div className="page-hero" id="team-bg">
