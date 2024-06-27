@@ -12,6 +12,13 @@ p, h1, h2, h3, h4, h5, h6, ul{
     margin: 0px;
     padding: 0px;
 }
+p{
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-size: 14px;
+    color: #444;
+    line-height: 20px;
+}
 
 a{
     color: inherit;
@@ -111,10 +118,14 @@ body{
 
     .navlist{
         display: inline-flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 32px;
         flex-shrink: 0;
 
+    }
+
+    .navlist > li{
+        padding: 12px 0px;
     }
 
   .searchbar{
@@ -239,6 +250,7 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 12px 0px;
     
     }
 
@@ -251,7 +263,7 @@ body{
     .dropdown-menu ul.dropdown{
         padding: 10px;
         position: absolute;
-        top: 18px;
+        top: 40px;
         z-index: 999;
         display: none;
     
@@ -262,7 +274,6 @@ body{
         width: max-content;
         display: flex;
     padding: 16.716px 15px;
-    margin-top: 7.5px;
     background-color: #ffffff;
     flex-direction: column;
     align-items: flex-start;
@@ -277,8 +288,10 @@ body{
         transition: all 0.25s ease;
     } 
 
+
+
     .dropdown li a:hover{
-        color: var(--text-pinks);
+        color: var(--text-pink);
     }
 
     /* Nav css end */
@@ -311,7 +324,7 @@ body{
 
 .page-head p{
     font-size: 12px;
-    font-weight: 400;
+    color: white;
 }
 
 .quick-link-box{
@@ -332,14 +345,15 @@ body{
 }
 
 
-.quicklink{
+.quicklink, .theme-quicklink{
     font-family: Poppins;
     font-size: 14.078px;
     font-style: normal;
     font-weight: 400;
+    cursor: pointer;
 }
 
-.quicklink.active{
+.quicklink.active, .theme-quicklink.active{
     color: var(--text-pink);
 }
 
@@ -437,6 +451,7 @@ right: 0px;
     width: 232.5px;
     height: 277.5px;
     background-color: var(--text-white);
+    box-shadow: 0px 0px 11.25px 1.266px rgba(0, 0, 0, 0.1);
 }
 
 .resource-box img{
@@ -592,6 +607,8 @@ right: 0px;
 }
 
 
+
+
 .about h1, .case_studies h1{
     font-size: 21px;
     font-family: "Playfair Display";
@@ -609,7 +626,7 @@ right: 0px;
 .about, .case_studies{
     gap: 18.5px;
     margin-top: 50px;
-    width: 710px;
+    width: 978px;
 }
 
 #about, #case_studies{
@@ -1365,13 +1382,8 @@ text-transform: capitalize;
 }
 .overview-body p{
     width: 432.75px;
-    color: #444;
-font-family: Poppins;
-font-size: 12px;
-font-style: normal;
-font-weight: 300;
-line-height: 19.5px; /* 162.5% */
-text-transform: capitalize;
+
+
 }
 .about-image{
     width: 450px;
@@ -1401,11 +1413,6 @@ text-transform: capitalize;
     display: flex;
     flex-direction: column;
     gap: 12px;
-}
-.area-head p{
-    font-size: 12px;
-line-height: 19.5px;
-text-transform: capitalize;
 }
 
 .headline{
@@ -1699,12 +1706,6 @@ text-transform: capitalize;
     }
     .obj-card p{
     color: #666;
-    font-family: "Montserrat";
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px; /* 150% */
-    text-transform: capitalize;
     padding: 24px;
     }
 .designleft{
@@ -1875,11 +1876,8 @@ gap: 22.5px;
 .right-content p{
     color: #555;
 text-align: justify;
-font-family: Poppins;
-font-size: 21px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+font-size: 18px;
+line-height: 30px;
 }
 .sites{
     display: flex;
@@ -1887,13 +1885,11 @@ align-items: center;
 gap: 22.5px;
 }
 .sites h4{
-    color: #000;
-font-family: "Playfair Display";
+    color: var(--text-black);
+font-family: "Montserrat";
 font-size: 18.75px;
-font-style: normal;
-font-weight: 600;
-line-height: 100%; /* 18.75px */
-letter-spacing: 0.978px;
+font-weight: 500;
+
 }
 
 
@@ -2317,6 +2313,19 @@ justify-content: center;
 #themes-right{
     align-items: flex-start;
 }
+
+#themes-sidebox{
+    margin-top: 84px;
+}
+
+.theme-cont{
+    display: none;
+}
+
+.theme-cont.active{
+    display: block;
+}
+
 
 .section-head3{
     margin: auto;

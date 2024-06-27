@@ -8,11 +8,10 @@ import image5Img from "../images/gallery/image5.jpg";
 import image6Img from "../images/gallery/image6.jpg";
 import image7Img from "../images/gallery/image7.jpg";
 import image8Img from "../images/gallery/image8.jpg";
-import iconImg from "../images/icon.png";
-import right_arrow_small from "../images/right-arrow-small.svg";
+
 import "./global.css";
 import "./style.css";
-import { NavLink } from "react-router-dom";
+
 import { scrollSpy } from "./scrollSpy";
 import { useEffect } from "react";
 
