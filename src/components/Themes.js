@@ -16,6 +16,7 @@ function Themes() {
   }, []);
 
   const [activeOption, setActiveOption] = useState(0);
+  const [activeTheme, setActiveTheme] = useState("theme-1");
 
   const options = [
     {
@@ -49,6 +50,12 @@ function Themes() {
     setActiveOption(index);
   };
 
+  const handleTheme = (themeId) => {
+    if (themeId !== activeTheme) {
+      setActiveTheme(themeId); // Toggle active theme state
+    }
+  };
+
   return (
     <div className="themes-page">
       <div className="page-hero" id="themes-bg">
@@ -69,71 +76,377 @@ function Themes() {
 
       <div className="container" id="themes">
         <div className="quick-link-box" id="themes-sidebox">
-          <a href="#theme-1" className="quicklink active">
+          <div
+            className={`theme-quicklink ${
+              activeTheme === "theme-1" ? "active" : ""
+            }`}
+            onClick={() => handleTheme("theme-1")}
+          >
             - Theme-1
-          </a>
-          <a href="#theme-2" className="quicklink">
+          </div>
+          <div
+            className={`theme-quicklink ${
+              activeTheme === "theme-2" ? "active" : ""
+            }`}
+            onClick={() => handleTheme("theme-2")}
+          >
             - Theme-2
-          </a>
-          <a href="#theme-3" className="quicklink">
+          </div>
+          <div
+            className={`theme-quicklink ${
+              activeTheme === "theme-3" ? "active" : ""
+            }`}
+            onClick={() => handleTheme("theme-3")}
+          >
             - Theme-3
-          </a>
-          <a href="#theme-4" className="quicklink">
+          </div>
+          <div
+            className={`theme-quicklink ${
+              activeTheme === "theme-4" ? "active" : ""
+            }`}
+            onClick={() => handleTheme("theme-4")}
+          >
             - Theme-4
-          </a>
-          <a href="#theme-5" className="quicklink">
+          </div>
+          <div
+            className={`theme-quicklink ${
+              activeTheme === "theme-5" ? "active" : ""
+            }`}
+            onClick={() => handleTheme("theme-5")}
+          >
             - Theme-5
-          </a>
+          </div>
+          <div
+            className={`theme-quicklink ${
+              activeTheme === "theme-6" ? "active" : ""
+            }`}
+            onClick={() => handleTheme("theme-6")}
+          >
+            - Theme-6
+          </div>
         </div>
 
         <div className="right" id="themes-right">
-          <div className="section-head3">
-            <p>Theme</p>
+          <div
+            className={`theme-cont ${
+              activeTheme === "theme-1" ? "active" : ""
+            }`}
+          >
+            <div className="section-head3">
+              <p>Theme</p>
 
-            <h1>Theme 1- Review of Climate Change and Disaster Risk </h1>
-          </div>
-          <section className="themes" id="description">
-            <h1>Description</h1>
-            <p>
-              Project Goal attempts to tap adaptive transformations
-              (collaborative learning) for Climate Change (CC1& Disaster Risk
-              Reduction (DRR) & enhance research & communication capacities of
-              the men, women, and youths in their context by Training the
-              Community Trainers (ToCT) & developing training resources &
-              community-friendly tools for comprehensive outreach through an
-              innovative approach.
-              <br></br>
-              The collaborative case studies are based on scientific research
-              and will be developed in- 1. India-Udham Singh Nagar District,
-              Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
-              District, Manipur
-              <br></br>
-              2. Nepal-Chitwan District, Bagmati Province
-              <br></br>
-              3. Sri Lanka- Gampaha District. Western Province
-              <br></br>
-              4. Japan- literature-based case study and expert, stakeholders,
-              and community inputs through hybrid mode
-            </p>
-          </section>
-          <section className="themes" id="theme-case-studies">
-            <div className="theme-cs-box">
-              <div className="cs-select">
-                {options.map((option, index) => (
-                  <div
-                    key={index}
-                    className={`cs ${index === activeOption ? "active" : ""}`}
-                    onClick={() => handleClick(index)}
-                  >
-                    <p>{option.title}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="theme-cs-desc">
-                <p>{options[activeOption].description}</p>
-              </div>
+              <h1>Theme 1- Review of Climate Change and Disaster Risk </h1>
             </div>
-          </section>
+            <section className="themes" id="description">
+              <h1>Description</h1>
+              <p>
+                Project Goal attempts to tap adaptive transformations
+                (collaborative learning) for Climate Change (CC1& Disaster Risk
+                Reduction (DRR) & enhance research & communication capacities of
+                the men, women, and youths in their context by Training the
+                Community Trainers (ToCT) & developing training resources &
+                community-friendly tools for comprehensive outreach through an
+                innovative approach.
+                <br></br>
+                The collaborative case studies are based on scientific research
+                and will be developed in- 1. India-Udham Singh Nagar District,
+                Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
+                District, Manipur
+                <br></br>
+                2. Nepal-Chitwan District, Bagmati Province
+                <br></br>
+                3. Sri Lanka- Gampaha District. Western Province
+                <br></br>
+                4. Japan- literature-based case study and expert, stakeholders,
+                and community inputs through hybrid mode
+              </p>
+            </section>
+            <section className="themes" id="theme-case-studies">
+              <div className="theme-cs-box">
+                <div className="cs-select">
+                  {options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={`cs ${index === activeOption ? "active" : ""}`}
+                      onClick={() => handleClick(index)}
+                    >
+                      <p>{option.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="theme-cs-desc">
+                  <p>{options[activeOption].description}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div
+            className={`theme-cont ${
+              activeTheme === "theme-2" ? "active" : ""
+            }`}
+          >
+            <div className="section-head3">
+              <p>Theme</p>
+
+              <h1>Theme 2- Review of Gender Inequality </h1>
+            </div>
+            <section className="themes" id="description">
+              <h1>Description</h1>
+              <p>
+                Project Goal attempts to tap adaptive transformations
+                (collaborative learning) for Climate Change (CC1& Disaster Risk
+                Reduction (DRR) & enhance research & communication capacities of
+                the men, women, and youths in their context by Training the
+                Community Trainers (ToCT) & developing training resources &
+                community-friendly tools for comprehensive outreach through an
+                innovative approach.
+                <br></br>
+                The collaborative case studies are based on scientific research
+                and will be developed in- 1. India-Udham Singh Nagar District,
+                Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
+                District, Manipur
+                <br></br>
+                2. Nepal-Chitwan District, Bagmati Province
+                <br></br>
+                3. Sri Lanka- Gampaha District. Western Province
+                <br></br>
+                4. Japan- literature-based case study and expert, stakeholders,
+                and community inputs through hybrid mode
+              </p>
+            </section>
+            <section className="themes" id="theme-case-studies">
+              <div className="theme-cs-box">
+                <div className="cs-select">
+                  {options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={`cs ${index === activeOption ? "active" : ""}`}
+                      onClick={() => handleClick(index)}
+                    >
+                      <p>{option.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="theme-cs-desc">
+                  <p>{options[activeOption].description}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div
+            className={`theme-cont ${
+              activeTheme === "theme-3" ? "active" : ""
+            }`}
+          >
+            <div className="section-head3">
+              <p>Theme</p>
+
+              <h1> Theme 3- Gender wise determination of CC Impact</h1>
+            </div>
+            <section className="themes" id="description">
+              <h1>Description</h1>
+              <p>
+                Project Goal attempts to tap adaptive transformations
+                (collaborative learning) for Climate Change (CC1& Disaster Risk
+                Reduction (DRR) & enhance research & communication capacities of
+                the men, women, and youths in their context by Training the
+                Community Trainers (ToCT) & developing training resources &
+                community-friendly tools for comprehensive outreach through an
+                innovative approach.
+                <br></br>
+                The collaborative case studies are based on scientific research
+                and will be developed in- 1. India-Udham Singh Nagar District,
+                Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
+                District, Manipur
+                <br></br>
+                2. Nepal-Chitwan District, Bagmati Province
+                <br></br>
+                3. Sri Lanka- Gampaha District. Western Province
+                <br></br>
+                4. Japan- literature-based case study and expert, stakeholders,
+                and community inputs through hybrid mode
+              </p>
+            </section>
+            <section className="themes" id="theme-case-studies">
+              <div className="theme-cs-box">
+                <div className="cs-select">
+                  {options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={`cs ${index === activeOption ? "active" : ""}`}
+                      onClick={() => handleClick(index)}
+                    >
+                      <p>{option.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="theme-cs-desc">
+                  <p>{options[activeOption].description}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div
+            className={`theme-cont ${
+              activeTheme === "theme-4" ? "active" : ""
+            }`}
+          >
+            <div className="section-head3">
+              <p>Theme</p>
+
+              <h1>Theme 4- Gender wise determination of Disaster Risk</h1>
+            </div>
+            <section className="themes" id="description">
+              <h1>Description</h1>
+              <p>
+                Project Goal attempts to tap adaptive transformations
+                (collaborative learning) for Climate Change (CC1& Disaster Risk
+                Reduction (DRR) & enhance research & communication capacities of
+                the men, women, and youths in their context by Training the
+                Community Trainers (ToCT) & developing training resources &
+                community-friendly tools for comprehensive outreach through an
+                innovative approach.
+                <br></br>
+                The collaborative case studies are based on scientific research
+                and will be developed in- 1. India-Udham Singh Nagar District,
+                Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
+                District, Manipur
+                <br></br>
+                2. Nepal-Chitwan District, Bagmati Province
+                <br></br>
+                3. Sri Lanka- Gampaha District. Western Province
+                <br></br>
+                4. Japan- literature-based case study and expert, stakeholders,
+                and community inputs through hybrid mode
+              </p>
+            </section>
+            <section className="themes" id="theme-case-studies">
+              <div className="theme-cs-box">
+                <div className="cs-select">
+                  {options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={`cs ${index === activeOption ? "active" : ""}`}
+                      onClick={() => handleClick(index)}
+                    >
+                      <p>{option.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="theme-cs-desc">
+                  <p>{options[activeOption].description}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div
+            className={`theme-cont ${
+              activeTheme === "theme-5" ? "active" : ""
+            }`}
+          >
+            <div className="section-head3">
+              <p>Theme</p>
+
+              <h1>Theme 5- Development of Strategies for CC adaptation</h1>
+            </div>
+            <section className="themes" id="description">
+              <h1>Description</h1>
+              <p>
+                Project Goal attempts to tap adaptive transformations
+                (collaborative learning) for Climate Change (CC1& Disaster Risk
+                Reduction (DRR) & enhance research & communication capacities of
+                the men, women, and youths in their context by Training the
+                Community Trainers (ToCT) & developing training resources &
+                community-friendly tools for comprehensive outreach through an
+                innovative approach.
+                <br></br>
+                The collaborative case studies are based on scientific research
+                and will be developed in- 1. India-Udham Singh Nagar District,
+                Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
+                District, Manipur
+                <br></br>
+                2. Nepal-Chitwan District, Bagmati Province
+                <br></br>
+                3. Sri Lanka- Gampaha District. Western Province
+                <br></br>
+                4. Japan- literature-based case study and expert, stakeholders,
+                and community inputs through hybrid mode
+              </p>
+            </section>
+            <section className="themes" id="theme-case-studies">
+              <div className="theme-cs-box">
+                <div className="cs-select">
+                  {options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={`cs ${index === activeOption ? "active" : ""}`}
+                      onClick={() => handleClick(index)}
+                    >
+                      <p>{option.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="theme-cs-desc">
+                  <p>{options[activeOption].description}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div
+            className={`theme-cont ${
+              activeTheme === "theme-6" ? "active" : ""
+            }`}
+          >
+            <div className="section-head3">
+              <p>Theme</p>
+
+              <h1>
+                Theme 6- Development of Strategies for Disaster Risk Reduction
+              </h1>
+            </div>
+            <section className="themes" id="description">
+              <h1>Description</h1>
+              <p>
+                Project Goal attempts to tap adaptive transformations
+                (collaborative learning) for Climate Change (CC1& Disaster Risk
+                Reduction (DRR) & enhance research & communication capacities of
+                the men, women, and youths in their context by Training the
+                Community Trainers (ToCT) & developing training resources &
+                community-friendly tools for comprehensive outreach through an
+                innovative approach.
+                <br></br>
+                The collaborative case studies are based on scientific research
+                and will be developed in- 1. India-Udham Singh Nagar District,
+                Uttarakhand. Dumka, Aspirant District harkhand and Bishnupur
+                District, Manipur
+                <br></br>
+                2. Nepal-Chitwan District, Bagmati Province
+                <br></br>
+                3. Sri Lanka- Gampaha District. Western Province
+                <br></br>
+                4. Japan- literature-based case study and expert, stakeholders,
+                and community inputs through hybrid mode
+              </p>
+            </section>
+            <section className="themes" id="theme-case-studies">
+              <div className="theme-cs-box">
+                <div className="cs-select">
+                  {options.map((option, index) => (
+                    <div
+                      key={index}
+                      className={`cs ${index === activeOption ? "active" : ""}`}
+                      onClick={() => handleClick(index)}
+                    >
+                      <p>{option.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="theme-cs-desc">
+                  <p>{options[activeOption].description}</p>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>

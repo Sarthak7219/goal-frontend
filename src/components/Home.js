@@ -17,7 +17,6 @@ import small3Img from "../images/small3.png";
 import small4Img from "../images/small4.png";
 import back_to_top_arrow from "../images/back_to_top_arrow.svg";
 import leftArrowImg from "../images/rightarrow.png";
-import rightArrowImg from "../images/rightarrow.png";
 import gallery1Img from "../images/gallery/image1.jpg";
 import gallery2Img from "../images/gallery/image2.jpg";
 import gallery3Img from "../images/gallery/image3.jpg";
@@ -25,9 +24,6 @@ import gallery4Img from "../images/gallery/image4.jpg";
 import gallery5Img from "../images/gallery/image5.jpg";
 import gallery6Img from "../images/gallery/image6.jpg";
 import gallery7Img from "../images/gallery/image7.jpg";
-import story1Img from "../images/story1 (2).png";
-import story2Img from "../images/story2 (2).png";
-import story3Img from "../images/story3 (2).png";
 import designleftImg from "../images/designleft.png";
 import designrightImg from "../images/designright.png";
 import line172Img from "../images/Line 172.png";
@@ -99,9 +95,10 @@ function Home({ data }) {
           <div class="about-description">
             <div class="overview">
               <div class="overview-body">
-                <h5>
-                  Overview <img src={line172Img} alt="" />
-                </h5>
+                <div className="headline">
+                  <h5>Overview</h5>
+                  <img src={line172Img} alt="" />
+                </div>
                 <h2>Know About Our Project</h2>
                 <p>
                   Project GoAL attempts to tap adaptive transformations for

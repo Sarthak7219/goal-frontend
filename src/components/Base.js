@@ -24,7 +24,7 @@ function Base() {
   return (
     <div class="navbar">
       <NavLink to="/">
-        <img src={logoImg} alt="image" />
+        <img src={logoImg} alt="" />
       </NavLink>
       <ul class="navlist">
         <li>
@@ -33,27 +33,28 @@ function Base() {
         <li class="dropdown-menu">
           <NavLink to="/team" class="/team">
             Team
-            <img src={downArrowImg} />
+            <img src={downArrowImg} alt="" />
           </NavLink>
           <ul class="dropdown">
             <li>
-              <a href="{% url 'team' %}#collabarotors">Collabarotors</a>
+              <NavLink to="/team#collabarotors">Collabarotors</NavLink>
             </li>
             <li>
-              <a href="{% url 'team' %}#research_associates">
+              <NavLink to="/team#research_associates">
                 Research associates
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'team' %}#community_trainers">
+              <NavLink to="/team#community_trainers">
+                {" "}
                 Community Trainers
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'team' %}#intern">Intern</a>
+              <NavLink to="/team#intern">Interns</NavLink>
             </li>
             <li>
-              <a href="{% url 'team' %}#students">Students</a>
+              <NavLink to="/team#students">Students</NavLink>
             </li>
           </ul>
         </li>
@@ -64,54 +65,54 @@ function Base() {
         <li class="dropdown-menu">
           <NavLink to="/resources" class="Resources">
             Resources
-            <img src={downArrowImg} />
+            <img src={downArrowImg} alt="" />
           </NavLink>
           <ul class="dropdown">
             <li>
-              <a href="{% url 'resources' %}#publications">Publications</a>
+              <NavLink to="/resources#publications">Publications</NavLink>
             </li>
             <li>
-              <a href="{% url 'resources' %}#training_manuals">
+              <NavLink to="/resources#training_manuals">
                 Training manuals
-              </a>
+              </NavLink>
             </li>
           </ul>
         </li>
         <li class="dropdown-menu">
           <NavLink to="/themes" id="themes-dropdown">
             Themes
-            <img src={downArrowImg} />
+            <img src={downArrowImg} alt="" />
           </NavLink>
           <ul class="dropdown">
             <li>
-              <a href="{% url 'themes' %}#publications">
-                Theme 1- Review of Climate Change and Disaster Risk{" "}
-              </a>
+              <NavLink to="/themes">
+                Theme 1- Review of Climate Change and Disaster Risk
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'resources' %}#training_manuals">
+              <NavLink to="/themes">
                 Theme 2- Review of Gender Inequality
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'resources' %}#training_manuals">
+              <NavLink to="/themes">
                 Theme 3- Gender wise determination of CC Impact
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'resources' %}#training_manuals">
+              <NavLink to="/themes">
                 Theme 4- Gender wise determination of Disaster Risk
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'resources' %}#training_manuals">
+              <NavLink to="/themes">
                 Theme 5- Development of Strategies for CC adaptation
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="{% url 'resources' %}#training_manuals">
+              <NavLink to="/themes">
                 Theme 6- Development of Strategies for Disaster Risk Reduction
-              </a>
+              </NavLink>
             </li>
           </ul>
         </li>
@@ -122,23 +123,23 @@ function Base() {
         <li class="dropdown-menu">
           <NavLink to="/casestudy">
             Case Studies
-            <img src={downArrowImg} />
+            <img src={downArrowImg} alt="" />
           </NavLink>
           <ul class="dropdown">
             <li>
-              <a href="{% url 'case_studies' %}#case_study1">Case Study1</a>
+              <NavLink to="/casestudy#case_study1">Case Study1</NavLink>
             </li>
             <li>
-              <a href="{% url 'case_studies' %}#case_study2">Case Study2</a>
+              <NavLink to="/casestudy#case_study2">Case Study2</NavLink>
             </li>
             <li>
-              <a href="{% url 'case_studies' %}#case_study3">Case Study3</a>
+              <NavLink to="/casestudy#case_study3">Case Study3</NavLink>
             </li>
             <li>
-              <a href="{% url 'case_studies' %}#case_study4">Case Study4</a>
+              <NavLink to="/casestudy#case_study4">Case Study4</NavLink>
             </li>
             <li>
-              <a href="{% url 'case_studies' %}#case_study5">Case Study5</a>
+              <NavLink to="/casestudy#case_study5">Case Study5</NavLink>
             </li>
           </ul>
         </li>
@@ -147,20 +148,20 @@ function Base() {
         <div class="dropdown-menu">
           <NavLink to="#" class="language">
             English
-            <img src={downArrowImg} />
+            <img src={downArrowImg} alt="" />
           </NavLink>
           <ul class="dropdown">
             <li class="case1">
-              <a href="#">Hindi</a>
+              <NavLink to="#">Hindi</NavLink>
             </li>
             <li class="case2">
-              <a href="#">Sinhali</a>
+              <NavLink to="#">Sinhali</NavLink>
             </li>
             <li class="case2">
-              <a href="#">Nepali</a>
+              <NavLink to="#">Nepali</NavLink>
             </li>
             <li class="case2">
-              <a href="#">Japanese</a>
+              <NavLink to="#">Japanese</NavLink>
             </li>
           </ul>
         </div>
@@ -171,7 +172,7 @@ function Base() {
           <img src={searchImg} alt="search_icon" />
           <form>
             <input type="text" placeholder="Search" />
-            <img src={cancelIcon} onClick={toggleActiveClass} />
+            <img src={cancelIcon} onClick={toggleActiveClass} alt="" />
           </form>
         </div>
       </div>

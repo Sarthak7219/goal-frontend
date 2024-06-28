@@ -64,34 +64,44 @@ function WorkshopDetail({ workshops ,image_workshop}) {
           <div className="left-container">
             <img src={workshopImage} alt="" />
 
-            <div className="about-workshop">
+            <div>
               <h2>About the workshop</h2>
               <p>{workshop.description}</p>
             </div>
-            <div className="registration-detail">
-              <h2>Registration</h2>
-              <h4>Target Audience</h4>
+            <div>
+              <h2>Speakers</h2>
               <p>
-                The workshop is designed for Masters and PhD students,
-                researchers and working professionals in the fields of
-                freshwater ecology, hydrology, climate change, water management,
-                environmental science, etc.
-              </p>
-              <h4>How to register?</h4>
-              <p>
-                Registration page (for workshop and poster presentations): LINK
-                Last Day to register: 25th May 2023 
+                Dr. Lakra Harshit, Dr. Shobha Poudel, Dr. Surabhi Mehrotra,
+                Prof. Deepthi Wickramasinghe
               </p>
             </div>
-            <div className="accomodation">
-              <h2>Accomodation</h2>
+            <div>
+              <h2>Organised by</h2>
               <p>
-                Accommodation is available for external participants (those from
-                outside IIT Roorkee) at IIT Roorkee. Please note that the
-                availability of accommodation is limited and will be provided on
-                a first-come, first-served basis. If you have any questions or
-                concerns regarding accommodation, please contact us at the
-                provided email address.
+                Science Hub, Nepal and Indian Institute of Technology Roorkee,
+                India
+              </p>
+            </div>
+
+            <div>
+              <h2>Key takeaways</h2>
+              <p>
+                1. Actively involve women from the community in planning,
+                implementation, and monitoring is very crucial as they come
+                under the vulnerable section. <br />
+                <br /> 2. Need on improving infrastructure, providing financial
+                aid to farmers, and creating mental health support. It assigns
+                responsibility to specific government departments for effective
+                coordination and planning.
+                <br />
+                <br />
+                3. Understanding the challenges faced by the rural areas at the
+                time of disasters and highlighting the need for community
+                engagement at the local level.
+                <br />
+                <br /> 4. Need for promoting disaster specific training for the
+                youth to make the community prepared for emergencies, cope up
+                with the aftermath and build back better.
               </p>
             </div>
           </div>
@@ -103,8 +113,8 @@ function WorkshopDetail({ workshops ,image_workshop}) {
                 <p>{workshop.date}</p>
               </div>
               <div>
-                <h4>Coordinator:</h4>
-                <p>Sarthak Rangari</p>
+                <h4>Mode:</h4>
+                <p>Offline</p>
               </div>
               <div>
                 <h4>Venue:</h4>
@@ -140,18 +150,6 @@ function WorkshopDetail({ workshops ,image_workshop}) {
                 </div>
               </div>
             </div>
-            {/* <!-- <div className="popular-tags">
-                <h2>Popular tags</h2>
-                <div className="tags">
-                    <div className="btn">Food</div>
-                    <div className="btn">Food</div>
-                    <div className="btn">Food</div>
-                    <div className="btn">Food</div>
-                    <div className="btn">Food</div>
-                    <div className="btn">Food</div>
-                    <div className="btn">Food</div>
-                </div>
-            </div> --> */}
           </div>
         </div>
       </div>
