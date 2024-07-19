@@ -336,7 +336,7 @@ body{
     position: sticky;
     top: 35px;
     display: inline;
-    margin-top: 204.6px;
+    margin-top: 60.6px;
     margin-left: 18.75px;
     min-width: 195px;
     display: flex;
@@ -378,7 +378,7 @@ body{
     align-items: center;
     margin-left: 18px;
     margin-right: 36.75px;
-    padding-right: 176.6px;  /*(border 1.6px added)*/
+   
     width: -webkit-fill-available;
 }
 
@@ -630,7 +630,7 @@ right: 0px;
 .about, .case_studies{
     gap: 18.5px;
     margin-top: 50px;
-    width: 978px;
+    width: 710px;
 }
 
 #about, #case_studies{
@@ -829,12 +829,12 @@ gap: 17.75px;
     display: flex;
     flex-direction: column;
 }
-.right-container .recent-workshops{
+.recent-workshops{
     width: 312px;
 height: 413.25px;
 display: flex;
     flex-direction: column;
-
+    background: #F7EDF7;
 }
 .popular-tags{
     padding: 18px 18px 37.5px 37.5px;
@@ -921,7 +921,7 @@ margin-bottom: 29.75px;
 .workshop-cards{
 display: flex;
 width: 261.5px;
-height: 283.5px;
+
 flex-direction: column;
 justify-content: center;
 align-items: flex-start;
@@ -2453,4 +2453,27 @@ justify-content: center;
 
 
 
+
+/* case study css*/
+
+#case_studies-right{
+    margin-top: 60px;
+}
+
+#case_studies-right .case_studies .column{
+    display: flex;
+    gap: 15px;
+}
+#case_studies-right section{
+    width: 1038px;
+}
+.case_studies h1{
+color: #252A34;
+font-family: Montserrat;
+font-size: 29.25px;
+font-style: normal;
+font-weight: 700;
+line-height: 37.5px; /* 128.205% */
+text-transform: capitalize;
+}
 

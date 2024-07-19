@@ -8,7 +8,10 @@ import workshopImage from "../images/workhopimage.png";
 import workshopDetailImage1 from "../images/workshops/workshopdetail1.png";
 import iconImg from "../images/icon.png";
 
-function WorkshopDetail({ workshops }) {
+function WorkshopDetail({ workshops ,image_workshop}) {
+  useEffect(() => {
+    console.log("image_workshop Data:", image_workshop); // Log the case_studies prop to inspect its structure
+  }, [image_workshop]);
   const { id } = useParams();
   const [workshop, setWorkshop] = useState(null);
 

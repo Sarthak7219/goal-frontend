@@ -16,12 +16,16 @@ import PageNotFound from "./components/PageNotFound";
 import { Routes, Route } from "react-router-dom";
 import Theme from "./components/Themes";
 
+
+
 function App() {
   const [data, setData] = useState({
     resources: [],
     team_members: [],
     workshops: [],
     case_studies: [],
+    image_case_study:[],
+    image_workshop:[]
   });
 
   useEffect(() => {
@@ -32,6 +36,7 @@ function App() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  console.log("Data in App component:", data);
   return (
     <div className="App">
       <Base />
@@ -43,12 +48,12 @@ function App() {
 
         <Route
           path="/workshops"
-          element={<WorkshopList workshops={data.workshops} />}
+          element={<WorkshopList workshops={data.workshops} image_workshop={data.image_workshop} />}
         />
 
         <Route
           path="/workshops/workshop-detail/:id"
-          element={<WorkshopDetail workshops={data.workshops} />}
+          element={<WorkshopDetail workshops={data.workshops} image_workshop={data.image_workshop}/>}
         />
 
         <Route path="/gallery" element={<Gallery />} />
@@ -60,7 +65,7 @@ function App() {
 
         <Route
           path="/casestudy"
-          element={<Casestudy case_studies={data.case_studies} />}
+          element={<Casestudy case_studies={data.case_studies} workshops={data.workshops} image_case_study={data.image_case_study}  />}
         />
 
         <Route
