@@ -2,9 +2,11 @@ import React from "react";
 import "./global.css";
 import "./style.css";
 import nitbhopal_logo from "../images/logo/bhopal.png";
-import science_hub_logo from "../images/logo/science_hub_logo.png";
+import science_hub_logo from "../images/logo/science_hub_png.png";
 import rika_logo from "../images/logo/rika_logo.png";
 import colombo_logo from "../images/logo/colombo.png";
+import JNUImg from "../images/logo/JNU.png";
+import IITRImg from "../images/logo/IITR.png";
 import oneImg from "../images/1.png";
 import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
@@ -34,12 +36,11 @@ import unselected_dot from "../images/unselected_dot.svg";
 import apnLogo1Img from "../images/APN Logo-c-v 1 (1).png";
 import linkarrowImg from "../images/linkarrow.png";
 import verticalineImg from "../images/verticaline.png";
-import JNUImg from "../images/logo/JNU.png";
-import IITRImg from "../images/logo/IITR.png";
+
 import mapImg from "../images/map.png";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import Carousel from "./logo_carousel";
+
 import Click_Carousel from "./click_carousel";
 
 function Home({ data }) {
@@ -48,40 +49,50 @@ function Home({ data }) {
     <div>
       <div class="homepage">
         <div class="header" id="hero">
-          <video
-            ref={videoRef}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="back-video"
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-
-          <div class="header-content">
-            <div class="goal">GoAL</div>
-            <div class="goal-desc">
-              <p class="full-form">
-                Gender oriented Adaptive Transformation cross-Learning for
-                Climate Change and Disaster Risk Resilience among India, Nepal,
-                Sri Lanka and Japan
-              </p>
-              <p class="funder">An APN Funded Project | IIT Roorkee</p>
-              <a href="#about-home">
-                <button class="btn">
-                  <div class="btn-text">
-                    <p>Explore</p>
-                  </div>
-                </button>
-              </a>
-            </div>
+          <div className="video-container">
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="back-video"
+            >
+              <source src={videoSrc} type="video/mp4" />
+            </video>
+            <div className="video-overlay"></div>
           </div>
 
-          <div class="collabs">
-            <h5>Collaborating Institutes</h5>
-
-            <Carousel />
+          <div className="hero-content">
+            <div class="header-content">
+              <div class="goal">GoAL project</div>
+              <div class="goal-desc">
+                <p class="full-form">
+                  Gender oriented Adaptive Transformation cross-Learning for
+                  Climate Change and Disaster Risk Resilience among India,
+                  Nepal, Sri Lanka and Japan
+                </p>
+                <p class="funder">An APN Funded Project | IIT Roorkee</p>
+                <a href="#about-home">
+                  <button class="btn">
+                    <div class="btn-text">
+                      <p>Explore</p>
+                    </div>
+                  </button>
+                </a>
+              </div>
+            </div>
+            <div className="collab-container">
+              <h5>Collaborating Institutes</h5>
+              <div className="collab-box">
+                <img src={nitbhopal_logo} alt="" />
+                <img src={science_hub_logo} alt="" />
+                <img src={rika_logo} alt="" style={{ margin: "auto 0" }} />
+                <img src={colombo_logo} alt="" />
+                <img src={JNUImg} alt="" />
+                <img src={IITRImg} alt="" />
+              </div>
+            </div>
           </div>
         </div>
         <a href="#hero">
@@ -300,9 +311,8 @@ function Home({ data }) {
         </div>
         <div class="funding-agency">
           <div class="fund-content">
-            <div class="fund-head">
-              <h2>Funding Agency</h2>
-            </div>
+            <h2 class="fund-head">Funding Agency</h2>
+
             <div class="fund-body">
               <div class="left-image">
                 <img src={apnLogo1Img} alt="" />
@@ -314,19 +324,18 @@ function Home({ data }) {
                   the challenges of global change and sustainability.
                 </p>
                 <div class="sites">
-                  <h4>
+                  <a href="https://www.apn-gcr.org/" target="_blank">
                     APN Website
-                    <span>
-                      <img src={linkarrowImg} alt="" />
-                    </span>
-                  </h4>
+                    <img src={linkarrowImg} alt="" />
+                  </a>
                   <img src={verticalineImg} alt="" />
-                  <h4>
-                    project Website
-                    <span>
-                      <img src={linkarrowImg} alt="" />
-                    </span>
-                  </h4>
+                  <a
+                    href="https://www.apn-gcr.org/project/goal-gender-orientated-adaptive-transformation-cross-learning-for-climate-change-and-disaster-risk-resilience-among-india-nepal-sri-lanka-and-japan/"
+                    target="_blank"
+                  >
+                    Project Website
+                    <img src={linkarrowImg} alt="" />
+                  </a>
                 </div>
               </div>
             </div>

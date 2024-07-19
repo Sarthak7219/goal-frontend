@@ -94,15 +94,20 @@ body{
         display: flex;
         width: 100%;
         gap: 85.5px;
-        position: absolute;
+        position: fixed;
         top: 0px;
-        padding: 18px 0;
-        background-color: #000000a3;
+        padding: 10px 0;
+      
         flex-direction: row;
         justify-content: center;
         align-items: center;
        
-        z-index: 10;
+       
+        background: rgb(45 45 45 / 67%);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
     }
  
     .goal{
@@ -113,7 +118,7 @@ body{
         font-style: normal;
         font-weight: 900;
         line-height: 37.706px; /* 73.373% */
-        margin-top: 200px;
+        margin-top: 20px;
     }
 
     .navlist{
@@ -362,7 +367,7 @@ body{
     align-items: flex-start;
     margin: 0px;
     padding: 0px;
-    max-width: 1920px;  /* temporary */
+    
 
      
 }
@@ -1141,13 +1146,36 @@ line-height: 150%; /* 28.125px */
     
 }
 
-.back-video{
+
+
+
+
+.video-container{
     position: absolute;
     width: 100%;
     height: 100vh;
-    z-index: -1;
-    object-fit: cover;
     min-height: 693px;
+    z-index: -1;
+}
+
+
+.back-video{
+    width: 100%;
+    height: 100%;
+    /* z-index: -1; */
+    object-fit: cover;
+    
+}
+
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    pointer-events: none; /* This ensures the overlay doesn't interfere with video controls */
 }
 
 .back-video::after{
@@ -1163,13 +1191,54 @@ line-height: 150%; /* 28.125px */
 }
 
 
+.hero-content{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: space-between;
+    max-width: 1080px;
+    margin: auto;
+}
+
+
+.collab-container{
+    max-width: 16%;
+    margin: 0px;
+    text-align: center;
+}
+
+.collab-container h5{
+    font-family: "Montserrat";
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22.5px; /* 187.5% */
+    color: var(--text-white);
+}
+
+.collab-box{
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 25px;
+    width: 175px;
+}
+
+
+
+
+.collab-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover; /* Ensures images cover their grid area without distortion */
+}
+
 
 .goal{
     color: var(--text-white, #FFF);
-text-align: center;
+text-align: start;
 font-family: "Playfair Display";
-font-size: 135px;
-font-style: normal;
+font-size: 115px;
 font-weight: 700;
 line-height: 150px; /* 111.111% */
 text-transform: capitalize;
@@ -1178,20 +1247,19 @@ text-transform: capitalize;
 .goal-desc{
 display:flex;
 flex-direction: column;
-align-items: center;
+align-items: flex-start;
 gap: 25px;
 max-width: 800px;
-margin: auto;
+margin-top: 8px;
 }
 
 .full-form{
     color: #EEE;
-    text-align: center;
     font-family: Poppins;
     font-size: 16.5px;
     font-style: normal;
     font-weight: 300;
-    line-height: 22.5px; /* 136.364% */
+    line-height: 30px; /* 136.364% */
 }
 .funder{
 color: var(--text-white, #FFF);
@@ -1863,10 +1931,20 @@ line-height: 30px;
 align-items: center;
 gap: 22.5px;
 }
-.sites h4{
+
+.sites a img{
+     margin-left: 5px;
+     width: 16px;
+     height: auto;
+     object-fit: contain;
+     
+}
+.sites a{
+    display: flex;
+    align-items: center;
     color: var(--text-black);
 font-family: "Montserrat";
-font-size: 18.75px;
+font-size: 16px;
 font-weight: 500;
 
 }
@@ -2077,7 +2155,8 @@ flex-wrap: wrap;
 
 .header{
     margin-top: 0px !important;
-    
+    height: 100vh;
+    min-height: 693px;
 }
 
 
@@ -2094,8 +2173,8 @@ flex-wrap: wrap;
 
 .workshops-list{
     width: 845px;
-    /* margin: auto; */
-    margin-left: 233px;
+    margin: auto;
+    /* margin-left: 233px; */
     margin-top: 60px;
 
 }
@@ -2289,9 +2368,7 @@ justify-content: center;
 
 /* Themes CSS */
 
-#themes-right{
-    align-items: flex-start;
-}
+
 
 #themes-sidebox{
     margin-top: 84px;
