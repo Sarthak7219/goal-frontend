@@ -34,7 +34,7 @@ function WorkshopList({ workshops }) {
             <div>
               <div className="line"></div>
               <div className="box">
-                <img src={workshop.image} alt="" />
+                {/* <img src={workshop.image} alt="" /> */}
                 <div>
                   <div className="flex">
                     <p>Workshop</p>

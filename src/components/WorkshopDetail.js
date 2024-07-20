@@ -62,7 +62,14 @@ function WorkshopDetail({ workshops ,image_workshop}) {
         </div>
         <div className="workshop-container">
           <div className="left-container">
-            <img src={workshopImage} alt="" />
+          {image_workshop.map((item) => (
+          <img
+            key={item.id}
+            src={`${process.env.REACT_APP_API_URL}${item.image}`}
+            alt="Case Study"
+            className="gallery-image"
+          />
+        ))}
 
             <div>
               <h2>About the workshop</h2>

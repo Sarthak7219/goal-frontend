@@ -28,6 +28,7 @@ function App() {
     image_workshop:[]
   });
 
+
   useEffect(() => {
     const API_URL = process.env.REACT_APP_API_URL;
     fetch(API_URL)
@@ -35,6 +36,21 @@ function App() {
       .then((data) => setData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+  
+  useEffect(() => {
+    const API_URL_IMAGES = `${process.env.REACT_APP_API_URL}/images/`;
+    fetch(API_URL_IMAGES)
+      .then((response) => response.json())
+      .then((imageData) => {
+        setData((prevData) => ({
+          ...prevData,
+          image_case_study: imageData.image_case_study,
+          image_workshop: imageData.image_workshop
+        }));
+      })
+      .catch((error) => console.error("Error fetching image data:", error));
+  }, []);
+  
 
   console.log("Data in App component:", data);
   return (
