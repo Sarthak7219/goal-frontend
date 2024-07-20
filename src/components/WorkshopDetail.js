@@ -8,7 +8,7 @@ import workshopImage from "../images/workhopimage.png";
 import workshopDetailImage1 from "../images/workshops/workshopdetail1.png";
 import iconImg from "../images/icon.png";
 
-function WorkshopDetail({ workshops ,image_workshop}) {
+function WorkshopDetail({ workshops, image_workshop }) {
   useEffect(() => {
     console.log("image_workshop Data:", image_workshop); // Log the case_studies prop to inspect its structure
   }, [image_workshop]);
@@ -62,7 +62,19 @@ function WorkshopDetail({ workshops ,image_workshop}) {
         </div>
         <div className="workshop-container">
           <div className="left-container">
-            <img src={workshopImage} alt="" />
+            {workshop.link ? (
+              <iframe
+                width="642"
+                height="298"
+                src={workshop.link}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Workshop Video"
+              ></iframe>
+            ) : (
+              <img src={workshopImage} alt="Workshop" />
+            )}
 
             <div>
               <h2>About the workshop</h2>
@@ -70,39 +82,16 @@ function WorkshopDetail({ workshops ,image_workshop}) {
             </div>
             <div>
               <h2>Speakers</h2>
-              <p>
-                Dr. Lakra Harshit, Dr. Shobha Poudel, Dr. Surabhi Mehrotra,
-                Prof. Deepthi Wickramasinghe
-              </p>
+              <p>{workshop.speakers}</p>
             </div>
             <div>
               <h2>Organised by</h2>
-              <p>
-                Science Hub, Nepal and Indian Institute of Technology Roorkee,
-                India
-              </p>
+              <p>{workshop.organised_by}</p>
             </div>
 
             <div>
               <h2>Key takeaways</h2>
-              <p>
-                1. Actively involve women from the community in planning,
-                implementation, and monitoring is very crucial as they come
-                under the vulnerable section. <br />
-                <br /> 2. Need on improving infrastructure, providing financial
-                aid to farmers, and creating mental health support. It assigns
-                responsibility to specific government departments for effective
-                coordination and planning.
-                <br />
-                <br />
-                3. Understanding the challenges faced by the rural areas at the
-                time of disasters and highlighting the need for community
-                engagement at the local level.
-                <br />
-                <br /> 4. Need for promoting disaster specific training for the
-                youth to make the community prepared for emergencies, cope up
-                with the aftermath and build back better.
-              </p>
+              <p>{workshop.key_takeaways}</p>
             </div>
           </div>
           <div className="right-container">
@@ -114,7 +103,7 @@ function WorkshopDetail({ workshops ,image_workshop}) {
               </div>
               <div>
                 <h4>Mode:</h4>
-                <p>Offline</p>
+                <p>{workshop.mode}</p>
               </div>
               <div>
                 <h4>Venue:</h4>

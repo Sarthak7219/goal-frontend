@@ -57,11 +57,11 @@ function Resources({ resources }) {
             <div className="resources-container">
               {resources.map((resource) => (
                 <div className="resource-box" key={resource.id}>
-                  <img src={resourceImage} alt="" />
                   <div className="detail">
                     <p>{resource.publisher}</p>
                     <h3>{resource.title}</h3>
-                    <p className="date">{resource.date_of_publishing}</p>
+
+                    <a href="#">Read More</a>
                   </div>
                 </div>
               ))}
@@ -80,7 +80,6 @@ function Resources({ resources }) {
 
             <div className="resources-container">
               <div className="resource-box">
-                <img src={resourceImage} alt="" />
                 <div className="detail">
                   <p>Publisher</p>
                   <h3>Lorem ipsum dolor sit amet consectetur.</h3>
@@ -88,7 +87,6 @@ function Resources({ resources }) {
                 </div>
               </div>
               <div className="resource-box">
-                <img src={resourceImage} alt="" />
                 <div className="detail">
                   <p>Publisher</p>
                   <h3>Lorem ipsum dolor sit amet consectetur.</h3>
@@ -96,7 +94,6 @@ function Resources({ resources }) {
                 </div>
               </div>
               <div className="resource-box">
-                <img src={resourceImage} alt="" />
                 <div className="detail">
                   <p>Publisher</p>
                   <h3>Lorem ipsum dolor sit amet consectetur.</h3>
@@ -104,7 +101,13 @@ function Resources({ resources }) {
                 </div>
               </div>
               <div className="resource-box">
-                <img src={resourceImage} alt="" />
+                <div className="detail">
+                  <p>Publisher</p>
+                  <h3>Lorem ipsasjf</h3>
+                  <p className="date">June27, 2023</p>
+                </div>
+              </div>
+              <div className="resource-box">
                 <div className="detail">
                   <p>Publisher</p>
                   <h3>Lorem ipsum dolor sit amet consectetur.</h3>

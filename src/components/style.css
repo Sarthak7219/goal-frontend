@@ -377,7 +377,7 @@ body{
     flex-direction: column;
     align-items: center;
     margin-left: 18px;
-    margin-right: 36.75px;
+    margin-right: 218px;
    
     width: -webkit-fill-available;
 }
@@ -454,25 +454,19 @@ right: 0px;
 
 .resource-box{
     width: 232.5px;
-    height: 277.5px;
+    padding: 22px 12px;
     background-color: var(--text-white);
     box-shadow: 0px 0px 11.25px 1.266px rgba(0, 0, 0, 0.1);
 }
 
-.resource-box img{
-    height: 136.5px;
-    width: 100%;
-    object-fit: cover;
-}
 
 .resource-box .detail{
     width: 100%;
-    padding-left: 11.25px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
-    margin-top: 22.5px;
+   
 }
 
 .resource-box .detail p{
@@ -488,6 +482,14 @@ right: 0px;
 .resource-box .detail .date{
     color: #909090;
     font-size: 10.5px;
+    font-weight: 500;
+}
+.resource-box .detail a{
+    width: 100%;
+    text-align: end;
+    /* color:  #0000EE; */
+    text-decoration: underline;
+    font-size: 12.5px;
     font-weight: 500;
 }
 
@@ -630,7 +632,7 @@ right: 0px;
 .about, .case_studies{
     gap: 18.5px;
     margin-top: 50px;
-    width: 710px;
+    width: 973px;
 }
 
 #about, #case_studies{
@@ -904,8 +906,7 @@ line-height: 21px;
 
 .recent-workshops{
     padding: 32px;
-    width: 261.5px;
-height: 338.25px;
+
 padding-left: 18px;
 
 }
@@ -1437,12 +1438,25 @@ text-transform: capitalize;
     position: relative;
     height: 508.5px;
 }
+
+
+.about-image .img1{
+    width: 340px;
+    height: 340px;
+    object-fit: cover;
+    border: 20px solid #FDEBF6;
+}
+
+
 .about-image .img2{
     position: absolute;
     top: 225px;
     left: 180px;
     display: block;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
+    border: 20px solid #FDEBF6;
 }
 /* study area */
 
@@ -1896,7 +1910,7 @@ background: #FDEBF6;
 
 .fund-head{
     width: 100%;
-    padding-left: 329px;
+ 
 }
 
 .fund-content h2{
@@ -2456,9 +2470,7 @@ justify-content: center;
 
 /* case study css*/
 
-#case_studies-right{
-    margin-top: 60px;
-}
+
 
 #case_studies-right .case_studies .column{
     display: flex;
@@ -2466,6 +2478,8 @@ justify-content: center;
 }
 #case_studies-right section{
     width: 1038px;
+    margin-top: 0px;
+    padding-top: 60px;
 }
 .case_studies h1{
 color: #252A34;
@@ -2477,3 +2491,6 @@ line-height: 37.5px; /* 128.205% */
 text-transform: capitalize;
 }
 
+#case_studies-right{
+    margin: auto;
+}
