@@ -12,6 +12,7 @@ import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
 import videoSrc from "../images/video.mp4";
 import frame38517Img from "../images/Frame 38517.png";
+import about1 from "../images/about1.jpg";
 import frame38516Img from "../images/Frame 38516.png";
 import small1Img from "../images/small1.png";
 import small2Img from "../images/small2.png";
@@ -29,8 +30,7 @@ import gallery7Img from "../images/gallery/image7.jpg";
 import designleftImg from "../images/designleft.png";
 import designrightImg from "../images/designright.png";
 import line172Img from "../images/Line 172.png";
-import calendarIcon from "../images/calendar.svg";
-import location_icon from "../images/location_icon.svg";
+
 import selected_dot from "../images/selected_dot.svg";
 import unselected_dot from "../images/unselected_dot.svg";
 import apnLogo1Img from "../images/APN Logo-c-v 1 (1).png";
@@ -42,6 +42,7 @@ import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 
 import Click_Carousel from "./click_carousel";
+import Workshop_Carousel from "./workshop_carousel";
 
 function Home({ data }) {
   const videoRef = useRef(null);
@@ -193,40 +194,7 @@ function Home({ data }) {
 
               <h2>We conduct regular workshops</h2>
             </div>
-            <div class="workshop-body ">
-              <div class="left-right-icons">
-                <img src={leftArrowImg} class="left-arrow" alt="" />
-                <img src={leftArrowImg} class="right-arrow" alt="" />
-              </div>
-
-              <div class="workshops">
-                {data.workshops.map((workshop) => (
-                  <div class="worshop-detail-home" key={workshop.id}>
-                    <div class="detail">
-                      <h2>{workshop.title}</h2>
-                      <div class="venue">
-                        <div>
-                          <img src={location_icon} alt="icon" />
-                          <p>{workshop.venue}</p>
-                        </div>
-                        <div>
-                          <img src={calendarIcon} alt="icon" />
-                          <p>{workshop.date}</p>
-                        </div>
-                      </div>
-                      <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
-                        {" "}
-                        <button class="btn">View Details</button>
-                      </NavLink>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div class="dots swiper-pagination">
-                <img src={selected_dot} alt="" />
-                <img src={unselected_dot} alt="" />
-              </div>
-            </div>
+            <Workshop_Carousel workshops={data.workshops} />
           </div>
         </div>
         <div class="objective-page">

@@ -6,6 +6,7 @@ import { NavLink, useParams } from "react-router-dom";
 
 import workshopImage from "../images/workhopimage.png";
 import workshopDetailImage1 from "../images/workshops/workshopdetail1.png";
+
 import iconImg from "../images/icon.png";
 
 function WorkshopDetail({ workshops, image_workshop }) {

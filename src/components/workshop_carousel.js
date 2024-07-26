@@ -1,26 +1,18 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import leftArrowImg from "../images/rightarrow.png";
 import rightArrowImg from "../images/rightarrow.png";
-import story1Img from "../images/story1 (2).png";
-import story2Img from "../images/story2 (2).png";
-import story3Img from "../images/story3 (2).png";
+import calendarIcon from "../images/calendar.svg";
+import location_icon from "../images/location_icon.svg";
 import selected_dot from "../images/selected_dot.svg";
 import unselected_dot from "../images/unselected_dot.svg";
 import "./style.css";
 
-const Click_Carousel = () => {
+const Workshop_Carousel = ({ workshops }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const stories = [
-    story1Img,
-    story2Img,
-    story3Img,
-    story1Img,
-    story2Img,
-    story3Img,
-  ];
-  const totalStories = stories.length;
-  const storiesPerPage = 3;
-  const totalDots = Math.ceil(totalStories / storiesPerPage);
+
+  const workshopsPerPage = 3;
+  const totalDots = Math.ceil(workshops.length / workshopsPerPage);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalDots);
@@ -46,7 +38,7 @@ const Click_Carousel = () => {
           onClick={nextSlide}
         />
       </div>
-      <div className="stories">
+      <div className="workshops">
         <ul
           className="stories-list"
           style={{
@@ -54,9 +46,25 @@ const Click_Carousel = () => {
             transition: "transform 0.5s ease-in-out",
           }}
         >
-          {stories.map((story, index) => (
-            <li key={index} className="story">
-              <img src={story} alt={`Story ${index + 1}`} />
+          {workshops.map((workshop, index) => (
+            <li class="worshop-detail-home" key={index}>
+              <div class="detail">
+                <h2>{workshop.title}</h2>
+                <div class="venue">
+                  <div>
+                    <img src={location_icon} alt="icon" />
+                    <p>{workshop.venue}</p>
+                  </div>
+                  <div>
+                    <img src={calendarIcon} alt="icon" />
+                    <p>{workshop.date}</p>
+                  </div>
+                </div>
+                <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
+                  {" "}
+                  <button class="btn">View Details</button>
+                </NavLink>
+              </div>
             </li>
           ))}
         </ul>
@@ -75,4 +83,4 @@ const Click_Carousel = () => {
   );
 };
 
-export default Click_Carousel;
+export default Workshop_Carousel;
