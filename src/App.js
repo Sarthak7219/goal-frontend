@@ -16,19 +16,14 @@ import PageNotFound from "./components/PageNotFound";
 import { Routes, Route } from "react-router-dom";
 import Theme from "./components/Themes";
 
-
-
 function App() {
   const [data, setData] = useState({
     resources: [],
     team_members: [],
     workshops: [],
-    case_studies: []
+    case_studies: [],
   });
-  const [images, setImages] = useState({
-   
-  });
-
+  const [images, setImages] = useState({});
 
   useEffect(() => {
     const API_URL = process.env.REACT_APP_API_URL;
@@ -37,7 +32,7 @@ function App() {
       .then((data) => setData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  
+
   useEffect(() => {
     const API_URL_IMAGES = `${process.env.REACT_APP_API_URL}/workshop_images/`;
     fetch(API_URL_IMAGES)
@@ -49,11 +44,6 @@ function App() {
       .catch((error) => console.error("Error fetching image data:", error));
   }, []);
 
-  console.log("Images in App component:", images);
-  console.log("data workshop in App component:", data.workshops);
-  
-
-  console.log("Data in App component:", data);
   return (
     <div className="App">
       <Base />
@@ -65,15 +55,31 @@ function App() {
 
         <Route
           path="/workshops"
-          element={<WorkshopList workshops={data.workshops} image_workshop={images} />}
+          element={
+            <WorkshopList workshops={data.workshops} image_workshop={images} />
+          }
         />
 
         <Route
           path="/workshops/workshop-detail/:id"
-          element={<WorkshopDetail workshops={data.workshops} image_workshop={images}/>}
+          element={
+            <WorkshopDetail
+              workshops={data.workshops}
+              image_workshop={images}
+            />
+          }
         />
 
-        <Route path="/gallery" element={<Gallery workshops={data.workshops} case_studies={data.case_studies} image_workshop={images}/>}  />
+        <Route
+          path="/gallery"
+          element={
+            <Gallery
+              workshops={data.workshops}
+              case_studies={data.case_studies}
+              image_workshop={images}
+            />
+          }
+        />
 
         <Route
           path="/resources"
@@ -82,7 +88,13 @@ function App() {
 
         <Route
           path="/casestudy"
-          element={<Casestudy case_studies={data.case_studies} workshops={data.workshops} image_case_study={data.image_case_study}  />}
+          element={
+            <Casestudy
+              case_studies={data.case_studies}
+              workshops={data.workshops}
+              image_case_study={data.image_case_study}
+            />
+          }
         />
 
         <Route
