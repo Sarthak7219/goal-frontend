@@ -1,23 +1,17 @@
 import React, { useState, useEffect } from "react";
-import gallery5Img from "../images/gallery/gallery5.png";
-import image1Img from "../images/gallery/image1.jpg";
-import image2Img from "../images/gallery/image2.jpg";
-import image3Img from "../images/gallery/image3.jpg";
-import image4Img from "../images/gallery/image4.jpg";
-import image5Img from "../images/gallery/image5.jpg";
-import image6Img from "../images/gallery/image6.jpg";
-import image7Img from "../images/gallery/image7.jpg";
-import image8Img from "../images/gallery/image8.jpg";
-
 import "./global.css";
 import "./style.css";
-
 import { scrollSpy } from "./scrollSpy";
 
-function Gallery({ workshops, case_studies, image_workshop }) {
+
+function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
   useEffect(() => {
-    console.log("image_workshop Gallery:", image_workshop); // Log the image_workshop prop to inspect its structure
+    console.log("image_workshop Gallery:", image_workshop);
   }, [image_workshop]);
+
+  useEffect(() => {
+    console.log("image_casestudy Gallery:", image_casestudy);
+  }, [image_casestudy]);
 
   useEffect(() => {
     const cleanup = scrollSpy();
@@ -26,62 +20,31 @@ function Gallery({ workshops, case_studies, image_workshop }) {
     };
   }, []);
 
-  const [activeBox, setActiveBox] = useState(null); // State to track active box
-  const [filteredImages, setFilteredImages] = useState([]); // State to track filtered images
+  const [activeBox, setActiveBox] = useState(null);
+  const [filteredWorkshopImages, setFilteredWorkshopImages] = useState([]);
+  const [filteredCaseStudyImages, setFilteredCaseStudyImages] = useState([]);
 
   const handleClick = (boxId) => {
-    setActiveBox(boxId === activeBox ? null : boxId); // Toggle active state
-    console.log("boxId:", boxId);
-    // Extract case study ID from boxId
-    const parts = boxId.split('-');
-    console.log("parts:", parts);
-  
-    // Extract case study ID from the appropriate part
+    setActiveBox(boxId === activeBox ? null : boxId);
+
+    const parts = boxId.split("-");
     const caseStudyId = parseInt(parts[3], 10);
-    console.log("Extracted case study ID:", caseStudyId);
 
     const relevantWorkshops = workshops.filter(
       (workshop) => workshop.case_study === caseStudyId
     );
-    console.log('relevantWorkshops:', relevantWorkshops);
 
-    // Extract workshop IDs
     const workshopIds = relevantWorkshops.map((workshop) => workshop.id);
-    console.log('workshopIds:', workshopIds);
 
-    // Filter images based on the relevant workshop IDs
-    const filtered = image_workshop.filter(
-      (img) => workshopIds.includes(img.workshop)
+    const filtered_workshop_images = image_workshop.filter((img) =>
+      workshopIds.includes(img.workshop)
+    );
+    const filtered_casestudy_images = image_casestudy.filter(
+      (img) => img.case_study === caseStudyId
     );
 
-    setFilteredImages(filtered);
-    console.log('filtered images:', filtered);
-  };
-
-  // Helper function to get the image URL based on image data
-  const getImageUrl = (imageName) => {
-    switch (imageName) {
-      case "gallery5":
-        return gallery5Img;
-      case "image1":
-        return image1Img;
-      case "image2":
-        return image2Img;
-      case "image3":
-        return image3Img;
-      case "image4":
-        return image4Img;
-      case "image5":
-        return image5Img;
-      case "image6":
-        return image6Img;
-      case "image7":
-        return image7Img;
-      case "image8":
-        return image8Img;
-      default:
-        return null;
-    }
+    setFilteredWorkshopImages(filtered_workshop_images);
+    setFilteredCaseStudyImages(filtered_casestudy_images);
   };
 
   return (
@@ -155,46 +118,28 @@ function Gallery({ workshops, case_studies, image_workshop }) {
             </div>
 
             <div className="photo-container gallery-container">
-              <div
-                className="gallery-box"
-                style={{ backgroundImage: `url(${gallery5Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                id="two-col"
-                style={{ backgroundImage: `url(${image1Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                id="onehalf-row"
-                style={{ backgroundImage: `url(${image2Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                style={{ backgroundImage: `url(${image3Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                style={{ backgroundImage: `url(${image4Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                style={{ backgroundImage: `url(${image5Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                id="two-row"
-                style={{ backgroundImage: `url(${image6Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                id="two-col"
-                style={{ backgroundImage: `url(${image7Img})` }}
-              ></div>
-              <div
-                className="gallery-box"
-                style={{ backgroundImage: `url(${image8Img})` }}
-              ></div>
+              {filteredCaseStudyImages.map((image, index) => (
+                 <li 
+                 key={index}
+                 className="worshop-detail-home gallery-box"
+                 style={{ backgroundImage: `url(${image.image_url})` }}>
+               
+            <div class="detail">
+             
+              <div class="venue">
+                <div>
+                 
+                  <p>{image.caption}</p>
+                </div>
+                <div>
+             
+                  <p>{image.date}</p>
+                </div>
+              </div>
+              
+            </div>
+          </li>
+              ))}
             </div>
 
             <div className="page-number-wrapper">
@@ -210,15 +155,33 @@ function Gallery({ workshops, case_studies, image_workshop }) {
               <div></div>
             </div>
 
-            <div className="photo-container gallery-container">
-              {filteredImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="gallery-box"
-                  style={{ backgroundImage: `url(${image.image_url})` }}
-                ></div>
+            <ul className="photo-container gallery-container">
+              {filteredWorkshopImages.map((image, index) => (
+               
+                 <li key={index}
+                
+                 className="worshop-detail-home gallery-box"
+                 style={{ backgroundImage: `url(${image.image_url})` }}
+                 >
+                
+              <div class="detail">
+               
+                <div class="venue">
+                  <div>
+                   
+                    <p>{image.caption}</p>
+                  </div>
+                  <div>
+               
+                    <p>{image.date}</p>
+                  </div>
+                </div>
+                
+              </div>
+            </li>
+                
               ))}
-            </div>
+              </ul>
 
             <div className="page-number-wrapper">
               <div>1</div>

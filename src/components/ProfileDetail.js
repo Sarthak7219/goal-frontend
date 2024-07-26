@@ -21,8 +21,8 @@ function ProfileDetail({ team_members }) {
 
   return (
     <div className="profile-detail-container">
-      <div className="page-hero" id="profile-bg">
-        <img src="/static/images/icon.svg" alt="" />
+      <div className="page-hero" id="profile-bg" style={{ backgroundImage: `url(${profile.bg_image})` }}>
+        
       </div>
       <div className="name-section">
         <img src={profile.image} alt="" />
