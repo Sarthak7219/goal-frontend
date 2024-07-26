@@ -22,11 +22,13 @@ function WorkshopDetail({ workshops, image_workshop }) {
     );
     setWorkshop(selectedWorkshop);
   }, [id, workshops]);
-
   if (!workshop) {
     return <div>Workshop not found</div>;
   }
-
+  const workshopImage = image_workshop.find(
+    (image) => image.workshop === parseInt(id)
+  );
+  console.log('hellp',workshopImage);
   return (
     <div className="workshop-detail-page">
       <div className="page-hero" id="gallery-bg">
@@ -63,7 +65,7 @@ function WorkshopDetail({ workshops, image_workshop }) {
         </div>
         <div className="workshop-container">
           <div className="left-container">
-            {workshop.link ? (
+            {/* {workshop.link ? (
               <iframe
                 width="642"
                 height="298"
@@ -73,9 +75,12 @@ function WorkshopDetail({ workshops, image_workshop }) {
                 allowFullScreen
                 title="Workshop Video"
               ></iframe>
-            ) : (
-              <img src={workshopImage} alt="Workshop" />
-            )}
+            ) : ( */}
+              <img
+                src={workshopImage ? workshopImage.image_url : workshopDetailImage1}
+                alt="Workshop"
+              />
+            {/* )} */}
 
             <div>
               <h2>About the workshop</h2>

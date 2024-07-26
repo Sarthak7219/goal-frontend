@@ -23,10 +23,12 @@ function App() {
     resources: [],
     team_members: [],
     workshops: [],
-    case_studies: [],
-    image_case_study:[],
-    image_workshop:[]
+    case_studies: []
   });
+  const [images, setImages] = useState({
+   
+  });
+
 
   useEffect(() => {
     const API_URL = process.env.REACT_APP_API_URL;
@@ -35,6 +37,21 @@ function App() {
       .then((data) => setData(data))
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+  
+  useEffect(() => {
+    const API_URL_IMAGES = `${process.env.REACT_APP_API_URL}/workshop_images/`;
+    fetch(API_URL_IMAGES)
+      .then((response) => response.json())
+      .then((images) => {
+        console.log("Fetched images:", images);
+        setImages(images);
+      })
+      .catch((error) => console.error("Error fetching image data:", error));
+  }, []);
+
+  console.log("Images in App component:", images);
+  console.log("data workshop in App component:", data.workshops);
+  
 
   console.log("Data in App component:", data);
   return (
@@ -48,15 +65,15 @@ function App() {
 
         <Route
           path="/workshops"
-          element={<WorkshopList workshops={data.workshops} image_workshop={data.image_workshop} />}
+          element={<WorkshopList workshops={data.workshops} image_workshop={images} />}
         />
 
         <Route
           path="/workshops/workshop-detail/:id"
-          element={<WorkshopDetail workshops={data.workshops} image_workshop={data.image_workshop}/>}
+          element={<WorkshopDetail workshops={data.workshops} image_workshop={images}/>}
         />
 
-        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/gallery" element={<Gallery workshops={data.workshops} case_studies={data.case_studies} image_workshop={images}/>}  />
 
         <Route
           path="/resources"
