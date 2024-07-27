@@ -1,12 +1,12 @@
 import React from "react";
 import "./global.css";
 import "./style.css";
-import nitbhopal_logo from "../images/logo/bhopal.png";
+import nitbhopal_logo from "../images/logo/manit.png";
 import science_hub_logo from "../images/logo/science_hub_png.png";
-import rika_logo from "../images/logo/rika_logo.png";
+import rika_logo from "../images/logo/rika.png";
 import colombo_logo from "../images/logo/colombo.png";
-import JNUImg from "../images/logo/JNU.png";
-import IITRImg from "../images/logo/IITR.png";
+import JNUImg from "../images/logo/jnu.png";
+import IITRImg from "../images/logo/iitr.png";
 import oneImg from "../images/1.png";
 import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
@@ -70,7 +70,7 @@ function Home({ data }) {
                 </p>
                 <p class="funder">An APN Funded Project | IIT Roorkee</p>
                 <a href="#about-home">
-                  <button class="btn">
+                  <button class="btn" style={{ padding: "9px 44px" }}>
                     <div class="btn-text">
                       <p>Explore</p>
                     </div>
@@ -81,12 +81,12 @@ function Home({ data }) {
             <div className="collab-container">
               <h5>Collaborating Institutes</h5>
               <div className="collab-box">
-                <img src={nitbhopal_logo} alt="" />
+                <img src={IITRImg} alt="" />
+                <img src={colombo_logo} alt="" />
                 <img src={science_hub_logo} alt="" />
                 <img src={rika_logo} alt="" style={{ margin: "auto 0" }} />
-                <img src={colombo_logo} alt="" />
+                <img src={nitbhopal_logo} alt="" />
                 <img src={JNUImg} alt="" />
-                <img src={IITRImg} alt="" />
               </div>
             </div>
           </div>

@@ -1250,14 +1250,18 @@ line-height: 150%; /* 28.125px */
     max-width: 16%;
     margin: 0px;
     text-align: center;
+    box-sizing: content-box;
+    padding: 25px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 .collab-container h5{
     font-family: "Montserrat";
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 600;
     line-height: 22.5px; /* 187.5% */
-    color: var(--text-white);
+    color: #252a34;
 }
 
 .collab-box{
@@ -1275,7 +1279,8 @@ line-height: 150%; /* 28.125px */
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover; /* Ensures images cover their grid area without distortion */
+    object-fit: contain;
+    max-height: 75px; /* Ensures images cover their grid area without distortion */
 }
 
 
