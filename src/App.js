@@ -110,6 +110,7 @@ function App() {
             <Casestudy
               case_studies={data.case_studies}
               workshops={data.workshops}
+              image_case_study={casestudyImages}
             />
           }
         />

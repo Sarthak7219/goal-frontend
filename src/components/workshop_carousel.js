@@ -8,11 +8,12 @@ import selected_dot from "../images/selected_dot.svg";
 import unselected_dot from "../images/unselected_dot.svg";
 import "./style.css";
 
-const Workshop_Carousel = ({ workshops }) => {
+const Workshop_Carousel = ({ workshops = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const workshopsPerPage = 3;
-  const totalDots = Math.ceil(workshops.length / workshopsPerPage);
+  const totalWorkshops = workshops.length;
+  const totalDots = Math.ceil(totalWorkshops / workshopsPerPage);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalDots);
@@ -39,46 +40,53 @@ const Workshop_Carousel = ({ workshops }) => {
         />
       </div>
       <div className="workshops">
-        <ul
-          className="stories-list"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-            transition: "transform 0.5s ease-in-out",
-          }}
-        >
-          {workshops.map((workshop, index) => (
-            <li class="worshop-detail-home" key={index}>
-              <div class="detail">
-                <h2>{workshop.title}</h2>
-                <div class="venue">
-                  <div>
-                    <img src={location_icon} alt="icon" />
-                    <p>{workshop.venue}</p>
+        {totalWorkshops === 0 ? (
+          <p>Workshops not found!</p>
+        ) : (
+          <ul
+            className="stories-list"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+              transition: "transform 0.5s ease-in-out",
+            }}
+          >
+            {workshops.map((workshop, index) => (
+              <li class="worshop-detail-home" key={index}>
+                <div class="detail">
+                  <h2>{workshop.title}</h2>
+                  <div class="venue">
+                    <div>
+                      <img src={location_icon} alt="icon" />
+                      <p>{workshop.venue}</p>
+                    </div>
+                    <div>
+                      <img src={calendarIcon} alt="icon" />
+                      <p>{workshop.date}</p>
+                    </div>
                   </div>
-                  <div>
-                    <img src={calendarIcon} alt="icon" />
-                    <p>{workshop.date}</p>
-                  </div>
+                  <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
+                    {" "}
+                    <button class="btn">View Details</button>
+                  </NavLink>
                 </div>
-                <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
-                  {" "}
-                  <button class="btn">View Details</button>
-                </NavLink>
-              </div>
-            </li>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {totalWorkshops > 0 && (
+        <div className="dots">
+          {Array.from({ length: totalDots }).map((_, index) => (
+            <img
+              key={index}
+              src={index === currentIndex ? selected_dot : unselected_dot}
+              alt={`Dot ${index + 1}`}
+              onClick={() => setCurrentIndex(index)}
+            />
           ))}
-        </ul>
-      </div>
-      <div className="dots">
-        {Array.from({ length: totalDots }).map((_, index) => (
-          <img
-            key={index}
-            src={index === currentIndex ? selected_dot : unselected_dot}
-            alt={`Dot ${index + 1}`}
-            onClick={() => setCurrentIndex(index)}
-          />
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

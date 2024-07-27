@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
 
 import iconImg from "../images/icon.png";
-import resourceImage from "../images/DSC_2080.JPG"; // Import resource image
 
 function Resources({ resources }) {
   useEffect(() => {

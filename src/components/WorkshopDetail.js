@@ -4,9 +4,6 @@ import "./global.css";
 import "./style.css";
 import { NavLink, useParams } from "react-router-dom";
 
-import workshopImage from "../images/workhopimage.png";
-import workshopDetailImage1 from "../images/workshops/workshopdetail1.png";
-
 import iconImg from "../images/icon.png";
 
 function WorkshopDetail({ workshops, image_workshop }) {
@@ -28,7 +25,7 @@ function WorkshopDetail({ workshops, image_workshop }) {
   const workshopImage = image_workshop.find(
     (image) => image.workshop === parseInt(id)
   );
-  console.log('hellp',workshopImage);
+  console.log("hellp", workshopImage);
   return (
     <div className="workshop-detail-page">
       <div className="page-hero" id="gallery-bg">
@@ -65,7 +62,7 @@ function WorkshopDetail({ workshops, image_workshop }) {
         </div>
         <div className="workshop-container">
           <div className="left-container">
-            {/* {workshop.link ? (
+            {workshop.link ? (
               <iframe
                 width="642"
                 height="298"
@@ -75,12 +72,9 @@ function WorkshopDetail({ workshops, image_workshop }) {
                 allowFullScreen
                 title="Workshop Video"
               ></iframe>
-            ) : ( */}
-              <img
-                src={workshopImage ? workshopImage.image_url : workshopDetailImage1}
-                alt="Workshop"
-              />
-            {/* )} */}
+            ) : (
+              <img src={workshopImage} alt="Workshop" />
+            )}
 
             <div>
               <h2>About the workshop</h2>
@@ -119,30 +113,23 @@ function WorkshopDetail({ workshops, image_workshop }) {
             <div className="recent-workshops">
               <h2>Recent Workshops</h2>
               <div className="workshop-cards">
-                <div className="card">
-                  <img src={workshopDetailImage1} alt="" />
-
-                  <div className="desc">
-                    <h5>Charity, Expectati ons vs. Reality</h5>
-                    <p>Homeless</p>
-                  </div>
-                </div>
-                <div className="card">
-                  <img src={workshopDetailImage1} alt="" />
-
-                  <div className="desc">
-                    <h5>Charity, Expectati ons vs. Reality</h5>
-                    <p>Homeless</p>
-                  </div>
-                </div>
-                <div className="card">
-                  <img src={workshopDetailImage1} alt="" />
-
-                  <div className="desc">
-                    <h5>Charity, Expectati ons vs. Reality</h5>
-                    <p>Homeless</p>
-                  </div>
-                </div>
+                {workshops && workshops.length > 0 ? (
+                  workshops.map((workshop) => (
+                    <div className="card" key={workshop.id}>
+                      <img src={workshop.image} />
+                      <div className="desc">
+                        <h5>
+                          {workshop.title.length > 20
+                            ? workshop.title.substring(0, 20) + ". . ."
+                            : workshop.title}
+                        </h5>
+                        <p>{workshop.date}</p>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No workshops available.</p>
+                )}
               </div>
             </div>
           </div>

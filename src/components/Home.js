@@ -12,14 +12,12 @@ import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
 import videoSrc from "../images/video.mp4";
 import frame38517Img from "../images/Frame 38517.png";
-import about1 from "../images/about1.jpg";
 import frame38516Img from "../images/Frame 38516.png";
 import small1Img from "../images/small1.png";
 import small2Img from "../images/small2.png";
 import small3Img from "../images/small3.png";
 import small4Img from "../images/small4.png";
 import back_to_top_arrow from "../images/back_to_top_arrow.svg";
-import leftArrowImg from "../images/rightarrow.png";
 import gallery1Img from "../images/gallery/image1.jpg";
 import gallery2Img from "../images/gallery/image2.jpg";
 import gallery3Img from "../images/gallery/image3.jpg";
@@ -30,9 +28,6 @@ import gallery7Img from "../images/gallery/image7.jpg";
 import designleftImg from "../images/designleft.png";
 import designrightImg from "../images/designright.png";
 import line172Img from "../images/Line 172.png";
-
-import selected_dot from "../images/selected_dot.svg";
-import unselected_dot from "../images/unselected_dot.svg";
 import apnLogo1Img from "../images/APN Logo-c-v 1 (1).png";
 import linkarrowImg from "../images/linkarrow.png";
 import verticalineImg from "../images/verticaline.png";
@@ -179,6 +174,9 @@ function Home({ data }) {
                 </p>
               </div>
             </div>
+            <NavLink to="/casestudy">
+              <button class="btn">See case studies</button>
+            </NavLink>
           </div>
           <div class="maps">
             <img src={mapImg} alt="" />
@@ -274,7 +272,7 @@ function Home({ data }) {
               </div>
               <h2>Hear from the people themselves</h2>
             </div>
-            <Click_Carousel />
+            <Click_Carousel stories={data.stories} />
           </div>
         </div>
         <div class="funding-agency">
@@ -292,7 +290,11 @@ function Home({ data }) {
                   the challenges of global change and sustainability.
                 </p>
                 <div class="sites">
-                  <a href="https://www.apn-gcr.org/" target="_blank">
+                  <a
+                    href="https://www.apn-gcr.org/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     APN Website
                     <img src={linkarrowImg} alt="" />
                   </a>
@@ -300,6 +302,7 @@ function Home({ data }) {
                   <a
                     href="https://www.apn-gcr.org/project/goal-gender-orientated-adaptive-transformation-cross-learning-for-climate-change-and-disaster-risk-resilience-among-india-nepal-sri-lanka-and-japan/"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Project Website
                     <img src={linkarrowImg} alt="" />

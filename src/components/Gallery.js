@@ -3,7 +3,6 @@ import "./global.css";
 import "./style.css";
 import { scrollSpy } from "./scrollSpy";
 
-
 function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
   useEffect(() => {
     console.log("image_workshop Gallery:", image_workshop);
@@ -119,26 +118,22 @@ function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
 
             <div className="photo-container gallery-container">
               {filteredCaseStudyImages.map((image, index) => (
-                 <li 
-                 key={index}
-                 className="worshop-detail-home gallery-box"
-                 style={{ backgroundImage: `url(${image.image_url})` }}>
-               
-            <div class="detail">
-             
-              <div class="venue">
-                <div>
-                 
-                  <p>{image.caption}</p>
-                </div>
-                <div>
-             
-                  <p>{image.date}</p>
-                </div>
-              </div>
-              
-            </div>
-          </li>
+                <li
+                  key={index}
+                  className="worshop-detail-home gallery-box"
+                  style={{ backgroundImage: `url(${image.image})` }}
+                >
+                  <div class="detail">
+                    <div class="venue">
+                      <div>
+                        <p>{image.caption}</p>
+                      </div>
+                      <div>
+                        <p>{image.date}</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
               ))}
             </div>
 
@@ -157,31 +152,24 @@ function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
 
             <ul className="photo-container gallery-container">
               {filteredWorkshopImages.map((image, index) => (
-               
-                 <li key={index}
-                
-                 className="worshop-detail-home gallery-box"
-                 style={{ backgroundImage: `url(${image.image_url})` }}
-                 >
-                
-              <div class="detail">
-               
-                <div class="venue">
-                  <div>
-                   
-                    <p>{image.caption}</p>
+                <li
+                  key={index}
+                  className="worshop-detail-home gallery-box"
+                  style={{ backgroundImage: `url(${image.image})` }}
+                >
+                  <div class="detail">
+                    <div class="venue">
+                      <div>
+                        <p>{image.caption}</p>
+                      </div>
+                      <div>
+                        <p>{image.date}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-               
-                    <p>{image.date}</p>
-                  </div>
-                </div>
-                
-              </div>
-            </li>
-                
+                </li>
               ))}
-              </ul>
+            </ul>
 
             <div className="page-number-wrapper">
               <div>1</div>
