@@ -4,7 +4,7 @@ import "./style.css";
 import { scrollSpy } from "./scrollSpy";
 
 
-function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
+function Gallery({ workshops, image_workshop, image_casestudy }) {
   useEffect(() => {
     console.log("image_workshop Gallery:", image_workshop);
   }, [image_workshop]);

@@ -65,7 +65,7 @@ function App() {
     <div className="App">
       <Base />
       <Routes>
-        <Route path="/" element={<Home data={data} />} />
+        <Route path="/" element={<Home data={data} image_workshop={workshopImages} image_casestudy={casestudyImages} />} />
         <Route path="/about" element={<About />} />
         <Route
           path="/workshops"

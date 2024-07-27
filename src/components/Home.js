@@ -44,7 +44,7 @@ import { NavLink } from "react-router-dom";
 import Click_Carousel from "./click_carousel";
 import Workshop_Carousel from "./workshop_carousel";
 
-function Home({ data }) {
+function Home({ data, image_workshop, image_casestudy }) {
   const videoRef = useRef(null);
   return (
     <div>
@@ -232,31 +232,54 @@ function Home({ data }) {
           <div class="images">
             <div class="row1">
               <ul>
-                <li>
-                  <img src={gallery1Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery2Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery3Img} alt="" />
-                </li>
+              {image_casestudy.map((image, index) => (
+                 <li 
+                 key={index}
+                 className="worshop-detail-home gallery-box"
+                 style={{ backgroundImage: `url(${image.image_url})` }}>
+               
+            <div class="detail">
+             
+              <div class="venue">
+                <div>
+                 
+                  <p>{image.caption}</p>
+                </div>
+                <div>
+             
+                  <p>{image.date}</p>
+                </div>
+              </div>
+              
+            </div>
+          </li>
+              ))}
               </ul>
             </div>
             <div class="row2">
               <ul>
-                <li>
-                  <img src={gallery4Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery5Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery6Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery7Img} alt="" />
-                </li>
+              {image_workshop.map((image, index) => (
+                 <li 
+                 key={index}
+                 className="worshop-detail-home gallery-box"
+                 style={{ backgroundImage: `url(${image.image_url})` }}>
+               
+            <div class="detail">
+             
+              <div class="venue">
+                <div>
+                 
+                  <p>{image.caption}</p>
+                </div>
+                <div>
+             
+                  <p>{image.date}</p>
+                </div>
+              </div>
+              
+            </div>
+          </li>
+              ))}
               </ul>
             </div>
           </div>
