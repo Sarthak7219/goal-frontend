@@ -1433,6 +1433,12 @@ line-height: 22.5px; /* 187.5% */
     text-align: center;
 }
 
+.logos ul li img{
+    width: 62px;
+    height: auto;
+    object-fit: contain;
+}
+
 .collabs h5{
     color: #EEE;
 text-align: center;
