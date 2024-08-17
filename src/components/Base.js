@@ -2,7 +2,6 @@ import React from "react";
 import "./style.css";
 import "./global.css";
 import { NavLink } from "react-router-dom";
-
 import logoImg from "../images/logo (2).png";
 import downArrowImg from "../images/down_arrow.svg";
 import searchImg from "../images/search_icon.svg";

@@ -1,12 +1,7 @@
 import React from "react";
 import "./global.css";
 import "./style.css";
-import nitbhopal_logo from "../images/logo/manit.png";
-import science_hub_logo from "../images/logo/science_hub_png.png";
-import rika_logo from "../images/logo/rika.png";
-import colombo_logo from "../images/logo/colombo.png";
-import JNUImg from "../images/logo/jnu.png";
-import IITRImg from "../images/logo/iitr.png";
+
 import oneImg from "../images/1.png";
 import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
@@ -19,7 +14,6 @@ import line172Img from "../images/Line 172.png";
 import apnLogo1Img from "../images/APN Logo-c-v 1 (1).png";
 import linkarrowImg from "../images/linkarrow.png";
 import verticalineImg from "../images/verticaline.png";
-import mapImg from "../images/map.png";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Click_Carousel from "./click_carousel";

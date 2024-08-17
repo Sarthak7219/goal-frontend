@@ -2,7 +2,6 @@ import React from "react";
 import iconImg from "../images/icon.png";
 import "./global.css";
 import "./style.css";
-import img_bg from "../images/img-bg.jpg";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
 import { useEffect } from "react";
