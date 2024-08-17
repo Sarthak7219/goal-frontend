@@ -76,9 +76,19 @@ function Casestudy({
               id={`case-study-${case_study.id}`}
               key={case_study.id}
             >
-              <p>Case Study</p>
-              <h1>{case_study.study_area}</h1>
-              <h5>Description</h5>
+              <div>
+                <p className="small-head">Case Study - {case_study.id}</p>
+                <h1 style={{ marginTop: "5px" }}>{case_study.study_area}</h1>
+              </div>
+              <h3
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "600",
+                  marginTop: "10px",
+                }}
+              >
+                Description
+              </h3>
               <div className="column">
                 <p>{case_study.description}</p>
                 <div className="recent-workshops">
@@ -94,17 +104,21 @@ function Casestudy({
                           (workshop) => workshop.case_study === case_study.id
                         )
                         .map((workshop) => (
-                          <div className="card" key={workshop.id}>
-                            <img src={workshop.image} alt={workshop.title} />
-                            <div className="desc">
-                              <h5>
-                                {workshop.title.length > 20
-                                  ? workshop.title.substring(0, 20) + ". . ."
-                                  : workshop.title}
-                              </h5>
-                              <p>{workshop.date}</p>
+                          <NavLink
+                            to={`/workshops/workshop-detail/${workshop.id}`}
+                          >
+                            <div className="card" key={workshop.id}>
+                              <img src={workshop.image} alt={workshop.title} />
+                              <div className="desc">
+                                <h5>
+                                  {workshop.title.length > 20
+                                    ? workshop.title.substring(0, 20) + ". . ."
+                                    : workshop.title}
+                                </h5>
+                                <p>{workshop.date}</p>
+                              </div>
                             </div>
-                          </div>
+                          </NavLink>
                         ))
                     ) : (
                       <p>No workshops found.</p>
@@ -123,16 +137,25 @@ function Casestudy({
               </h3>
               <div className="photos">
                 {image_case_study && image_case_study.length > 0 ? (
-                  image_case_study
-                    .filter((image) => image.case_study === case_study.id)
-                    .slice(0, 4)
-                    .map((image, index) => (
-                      <img
-                        src={image.image}
-                        alt={`Image ${index}`}
-                        key={index}
-                      />
-                    ))
+                  (() => {
+                    const filteredImages = image_case_study
+                      .filter((image) => image.case_study === case_study.id)
+                      .slice(0, 4);
+
+                    return filteredImages.length > 0 ? (
+                      filteredImages.map((image, index) => (
+                        <div key={index} className="img-hover-div">
+                          <img src={image.image} alt={`Image ${index}`} />
+                          <div className="image-info">
+                            <p className="date">Date: {image.date}</p>
+                            <p className="location">{image.caption}</p>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <p>No images available for this case study.</p>
+                    );
+                  })()
                 ) : (
                   <p>No images available.</p>
                 )}

@@ -27,26 +27,30 @@ function WorkshopList({ workshops }) {
       </div>
 
       <div className="workshops-list">
-        <h1>Workshops</h1>
+        <h1>See All Workshops</h1>
 
         <div className="workshops-list-wrapper">
-          {workshops.map((workshop) => (
-            <div>
-              <div className="line"></div>
-              <div className="box">
-                {/* <img src={workshop.image} alt="" /> */}
-                <div>
-                  <div className="flex">
-                    <p>Workshop</p>
-                    <p className="pink-date">{workshop.date}</p>
+          {workshops.length === 0 ? (
+            <p>No workshops found !</p>
+          ) : (
+            workshops.map((workshop) => (
+              <div>
+                <div className="line"></div>
+                <div className="box">
+                  {/* <img src={workshop.image} alt="" /> */}
+                  <div>
+                    <div className="flex">
+                      <p>Workshop</p>
+                      <p className="pink-date">{workshop.date}</p>
+                    </div>
+                    <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
+                      <h1>{workshop.title}</h1>
+                    </NavLink>
                   </div>
-                  <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
-                    <h1>{workshop.title}</h1>
-                  </NavLink>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>

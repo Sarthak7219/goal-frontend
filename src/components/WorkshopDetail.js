@@ -25,7 +25,11 @@ function WorkshopDetail({ workshops, image_workshop }) {
   const workshopImage = image_workshop.find(
     (image) => image.workshop === parseInt(id)
   );
-  console.log("hellp", workshopImage);
+
+  const filteredWorkshops = workshops.filter(
+    (r_workshop) => r_workshop.id !== workshop.id
+  );
+
   return (
     <div className="workshop-detail-page">
       <div className="page-hero" id="gallery-bg">
@@ -64,7 +68,7 @@ function WorkshopDetail({ workshops, image_workshop }) {
           <div className="left-container">
             {workshop.link ? (
               <iframe
-                width="642"
+                width="700"
                 height="298"
                 src={workshop.link}
                 frameBorder="0"
@@ -113,19 +117,21 @@ function WorkshopDetail({ workshops, image_workshop }) {
             <div className="recent-workshops">
               <h2>Recent Workshops</h2>
               <div className="workshop-cards">
-                {workshops && workshops.length > 0 ? (
-                  workshops.map((workshop) => (
-                    <div className="card" key={workshop.id}>
-                      <img src={workshop.image} />
-                      <div className="desc">
-                        <h5>
-                          {workshop.title.length > 20
-                            ? workshop.title.substring(0, 20) + ". . ."
-                            : workshop.title}
-                        </h5>
-                        <p>{workshop.date}</p>
+                {filteredWorkshops.length > 0 ? (
+                  filteredWorkshops.map((r_workshop) => (
+                    <NavLink to={`/workshops/workshop-detail/${r_workshop.id}`}>
+                      <div className="card" key={r_workshop.id}>
+                        <img src={r_workshop.image} />
+                        <div className="desc">
+                          <h5>
+                            {r_workshop.title.length > 20
+                              ? r_workshop.title.substring(0, 20) + ". . ."
+                              : r_workshop.title}
+                          </h5>
+                          <p>{r_workshop.date}</p>
+                        </div>
                       </div>
-                    </div>
+                    </NavLink>
                   ))
                 ) : (
                   <p>No workshops available.</p>

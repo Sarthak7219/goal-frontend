@@ -118,22 +118,13 @@ function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
 
             <div className="photo-container gallery-container">
               {filteredCaseStudyImages.map((image, index) => (
-                <li
-                  key={index}
-                  className="worshop-detail-home gallery-box"
-                  style={{ backgroundImage: `url(${image.image})` }}
-                >
-                  <div class="detail">
-                    <div class="venue">
-                      <div>
-                        <p>{image.caption}</p>
-                      </div>
-                      <div>
-                        <p>{image.date}</p>
-                      </div>
-                    </div>
+                <div key={index} className="img-hover-div">
+                  <img src={image.image} alt={`Image ${index}`} key={index} />
+                  <div class="image-info">
+                    <p class="date">Date: {image.date}</p>
+                    <p class="location">{image.caption}</p>
                   </div>
-                </li>
+                </div>
               ))}
             </div>
 
@@ -154,7 +145,7 @@ function Gallery({ workshops, case_studies, image_workshop, image_casestudy }) {
               {filteredWorkshopImages.map((image, index) => (
                 <li
                   key={index}
-                  className="worshop-detail-home gallery-box"
+                  className="img-hover-div"
                   style={{ backgroundImage: `url(${image.image})` }}
                 >
                   <div class="detail">

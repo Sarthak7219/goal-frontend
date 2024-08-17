@@ -59,6 +59,18 @@ function ProfileDetail({ team_members }) {
                 APN Profile
               </a>
             </li>
+
+            {profile.website_link && (
+              <li>
+                <a
+                  href={profile.website_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Website
+                </a>
+              </li>
+            )}
           </ul>
         </div>
         <div className="detail-desc">{profile.description}</div>

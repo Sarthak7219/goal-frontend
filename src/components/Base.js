@@ -8,7 +8,8 @@ import downArrowImg from "../images/down_arrow.svg";
 import searchImg from "../images/search_icon.svg";
 import cancelIcon from "../images/cancel_icon.svg";
 import { useState } from "react";
-function Base() {
+
+function Base({ case_studies }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleSearchClick = () => {
@@ -126,21 +127,17 @@ function Base() {
             <img src={downArrowImg} alt="" />
           </NavLink>
           <ul class="dropdown">
-            <li>
-              <NavLink to="/casestudy#case_study1">Case Study1</NavLink>
-            </li>
-            <li>
-              <NavLink to="/casestudy#case_study2">Case Study2</NavLink>
-            </li>
-            <li>
-              <NavLink to="/casestudy#case_study3">Case Study3</NavLink>
-            </li>
-            <li>
-              <NavLink to="/casestudy#case_study4">Case Study4</NavLink>
-            </li>
-            <li>
-              <NavLink to="/casestudy#case_study5">Case Study5</NavLink>
-            </li>
+            {case_studies && case_studies.length > 0 ? (
+              case_studies.map((case_study, index) => (
+                <li key={index}>
+                  <NavLink to="/casestudy">
+                    {case_study.study_area}, {case_study.country}
+                  </NavLink>
+                </li>
+              ))
+            ) : (
+              <p>No case studies found</p>
+            )}
           </ul>
         </li>
       </ul>

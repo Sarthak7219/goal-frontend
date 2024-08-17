@@ -11,36 +11,23 @@ import oneImg from "../images/1.png";
 import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
 import videoSrc from "../images/video.mp4";
-import frame38517Img from "../images/Frame 38517.png";
-import frame38516Img from "../images/Frame 38516.png";
-import small1Img from "../images/small1.png";
-import small2Img from "../images/small2.png";
-import small3Img from "../images/small3.png";
-import small4Img from "../images/small4.png";
+import img_bg from "../images/img-bg.jpg";
 import back_to_top_arrow from "../images/back_to_top_arrow.svg";
-import gallery1Img from "../images/gallery/image1.jpg";
-import gallery2Img from "../images/gallery/image2.jpg";
-import gallery3Img from "../images/gallery/image3.jpg";
-import gallery4Img from "../images/gallery/image4.jpg";
-import gallery5Img from "../images/gallery/image5.jpg";
-import gallery6Img from "../images/gallery/image6.jpg";
-import gallery7Img from "../images/gallery/image7.jpg";
 import designleftImg from "../images/designleft.png";
 import designrightImg from "../images/designright.png";
 import line172Img from "../images/Line 172.png";
 import apnLogo1Img from "../images/APN Logo-c-v 1 (1).png";
 import linkarrowImg from "../images/linkarrow.png";
 import verticalineImg from "../images/verticaline.png";
-
 import mapImg from "../images/map.png";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-
 import Click_Carousel from "./click_carousel";
 import Workshop_Carousel from "./workshop_carousel";
 
-function Home({ data }) {
+function Home({ data, homepageData, images }) {
   const videoRef = useRef(null);
+  const institutes = homepageData?.institutes || [];
   return (
     <div>
       <div class="homepage">
@@ -81,12 +68,17 @@ function Home({ data }) {
             <div className="collab-container">
               <h5>Collaborating Institutes</h5>
               <div className="collab-box">
-                <img src={IITRImg} alt="" />
-                <img src={colombo_logo} alt="" />
-                <img src={science_hub_logo} alt="" />
-                <img src={rika_logo} alt="" style={{ margin: "auto 0" }} />
-                <img src={nitbhopal_logo} alt="" />
-                <img src={JNUImg} alt="" />
+                {institutes.length > 0 ? (
+                  institutes.map((institute, index) => (
+                    <img
+                      key={index}
+                      src={institute.logo}
+                      alt={institute.name}
+                    />
+                  ))
+                ) : (
+                  <p>No collaborating institutes found.</p>
+                )}
               </div>
             </div>
           </div>
@@ -96,8 +88,21 @@ function Home({ data }) {
         </a>
         <div class="about-page" id="about-home">
           <div class="about-image">
-            <img src={frame38517Img} alt="about" class="img1" />
-            <img src={frame38516Img} alt="about" class="img2" />
+            {data && data.about_data ? (
+              <div class="image-grid">
+                <img src={data.about_data.img1} alt="Image 1" />
+                <img src={data.about_data.img2} alt="Image 2" />
+                <img src={data.about_data.img3} alt="Image 3" />
+                <img src={data.about_data.img4} alt="Image 4" />
+              </div>
+            ) : (
+              <div class="image-grid">
+                <img src={img_bg} alt="Image 1" />
+                <img src={img_bg} alt="Image 2" />
+                <img src={img_bg} alt="Image 3" />
+                <img src={img_bg} alt="Image 4" />
+              </div>
+            )}
           </div>
           <div class="about-description">
             <div class="overview">
@@ -131,55 +136,32 @@ function Home({ data }) {
                 <h3>Study Areas</h3>
                 <img src={line172Img} alt="" />
               </div>
-              <h1>Let Us Come Together To Make a Difference</h1>
+              <h1>Case Studies in Spotlight</h1>
               <p>
                 The collaborative case studies are based on scientific research
                 and will be developed in -
               </p>
             </div>
             <div class="area-cards">
-              <div class="area-card">
-                <div class="card-head">
-                  <img src={small1Img} alt="" />
-                  <span>India</span>
-                </div>
-                <p>
-                  Udham Singh Nagar District, Uttarakhand, Dumka, Aspirant
-                  District Jharkhand and Bishnupur District, Manipur
-                </p>
-              </div>
-              <div class="area-card">
-                <div class="card-head">
-                  <img src={small2Img} alt="" />
-                  <span>Nepal</span>
-                </div>
-                <p>Chitwan District, Bagmati Province</p>
-              </div>
-              <div class="area-card">
-                <div class="card-head">
-                  <img src={small3Img} alt="" />
-                  <span>Sri Lanka</span>
-                </div>
-                <p>Gampaha District, Western Province</p>
-              </div>
-              <div class="area-card">
-                <div class="card-head">
-                  <img src={small4Img} alt="" />
-                  <span>Japan</span>
-                </div>
-
-                <p>
-                  literature-based case study and expert, stakeholders, and
-                  community inputs through hybrid mode
-                </p>
-              </div>
+              {data.case_studies && data.case_studies.length > 0 ? (
+                data.case_studies.map((case_study, index) => (
+                  <div key={index} className="area-card">
+                    <div class="card-head">
+                      <span>{case_study.country}</span>
+                    </div>
+                    <p>{case_study.study_area}</p>
+                  </div>
+                ))
+              ) : (
+                <p>Add case study in database</p>
+              )}
             </div>
             <NavLink to="/casestudy">
               <button class="btn">See case studies</button>
             </NavLink>
           </div>
           <div class="maps">
-            <img src={mapImg} alt="" />
+            <img src={homepageData?.map_image} alt="" />
           </div>
         </div>
         <div class="workshop-page">
@@ -187,12 +169,19 @@ function Home({ data }) {
             <div class="head">
               <div class="headline">
                 <h3>Recent workshops</h3>
-                <img src="./images/Line 172.png" alt="" />
+                <img src={line172Img} alt="" />
               </div>
 
               <h2>We conduct regular workshops</h2>
             </div>
             <Workshop_Carousel workshops={data.workshops} />
+            <NavLink
+              to="/workshops"
+              style={{ textDecoration: "underline", color: "rgb(23, 47, 92)" }}
+            >
+              {" "}
+              See All Workshops
+            </NavLink>
           </div>
         </div>
         <div class="objective-page">
@@ -227,36 +216,16 @@ function Home({ data }) {
         </div>
         <div class="gallery-home">
           <h2>Our Gallery</h2>
-          <div class="images">
-            <div class="row1">
-              <ul>
-                <li>
-                  <img src={gallery1Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery2Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery3Img} alt="" />
-                </li>
-              </ul>
-            </div>
-            <div class="row2">
-              <ul>
-                <li>
-                  <img src={gallery4Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery5Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery6Img} alt="" />
-                </li>
-                <li>
-                  <img src={gallery7Img} alt="" />
-                </li>
-              </ul>
-            </div>
+          <div class="image-grid">
+            {images.map((image, index) => (
+              <div className="img-hover-div" key={index}>
+                <img src={image.image} alt={`Image ${index + 1}`} />
+                <div class="image-info">
+                  <p class="date">Date: {image.date}</p>
+                  <p class="location">{image.caption}</p>
+                </div>
+              </div>
+            ))}
           </div>
           <NavLink to="/gallery">
             {" "}
@@ -314,33 +283,19 @@ function Home({ data }) {
         </div>
         <div class="logos" style={{ margin: "auto", marginTop: "90px" }}>
           <ul>
-            <li class="logo">
-              <img src={colombo_logo} alt="" />
-              <p>university of colombo</p>
-            </li>
-            <li class="logo">
-              <img src={nitbhopal_logo} alt="" />
-              <p>NIT Bhopal</p>
-            </li>
-            <li class="logo">
-              <img src={science_hub_logo} alt="" />
-              <p>Science Hub</p>
-            </li>
-            <li class="logo">
-              <img src={rika_logo} alt="" />
-              <p>Rika</p>
-            </li>
+            {institutes.length > 0 ? (
+              institutes.map((institute, index) => (
+                <li class="logo" key={index}>
+                  <img src={institute.logo} alt={institute.name} />
+                  <p>{institute.name}</p>
+                </li>
+              ))
+            ) : (
+              <p>No collaborating institutes found.</p>
+            )}
             <li class="logo">
               <img src={apnLogo1Img} alt="" />
               <p>APN</p>
-            </li>
-            <li class="logo">
-              <img src={IITRImg} alt="" />
-              <p>IIT Roorkee</p>
-            </li>
-            <li class="logo">
-              <img src={JNUImg} alt="" />
-              <p>Jawaharlal Nehru University</p>
             </li>
           </ul>
         </div>
