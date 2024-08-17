@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const API_URL_WORKSHOP_IMAGES = `${process.env.REACT_APP_API_URL}/workshop_images/`;
+    const API_URL_WORKSHOP_IMAGES = `${process.env.REACT_APP_API_URL}workshop_images/`;
     fetch(API_URL_WORKSHOP_IMAGES)
       .then((response) => response.json())
       .then((workshopImages) => {
@@ -49,7 +49,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const API_URL_CASESTUDY_IMAGES = `${process.env.REACT_APP_API_URL}/casestudy_images/`;
+    const API_URL_CASESTUDY_IMAGES = `${process.env.REACT_APP_API_URL}casestudy_images/`;
     fetch(API_URL_CASESTUDY_IMAGES)
       .then((response) => response.json())
       .then((casestudyImages) => {

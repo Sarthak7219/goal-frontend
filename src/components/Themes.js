@@ -32,7 +32,7 @@ function Themes() {
   //Fetching themes data
   const [Themes, setThemes] = useState([]);
   useEffect(() => {
-    const API_URL_THEMES = `${process.env.REACT_APP_API_URL}/themes/`;
+    const API_URL_THEMES = `${process.env.REACT_APP_API_URL}themes/`;
     fetch(API_URL_THEMES)
       .then((response) => response.json())
       .then((Themes) => {
