@@ -22,6 +22,8 @@ function App() {
     team_members: [],
     workshops: [],
     case_studies: [],
+    themes: [],
+    case_study_theme_descriptions: [],
   });
 
   const [workshopImages, setWorkshopImages] = useState([]);
@@ -63,7 +65,7 @@ function App() {
 
   console.log("Images in App component:", casestudyImages);
   console.log("Images in App component:", workshopImages);
-  console.log("Data in App component:", data);
+  console.log("Data in App component:", data.case_study_theme_descriptions);
 
   return (
     <div className="App">
@@ -123,7 +125,7 @@ function App() {
           element={<ProfileDetail team_members={data.team_members} />}
         />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/themes" element={<Theme />} />
+        <Route path="/themes" element={<Theme  themes={data.themes} case_study_theme_descriptions={data.case_study_theme_descriptions}/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />

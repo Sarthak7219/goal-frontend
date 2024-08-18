@@ -87,6 +87,7 @@ function Home({ data, image_workshop, image_casestudy }) {
                 <img src={colombo_logo} alt="" />
                 <img src={JNUImg} alt="" />
                 <img src={IITRImg} alt="" />
+                <img src={apnLogo1Img} alt="" />
               </div>
             </div>
           </div>
