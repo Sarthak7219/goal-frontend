@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import iconImg from "../images/icon.png";
 import "./global.css";
 import "./style.css";
+import img_bg from "../images/img-bg.jpg";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
 
@@ -14,7 +15,7 @@ function Themes({ themes, case_study_theme_descriptions }) {
   }, []);
 
   const [activeOption, setActiveOption] = useState(0);
-  const [activeTheme, setActiveTheme] = useState(themes[0]?.id || "theme-1");
+  const [activeTheme, setActiveTheme] = useState("theme-1");
 
   const handleClick = (index) => {
     setActiveOption(index);
@@ -27,11 +28,17 @@ function Themes({ themes, case_study_theme_descriptions }) {
     }
   };
 
-  // Find the theme data based on the active theme
-  const currentTheme = themes.find(theme => theme.id === activeTheme);
-  
-  // Filter case studies for the active theme
-  const filteredCaseStudies = case_study_theme_descriptions.filter(cs => cs.theme === activeTheme);
+  //Fetching themes data
+  const [Themes, setThemes] = useState([]);
+  useEffect(() => {
+    const API_URL_THEMES = `${process.env.REACT_APP_API_URL}themes/`;
+    fetch(API_URL_THEMES)
+      .then((response) => response.json())
+      .then((Themes) => {
+        setThemes(Themes);
+      })
+      .catch((error) => console.error("Error fetching themes data:", error));
+  }, []);
 
   return (
     <div className="themes-page">
@@ -53,55 +60,102 @@ function Themes({ themes, case_study_theme_descriptions }) {
 
       <div className="container" id="themes">
         <div className="quick-link-box" id="themes-sidebox">
-          {themes.map((theme) => (
-            <div
-              key={theme.id}
-              className={`theme-quicklink ${
-                activeTheme === theme.id ? "active" : ""
-              }`}
-              onClick={() => handleTheme(theme.id)}
-            >
-              - {theme.title}
-            </div>
-          ))}
+          {Themes.length > 0 ? (
+            Themes.map((theme) => (
+              <div
+                className={`theme-quicklink ${
+                  activeTheme === `theme-${theme.id}` ? "active" : ""
+                }`}
+                onClick={() => handleTheme(`theme-${theme.id}`)}
+              >
+                - Theme-{theme.id}
+              </div>
+            ))
+          ) : (
+            <p>No themes found</p> // Display this message if no themes are available
+          )}
         </div>
 
         <div className="right" id="themes-right">
-          {currentTheme && (
-            <div
-              className={`theme-cont ${
-                activeTheme === currentTheme.id ? "active" : ""
-              }`}
-            >
-              <div className="section-head3">
-                <p>Theme</p>
-                <h1>{currentTheme.title}</h1>
-              </div>
-              <section className="themes" id="description">
-                <h1>Description</h1>
-                <p>{currentTheme.description}</p>
-              </section>
-              <section className="themes" id="theme-case-studies">
-                <div className="theme-cs-box">
-                  <div className="cs-select">
-                    {filteredCaseStudies.map((cs, index) => (
-                      <div
-                        key={cs.id}
-                        className={`cs ${index === activeOption ? "active" : ""}`}
-                        onClick={() => handleClick(index)}
-                      >
-                        <p>CaseStudy-{cs.case_study}</p>
-                      </div>
-                    ))}
+          {Themes.length > 0 ? (
+            Themes.map((theme) => (
+              <div
+                className={`theme-cont ${
+                  activeTheme === `theme-${theme.id}` ? "active" : ""
+                }`}
+              >
+                <div className="section-head3">
+                  <p>Theme {theme.id}</p>
+
+                  <h1>{theme.title}</h1>
+                </div>
+                <section className="themes" id="description">
+                  <h1>Description</h1>
+                  <p>{theme.description}</p>
+                </section>
+                <section className="themes" id="theme-case-studies">
+                  <h1>Examples From Case Studies</h1>
+                  <div className="theme-cs-box">
+                    <div className="cs-select">
+                      {theme.case_studies_description.map(
+                        (descriptionItem, index) => (
+                          <div
+                            key={index}
+                            className={`cs ${
+                              index === activeOption ? "active" : ""
+                            }`}
+                            onClick={() => handleClick(index)}
+                          >
+                            <p>{descriptionItem.case_study_title}</p>{" "}
+                            {/* Display case study title */}
+                          </div>
+                        )
+                      )}
+                    </div>
+                    <div className="theme-cs-desc">
+                      <p>
+                        {
+                          theme.case_studies_description[activeOption]
+                            .description
+                        }
+                      </p>
+                    </div>
                   </div>
-                  <div className="theme-cs-desc">
-                    {filteredCaseStudies.length > 0 && (
-                      <p>{filteredCaseStudies[activeOption]?.description}</p>
+                </section>
+                <section className="themes">
+                  <h1>Photos</h1>
+
+                  <div className="photos" style={{ marginTop: "20px" }}>
+                    {theme.case_studies_images &&
+                    theme.case_studies_images.length > 0 ? (
+                      theme.case_studies_images.map((image, index) => (
+                        <div className="img-hover-div" key={index}>
+                          <img src={image.image} alt={`Image`} />
+                          <div className="image-info">
+                            <p className="date">{image.date}</p>
+                            <p className="location">{image.caption}</p>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Images not available</p>
                     )}
                   </div>
-                </div>
-              </section>
-            </div>
+                  <NavLink
+                    to="/gallery"
+                    style={{
+                      fontSize: "14px",
+                      textDecoration: "underline",
+                      color: "#172f5c",
+                    }}
+                  >
+                    See All Photos
+                  </NavLink>
+                </section>
+              </div>
+            ))
+          ) : (
+            <p>No themes found</p> // Display this message if no themes are available
           )}
         </div>
       </div>

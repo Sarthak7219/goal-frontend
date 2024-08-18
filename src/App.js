@@ -63,16 +63,27 @@ function App() {
       );
   }, []);
 
-  console.log("Images in App component:", casestudyImages);
-  console.log("Images in App component:", workshopImages);
-  console.log("Data in App component:", data.case_study_theme_descriptions);
+  const allImages = [...workshopImages, ...casestudyImages];
+  const caseStudyList = data.case_studies.map((cs) => ({
+    study_area: cs.study_area,
+    country: cs.country,
+  }));
 
   return (
     <div className="App">
-      <Base />
+      <Base case_studies={caseStudyList} />
       <Routes>
-        <Route path="/" element={<Home data={data} image_workshop={workshopImages} image_casestudy={casestudyImages} />} />
-        <Route path="/about" element={<About />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              data={data}
+              homepageData={data.homepage_data}
+              images={allImages}
+            />
+          }
+        />
+        <Route path="/about" element={<About about_data={data.about_data} />} />
         <Route
           path="/workshops"
           element={

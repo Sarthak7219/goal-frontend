@@ -15,14 +15,12 @@ function Resources({ resources }) {
     };
   }, []);
 
-  // const openPDFInNewTab = (pdfUrl) => {
-  //   const newWindow = window.open();
-  //   console.log(pdfUrl);
-  //   newWindow.document.write(
-  //     `<iframe src="${pdfUrl}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen />`
-  //   );
-  //   newWindow.document.title = "PDF Viewer";
-  // };
+  const publications = resources.filter(
+    (resource) => resource.category === "publication"
+  );
+  const training_tools = resources.filter(
+    (resource) => resource.category === "training_tool"
+  );
 
   return (
     <div className="resources-page">
@@ -55,82 +53,70 @@ function Resources({ resources }) {
         <div className="right" id="resources-right">
           <section className="resources" id="publications">
             <div className="section-head">
-              <div>
+              {/* <div>
                 <p>Publications</p>
                 <div className="line"></div>
-              </div>
-              <h1>Read Our Publications</h1>
+              </div> */}
+              <h1>Publications</h1>
             </div>
 
             <div className="resources-container">
-              {resources.map((resource) => (
-                <div className="resource-box" key={resource.id}>
-                  <div className="detail">
-                    <p>{resource.publisher}</p>
-                    <h3>{resource.title}</h3>
+              {publications.length > 0 ? (
+                publications.map((publication) => (
+                  <div className="resource-box" key={publication.id}>
+                    <div className="detail">
+                      <div>
+                        <p>{publication.publisher}</p>
+                        <p className="date">{publication.date_of_publishing}</p>
+                      </div>
+                      <h3>{publication.title}</h3>
 
-                    {/* <button onClick={() => openPDFInNewTab(resource.pdf)}>
-                      View PDF
-                    </button> */}
-                    <a
-                      href={resource.pdf}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Open PDF
-                    </a>
+                      <a
+                        href={publication.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Open PDF
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p>Data not found</p> // Display this message if no resources match the filter
+              )}
             </div>
           </section>
 
           <section className="resources" id="training-manuels">
             <div className="section-head">
-              <div>
+              {/* <div>
                 <p>Training Manuels</p>
                 <div className="line"></div>
-              </div>
+              </div> */}
 
-              <h1>Read Our Training Manuels</h1>
+              <h1>Training Tools</h1>
             </div>
 
             <div className="resources-container">
-              <div className="resource-box">
-                <div className="detail">
-                  <p>Publisher</p>
-                  <h3>Lorem ipsum dolor sit amet consectetur.</h3>
-                  <p className="date">June27, 2023</p>
-                </div>
-              </div>
-              <div className="resource-box">
-                <div className="detail">
-                  <p>Publisher</p>
-                  <h3>Lorem ipsum dolor sit amet consectetur.</h3>
-                  <p className="date">June27, 2023</p>
-                </div>
-              </div>
-              <div className="resource-box">
-                <div className="detail">
-                  <p>Publisher</p>
-                  <h3>Lorem ipsum dolor sit amet consectetur.</h3>
-                  <p className="date">June27, 2023</p>
-                </div>
-              </div>
-              <div className="resource-box">
-                <div className="detail">
-                  <p>Publisher</p>
-                  <h3>Lorem ipsasjf</h3>
-                  <p className="date">June27, 2023</p>
-                </div>
-              </div>
-              <div className="resource-box">
-                <div className="detail">
-                  <p>Publisher</p>
-                  <h3>Lorem ipsum dolor sit amet consectetur.</h3>
-                  <p className="date">June27, 2023</p>
-                </div>
-              </div>
+              {training_tools.length > 0 ? (
+                training_tools.map((training_tool) => (
+                  <div className="resource-box" key={training_tool.id}>
+                    <div className="detail">
+                      <h3>{training_tool.title}</h3>
+
+                      <a
+                        href={training_tool.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Open File
+                      </a>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>Data not found</p> // Display this message if no resources match the filter
+              )}
             </div>
           </section>
         </div>

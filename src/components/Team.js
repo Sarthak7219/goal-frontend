@@ -58,45 +58,53 @@ function Team({ team_members }) {
             <h2>Collaborators</h2>
 
             <div className="photo-container">
-              {team_members
-                .filter(
-                  (team_member) => team_member.category === "collaborator"
-                )
-                .map((team_member) => (
-                  <NavLink
-                    to={`/team-member-detail/${team_member.id}`}
-                    key={team_member.id}
-                  >
-                    <div className="member-card">
-                      <img
-                        src={team_member.image}
-                        className="member-img"
-                        alt=""
-                      />
-                      <img
-                        src={resourceCardBg}
-                        className="member-card-bg"
-                        alt=""
-                      />
-                      <div className="member-details">
-                        <h3>{team_member.name}</h3>
-                        <div className="member-line"></div>
-                        <p className="position">{team_member.position}</p>
-                        <p className="institute">{team_member.organisation}</p>
-                        <div className="social-icons">
-                          <i
-                            className="fa-regular fa-envelope"
-                            style={{ color: "#ec028c" }}
-                          ></i>
-                          <i
-                            className="fa-brands fa-linkedin"
-                            style={{ color: "#ec028c" }}
-                          ></i>
+              {team_members.filter(
+                (team_member) => team_member.category === "collaborator"
+              ).length === 0 ? (
+                <p>Data not found !</p>
+              ) : (
+                team_members
+                  .filter(
+                    (team_member) => team_member.category === "collaborator"
+                  )
+                  .map((team_member) => (
+                    <NavLink
+                      to={`/team-member-detail/${team_member.id}`}
+                      key={team_member.id}
+                    >
+                      <div className="member-card">
+                        <img
+                          src={team_member.image}
+                          className="member-img"
+                          alt=""
+                        />
+                        <img
+                          src={resourceCardBg}
+                          className="member-card-bg"
+                          alt=""
+                        />
+                        <div className="member-details">
+                          <h3>{team_member.name}</h3>
+                          <div className="member-line"></div>
+                          <p className="position">{team_member.position}</p>
+                          <p className="institute">
+                            {team_member.organisation}
+                          </p>
+                          <div className="social-icons">
+                            <i
+                              className="fa-regular fa-envelope"
+                              style={{ color: "#ec028c" }}
+                            ></i>
+                            <i
+                              className="fa-brands fa-linkedin"
+                              style={{ color: "#ec028c" }}
+                            ></i>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </NavLink>
-                ))}
+                    </NavLink>
+                  ))
+              )}
             </div>
           </section>
           <section className="team" id="research_associates">
