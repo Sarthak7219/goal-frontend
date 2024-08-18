@@ -21,9 +21,16 @@ function ProfileDetail({ team_members }) {
 
   return (
     <div className="profile-detail-container">
-      <div className="page-hero" id="profile-bg" style={{ backgroundImage: `url(${profile.bg_image})` }}>
-        
-      </div>
+      <div
+        className="page-hero"
+        id="profile-bg"
+        style={{
+          background: `
+          linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)),
+          url(${profile.bg_image}) no-repeat center center / cover
+        `,
+        }}
+      ></div>
       <div className="name-section">
         <img src={profile.image} alt="" />
         <div className="profile-heading">
@@ -48,8 +55,9 @@ function ProfileDetail({ team_members }) {
               <p>{profile.email}</p>
             </li>
             <li>
-              <h4>Contact</h4>
-              <p>{profile.contact}</p>
+              <a href={profile.apn_profile_link} target="_blank">
+                APN Profile
+              </a>
             </li>
           </ul>
         </div>

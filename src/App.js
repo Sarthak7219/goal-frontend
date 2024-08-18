@@ -21,7 +21,7 @@ function App() {
     resources: [],
     team_members: [],
     workshops: [],
-    case_studies: []
+    case_studies: [],
   });
 
   const [workshopImages, setWorkshopImages] = useState([]);
@@ -43,7 +43,9 @@ function App() {
         console.log("Fetched workshop images:", workshopImages);
         setWorkshopImages(workshopImages);
       })
-      .catch((error) => console.error("Error fetching workshop image data:", error));
+      .catch((error) =>
+        console.error("Error fetching workshop image data:", error)
+      );
   }, []);
 
   useEffect(() => {
@@ -54,7 +56,9 @@ function App() {
         console.log("Fetched case study images:", casestudyImages);
         setCasestudyImages(casestudyImages);
       })
-      .catch((error) => console.error("Error fetching case study image data:", error));
+      .catch((error) =>
+        console.error("Error fetching case study image data:", error)
+      );
   }, []);
 
   console.log("Images in App component:", casestudyImages);
@@ -69,20 +73,55 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route
           path="/workshops"
-          element={<WorkshopList workshops={data.workshops} image_workshop={workshopImages} />}
+          element={
+            <WorkshopList
+              workshops={data.workshops}
+              image_workshop={workshopImages}
+            />
+          }
         />
         <Route
           path="/workshops/workshop-detail/:id"
-          element={<WorkshopDetail workshops={data.workshops} image_workshop={workshopImages} />}
+          element={
+            <WorkshopDetail
+              workshops={data.workshops}
+              image_workshop={workshopImages}
+            />
+          }
         />
         <Route
           path="/gallery"
-          element={<Gallery workshops={data.workshops} case_studies={data.case_studies} image_workshop={workshopImages} image_casestudy={casestudyImages} />}
+          element={
+            <Gallery
+              workshops={data.workshops}
+              case_studies={data.case_studies}
+              image_workshop={workshopImages}
+              image_casestudy={casestudyImages}
+            />
+          }
         />
-        <Route path="/resources" element={<Resources resources={data.resources} />} />
-        <Route path="/casestudy" element={<Casestudy case_studies={data.case_studies} workshops={data.workshops} />} />
-        <Route path="/team" element={<Team team_members={data.team_members} />} />
-        <Route path="/team-member-detail/:id" element={<ProfileDetail team_members={data.team_members} />} />
+        <Route
+          path="/resources"
+          element={<Resources resources={data.resources} />}
+        />
+        <Route
+          path="/casestudy"
+          element={
+            <Casestudy
+              case_studies={data.case_studies}
+              workshops={data.workshops}
+              image_case_study={casestudyImages}
+            />
+          }
+        />
+        <Route
+          path="/team"
+          element={<Team team_members={data.team_members} />}
+        />
+        <Route
+          path="/team-member-detail/:id"
+          element={<ProfileDetail team_members={data.team_members} />}
+        />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/themes" element={<Theme />} />
         <Route path="*" element={<PageNotFound />} />
