@@ -3,7 +3,7 @@ import "./global.css";
 import "./style.css";
 import { scrollSpy } from "./scrollSpy";
 
-function Gallery({ case_studies,workshops, image_workshop, image_casestudy }) {
+function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
   useEffect(() => {
     console.log("image_workshop Gallery:", image_workshop);
   }, [image_workshop]);
@@ -22,6 +22,9 @@ function Gallery({ case_studies,workshops, image_workshop, image_casestudy }) {
   const [activeBox, setActiveBox] = useState(null);
   const [filteredWorkshopImages, setFilteredWorkshopImages] = useState([]);
   const [filteredCaseStudyImages, setFilteredCaseStudyImages] = useState([]);
+  const [current_visit_page, setcurrent_visit_page] = useState(1);
+  const [current_workshop_page, setcurrent_workshop_page] = useState(1);
+  const [imagesperpage, setimagesperpage] = useState(8);
 
   const handleClick = (boxId) => {
     setActiveBox(boxId);
@@ -46,11 +49,33 @@ function Gallery({ case_studies,workshops, image_workshop, image_casestudy }) {
     setFilteredCaseStudyImages(filtered_casestudy_images);
   };
 
+  const last_visit_Index = current_visit_page * imagesperpage;
+  const first_visit_Index = last_visit_Index - imagesperpage;
+  const last_workshop_Index = current_workshop_page * imagesperpage;
+  const first_workshop_Index = last_workshop_Index - imagesperpage;
+  let current_visit_images = [];
+  let current_workshop_images=[];
+
+  if (filteredCaseStudyImages.length > 0)
+    current_visit_images = filteredCaseStudyImages.slice(first_visit_Index, last_visit_Index);
+
+  if (filteredWorkshopImages.length > 0)
+    current_workshop_images = filteredWorkshopImages.slice(first_workshop_Index, last_workshop_Index);
+
+  let pages_visit = [];
+  let pages_workshop = [];
+
+  for (let i = 1; i <= Math.ceil(filteredCaseStudyImages.length / imagesperpage); i++)
+    pages_visit.push(i);
+
+  for (let i = 1; i <= Math.ceil(filteredWorkshopImages.length / imagesperpage); i++)
+    pages_workshop.push(i);
+
   return (
     <div className="gallery-page">
       <h1>See photos from all case studies</h1>
       <div className="gallery-cs-select">
-      {case_studies.map((box, index) => (
+        {case_studies.map((box, index) => (
           <div
             className={`gal-cs-box ${activeBox === `gal-cs-box-${index + 1}` ? "active" : ""}`}
             id={`gal-cs-box-${index + 1}`}
@@ -73,77 +98,77 @@ function Gallery({ case_studies,workshops, image_workshop, image_casestudy }) {
           </a>
         </div>
 
-       
         {activeBox && (
-  <div className={`right ${activeBox ? "active" : ""}`} id="gallery-right">
-    {/* Visit Photos Section */}
-    <section id="visit-pics" className="gallery">
-      <div className="section-head2">
-        <h1>Visit Photos</h1>
-      </div>
-      {filteredCaseStudyImages.length > 0 ? (
-        <div className="photo-container gallery-container">
-          {filteredCaseStudyImages.map((image, index) => (
-            <div key={index} className="img-hover-div">
-              <img src={image.image} alt={`Image ${index}`} key={index} />
-              <div className="image-info">
-                <p className="date">Date: {image.date}</p>
-                <p className="location">{image.caption}</p>
+          <div className={`right ${activeBox ? "active" : ""}`} id="gallery-right">
+            {/* Visit Photos Section */}
+            <section id="visit-pics" className="gallery">
+              <div className="section-head2">
+                <h1>Visit Photos</h1>
               </div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>No visit photos available for this case study.</p>
-      )}
-      <div className="page-number-wrapper">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-      </div>
-    </section>
-
-    {/* Workshop Photos Section */}
-    <section id="workshop-pics" className="gallery">
-      <div className="section-head2">
-        <h1>Workshop Photos</h1>
-      </div>
-      {filteredWorkshopImages.length > 0 ? (
-        <ul className="photo-container gallery-container">
-          {filteredWorkshopImages.map((image, index) => (
-            <li
-              key={index}
-              className="img-hover-div"
-              style={{ backgroundImage: `url(${image.image})` }}
-            >
-              <div className="detail">
-                <div className="venue">
-                  <div>
-                    <p>{image.caption}</p>
-                  </div>
-                  <div>
-                    <p>{image.date}</p>
-                  </div>
+              {current_visit_images.length > 0 ? (
+                <div className="photo-container gallery-container">
+                  {current_visit_images.map((image, index) => (
+                    <div key={index} className="img-hover-div">
+                      <img src={image.image} alt={`Image ${index}`} key={index} />
+                      <div className="image-info">
+                        <p className="date">Date: {image.date}</p>
+                        <p className="location">{image.caption}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No workshop photos available for this case study.</p>
-      )}
-      <div className="page-number-wrapper">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-      </div>
-    </section>
-  </div>
-)}
+              ) : (
+                <p>No visit photos available for this case study.</p>
+              )}
 
-      
+              <div className="page-number-wrapper">
+                {pages_visit.map((page, index) => (
+                  <button key={index} onClick={() => setcurrent_visit_page(page)}>
+                    {page}
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            {/* Workshop Photos Section */}
+            <section id="workshop-pics" className="gallery">
+              <div className="section-head2">
+                <h1>Workshop Photos</h1>
+              </div>
+              {current_workshop_images.length > 0 ? (
+                <ul className="photo-container gallery-container">
+                  {current_workshop_images.map((image, index) => (
+                    <li
+                      key={index}
+                      className="img-hover-div"
+                      style={{ backgroundImage: `url(${image.image})` }}
+                    >
+                      <div className="detail">
+                        <div className="venue">
+                          <div>
+                            <p>{image.caption}</p>
+                          </div>
+                          <div>
+                            <p>{image.date}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No workshop photos available for this case study.</p>
+              )}
+              <div className="page-number-wrapper">
+                {pages_workshop.map((page, index) => (
+                  <button key={index} onClick={() => setcurrent_workshop_page(page)}>
+                    {page}
+                  </button>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
       </div>
     </div>
   );
