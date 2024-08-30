@@ -71,13 +71,15 @@ function Resources({ resources }) {
                       </div>
                       <h3>{publication.title}</h3>
 
-                      <a
-                        href={publication.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Open PDF
-                      </a>
+                      {publication.pdf && (
+                        <a
+                          href={publication.pdf}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open PDF
+                        </a>
+                      )}
                     </div>
                   </div>
                 ))
@@ -104,13 +106,24 @@ function Resources({ resources }) {
                     <div className="detail">
                       <h3>{training_tool.title}</h3>
 
-                      <a
-                        href={training_tool.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Open File
-                      </a>
+                      {training_tool.pdf && (
+                        <a
+                          href={training_tool.pdf}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open File
+                        </a>
+                      )}
+                      {training_tool.link && (
+                        <a
+                          href={training_tool.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open Link
+                        </a>
+                      )}
                     </div>
                   </div>
                 ))
