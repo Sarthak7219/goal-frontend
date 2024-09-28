@@ -112,14 +112,14 @@ function Team({ team_members }) {
 
             <div className="photo-container">
               {team_members.filter(
-                (team_member) => team_member.category === "research_associates"
+                (team_member) => team_member.category === "research_associate"
               ).length === 0 ? (
                 <p>Data not found !</p>
               ) : (
                 team_members
                   .filter(
                     (team_member) =>
-                      team_member.category === "research_associates"
+                      team_member.category === "research_associate"
                   )
                   .map((team_member) => (
                     <NavLink
@@ -166,14 +166,14 @@ function Team({ team_members }) {
 
             <div className="photo-container">
               {team_members.filter(
-                (team_member) => team_member.category === "community_trainers"
+                (team_member) => team_member.category === "community_trainer"
               ).length === 0 ? (
                 <p>Data not found !</p>
               ) : (
                 team_members
                   .filter(
                     (team_member) =>
-                      team_member.category === "community_trainers"
+                      team_member.category === "community_trainer"
                   )
                   .map((team_member) => (
                     <NavLink
@@ -220,12 +220,12 @@ function Team({ team_members }) {
 
             <div className="photo-container">
               {team_members.filter(
-                (team_member) => team_member.category === "interns"
+                (team_member) => team_member.category === "intern"
               ).length === 0 ? (
                 <p>Data not found !</p>
               ) : (
                 team_members
-                  .filter((team_member) => team_member.category === "interns")
+                  .filter((team_member) => team_member.category === "intern")
                   .map((team_member) => (
                     <NavLink
                       to={`/team-member-detail/${team_member.id}`}
@@ -271,12 +271,12 @@ function Team({ team_members }) {
 
             <div className="photo-container">
               {team_members.filter(
-                (team_member) => team_member.category === "students"
+                (team_member) => team_member.category === "student"
               ).length === 0 ? (
                 <p>Data not found !</p>
               ) : (
                 team_members
-                  .filter((team_member) => team_member.category === "students")
+                  .filter((team_member) => team_member.category === "student")
                   .map((team_member) => (
                     <NavLink
                       to={`/team-member-detail/${team_member.id}`}
