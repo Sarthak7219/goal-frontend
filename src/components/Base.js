@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
 import "./global.css";
 import { NavLink } from "react-router-dom";
@@ -6,49 +6,68 @@ import logoImg from "../images/logo (2).png";
 import downArrowImg from "../images/down_arrow.svg";
 import searchImg from "../images/search_icon.svg";
 import cancelIcon from "../images/cancel_icon.svg";
-import { useState } from "react";
 
-function Base({ case_studies }) {
+function Base({ case_studies, workshops }) {
   const [isActive, setIsActive] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
 
+  // Combine workshops and case_studies into one array for easier search
+  const getCombinedData = () => [
+    ...workshops.map(item => ({ ...item, type: 'workshops' })),
+    ...case_studies.map(item => ({ ...item, type: 'casestudy' })),
+  ];
+
+  // Activate searchbar when clicked
   const handleSearchClick = () => {
-    if (!isActive) {
-      setIsActive(true);
-    }
+    setIsActive(true);
   };
 
-  const toggleActiveClass = () => {
-    setIsActive(!isActive);
+  // Deactivate search and reset inputs
+  const toggleActiveClass = (e) => {
+    e.stopPropagation();
+    setIsActive(false);
+    setSearchQuery('');
+    setSearchResults([]);
+  };
+
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query); // Update the search query
+
+
+    // Filter results based on the search query
+    const combinedData = getCombinedData();
+    const filteredResults = combinedData.filter((result) =>
+      result.description?.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResults(filteredResults);
   };
 
   return (
-    <div class="navbar">
+    <div className="navbar">
       <NavLink to="/">
-        <img src={logoImg} alt="" />
+        <img src={logoImg} alt="Logo" />
       </NavLink>
-      <ul class="navlist">
+      <ul className="navlist">
         <li>
           <NavLink to="/about">About</NavLink>
         </li>
-        <li class="dropdown-menu">
-          <NavLink to="/team" class="/team">
+        <li className="dropdown-menu">
+          <NavLink to="/team" className="team">
             Team
-            <img src={downArrowImg} alt="" />
+            <img src={downArrowImg} alt="Dropdown Arrow" />
           </NavLink>
-          <ul class="dropdown">
+          <ul className="dropdown">
             <li>
-              <NavLink to="/team#collabarotors">Collabarotors</NavLink>
+              <NavLink to="/team#collaborators">Collaborators</NavLink>
             </li>
             <li>
-              <NavLink to="/team#research_associates">
-                Research associates
-              </NavLink>
+              <NavLink to="/team#research_associates">Research Associates</NavLink>
             </li>
             <li>
-              <NavLink to="/team#community_trainers">
-                {" "}
-                Community Trainers
-              </NavLink>
+              <NavLink to="/team#community_trainers">Community Trainers</NavLink>
             </li>
             <li>
               <NavLink to="/team#intern">Interns</NavLink>
@@ -61,71 +80,55 @@ function Base({ case_studies }) {
         <li>
           <NavLink to="/workshops">Workshops</NavLink>
         </li>
-
-        <li class="dropdown-menu">
-          <NavLink to="/resources" class="Resources">
+        <li className="dropdown-menu">
+          <NavLink to="/resources" className="Resources">
             Resources
-            <img src={downArrowImg} alt="" />
+            <img src={downArrowImg} alt="Dropdown Arrow" />
           </NavLink>
-          <ul class="dropdown">
+          <ul className="dropdown">
             <li>
               <NavLink to="/resources#publications">Publications</NavLink>
             </li>
             <li>
-              <NavLink to="/resources#training_manuals">
-                Training manuals
-              </NavLink>
+              <NavLink to="/resources#training_manuals">Training Manuals</NavLink>
             </li>
           </ul>
         </li>
-        <li class="dropdown-menu">
+        <li className="dropdown-menu">
           <NavLink to="/themes" id="themes-dropdown">
             Themes
-            <img src={downArrowImg} alt="" />
+            <img src={downArrowImg} alt="Dropdown Arrow" />
           </NavLink>
-          <ul class="dropdown">
+          <ul className="dropdown">
             <li>
-              <NavLink to="/themes">
-                Theme 1- Review of Climate Change and Disaster Risk
-              </NavLink>
+              <NavLink to="/themes">Theme 1 - Review of Climate Change and Disaster Risk</NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
-                Theme 2- Review of Gender Inequality
-              </NavLink>
+              <NavLink to="/themes">Theme 2 - Review of Gender Inequality</NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
-                Theme 3- Gender wise determination of CC Impact
-              </NavLink>
+              <NavLink to="/themes">Theme 3 - Gender-wise Determination of CC Impact</NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
-                Theme 4- Gender wise determination of Disaster Risk
-              </NavLink>
+              <NavLink to="/themes">Theme 4 - Gender-wise Determination of Disaster Risk</NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
-                Theme 5- Development of Strategies for CC adaptation
-              </NavLink>
+              <NavLink to="/themes">Theme 5 - Strategies for CC Adaptation</NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
-                Theme 6- Development of Strategies for Disaster Risk Reduction
-              </NavLink>
+              <NavLink to="/themes">Theme 6 - Strategies for Disaster Risk Reduction</NavLink>
             </li>
           </ul>
         </li>
-
         <li>
           <NavLink to="/gallery">Gallery</NavLink>
         </li>
-        <li class="dropdown-menu">
+        <li className="dropdown-menu">
           <NavLink to="/casestudy">
             Case Studies
-            <img src={downArrowImg} alt="" />
+            <img src={downArrowImg} alt="Dropdown Arrow" />
           </NavLink>
-          <ul class="dropdown">
+          <ul className="dropdown">
             {case_studies && case_studies.length > 0 ? (
               case_studies.map((case_study, index) => (
                 <li key={index}>
@@ -140,23 +143,23 @@ function Base({ case_studies }) {
           </ul>
         </li>
       </ul>
-      <div class="nav-right">
-        <div class="dropdown-menu">
-          <NavLink to="#" class="language">
+      <div className="nav-right">
+        <div className="dropdown-menu">
+          <NavLink to="#" className="language">
             English
-            <img src={downArrowImg} alt="" />
+            <img src={downArrowImg} alt="Dropdown Arrow" />
           </NavLink>
-          <ul class="dropdown">
-            <li class="case1">
+          <ul className="dropdown">
+            <li>
               <NavLink to="#">Hindi</NavLink>
             </li>
-            <li class="case2">
+            <li>
               <NavLink to="#">Sinhali</NavLink>
             </li>
-            <li class="case2">
+            <li>
               <NavLink to="#">Nepali</NavLink>
             </li>
-            <li class="case2">
+            <li>
               <NavLink to="#">Japanese</NavLink>
             </li>
           </ul>
@@ -165,11 +168,33 @@ function Base({ case_studies }) {
           className={`searchbar ${isActive ? "active" : ""}`}
           onClick={handleSearchClick}
         >
-          <img src={searchImg} alt="search_icon" />
+          <img src={searchImg} alt="Search Icon" />
           <form>
-            <input type="text" placeholder="Search" />
-            <img src={cancelIcon} onClick={toggleActiveClass} alt="" />
+          <input
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={handleSearch} // Update search query on input change
+          />
+          {isActive && (
+            <img
+              src={cancelIcon}
+              onClick={toggleActiveClass} // Clear search and close on cancel icon click
+              alt="Cancel"
+            />
+          )}
           </form>
+          {isActive && searchQuery && searchResults.length > 0 && (
+            <ul className="dropdown search-results-dropdown">
+              {searchResults.map((result, index) => (
+                <li key={index}>
+                  <NavLink to={`/${result.type.toLowerCase()}`}>
+                    {result.title || result.study_area} ({result.type})
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>

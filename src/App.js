@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div className="App">
-      <Base case_studies={caseStudyList} />
+      <Base case_studies={data.case_studies} workshops={data.workshops} />
       <Routes>
         <Route
           path="/"
@@ -135,7 +135,7 @@ function App() {
           path="/team-member-detail/:id"
           element={<ProfileDetail team_members={data.team_members} />}
         />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search" element={<SearchPage case_studies={data.case_studies} workshops={data.workshops} themes={data.themes} />} />
         <Route path="/themes" element={<Theme  themes={data.themes} case_study_theme_descriptions={data.case_study_theme_descriptions}/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./global.css";
 import "./style.css";
-
+import { useState, useEffect } from "react";
 import oneImg from "../images/1.png";
 import twoImg from "../images/2.png";
 import threeImg from "../images/3.png";
@@ -20,6 +20,19 @@ import Click_Carousel from "./click_carousel";
 import Workshop_Carousel from "./workshop_carousel";
 
 function Home({ data, homepageData, images }) {
+  const [current_page, setcurrent_page] = useState(1);
+  const [imagesperpage, setimagesperpage] = useState(8);
+  const last_Index = current_page * imagesperpage;
+  const first_Index = last_Index - imagesperpage;
+  let current_images = [];
+  if (images.length > 0)
+    current_images = images.slice(first_Index, last_Index);
+
+  let pages = [];
+
+  for (let i = 1; i <= Math.ceil(images.length / imagesperpage); i++)
+    pages.push(i);
+  console.log(pages);
   const videoRef = useRef(null);
   const institutes = homepageData?.institutes || [];
   return (
@@ -211,7 +224,7 @@ function Home({ data, homepageData, images }) {
         <div class="gallery-home">
           <h2>Our Gallery</h2>
           <div class="image-grid">
-            {images.map((image, index) => (
+            {current_images.map((image, index) => (
               <div className="img-hover-div" key={index}>
                 <img src={image.image} alt={`Image ${index + 1}`} />
                 <div class="image-info">
@@ -221,6 +234,13 @@ function Home({ data, homepageData, images }) {
               </div>
             ))}
           </div>
+          <div className="page-number-wrapper">
+                {pages.map((page, index) => (
+                  <button key={index} onClick={() => setcurrent_page(page)}>
+                    {page}
+                  </button>
+                ))}
+              </div>
           <NavLink to="/gallery">
             {" "}
             <button class="btn">View Gallery</button>

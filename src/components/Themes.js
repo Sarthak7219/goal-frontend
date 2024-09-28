@@ -7,6 +7,8 @@ import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
 
 function Themes({ themes, case_study_theme_descriptions }) {
+  console.log(themes)
+  
   useEffect(() => {
     const cleanup = scrollSpy();
     return () => {
