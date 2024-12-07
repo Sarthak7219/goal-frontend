@@ -29,8 +29,9 @@ function App() {
   const [workshopImages, setWorkshopImages] = useState([]);
   const [casestudyImages, setCasestudyImages] = useState([]);
 
+  const API_URL = process.env.REACT_APP_API_URL.replace(/\/+$/, "");
+
   useEffect(() => {
-    const API_URL = process.env.REACT_APP_API_URL;
     fetch(API_URL)
       .then((response) => response.json())
       .then((data) => {
@@ -40,7 +41,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const API_URL_WORKSHOP_IMAGES = `${process.env.REACT_APP_API_URL}/workshop_images/`;
+    const API_URL_WORKSHOP_IMAGES = `${API_URL}/workshop_images/`;
     fetch(API_URL_WORKSHOP_IMAGES)
       .then((response) => response.json())
       .then((workshopImages) => {
@@ -52,7 +53,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const API_URL_CASESTUDY_IMAGES = `${process.env.REACT_APP_API_URL}/casestudy_images/`;
+    const API_URL_CASESTUDY_IMAGES = `${API_URL}/casestudy_images/`;
     fetch(API_URL_CASESTUDY_IMAGES)
       .then((response) => response.json())
       .then((casestudyImages) => {
