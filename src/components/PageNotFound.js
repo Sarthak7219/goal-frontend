@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 function PageNotFound() {
   return (
-    <div class="page_404">
+    <div className="page_404">
       <img src={NotFoundImg} alt="" />
 
       <NavLink to="/">

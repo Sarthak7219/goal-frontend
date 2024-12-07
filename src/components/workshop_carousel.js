@@ -51,10 +51,10 @@ const Workshop_Carousel = ({ workshops = [] }) => {
             }}
           >
             {workshops.map((workshop, index) => (
-              <li class="worshop-detail-home" key={index}>
-                <div class="detail">
+              <li className="worshop-detail-home" key={index}>
+                <div className="detail">
                   <h2>{workshop.title}</h2>
-                  <div class="venue">
+                  <div className="venue">
                     <div>
                       <img src={location_icon} alt="icon" />
                       <p>{workshop.venue}</p>
@@ -66,7 +66,7 @@ const Workshop_Carousel = ({ workshops = [] }) => {
                   </div>
                   <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
                     {" "}
-                    <button class="btn">View Details</button>
+                    <button className="btn">View Details</button>
                   </NavLink>
                 </div>
               </li>

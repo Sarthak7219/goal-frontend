@@ -60,12 +60,12 @@ function About({ about_data }) {
             {about_data ? (
               <div className="about-abs">
                 <div className="content">{about_data.abstract}</div>
-                <div class="about-image">
-                  <div class="image-grid">
-                    <img src={about_data.img1} alt="Image 1" />
-                    <img src={about_data.img2} alt="Image 2" />
-                    <img src={about_data.img3} alt="Image 3" />
-                    <img src={about_data.img4} alt="Image 4" />
+                <div className="about-image">
+                  <div className="image-grid">
+                    <img src={about_data.img1} alt="1" />
+                    <img src={about_data.img2} alt="2" />
+                    <img src={about_data.img3} alt="3" />
+                    <img src={about_data.img4} alt="4" />
                   </div>
                 </div>
               </div>

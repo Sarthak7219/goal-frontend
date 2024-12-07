@@ -17,18 +17,6 @@ function Casestudy({
     };
   }, []);
 
-  useEffect(() => {
-    console.log("Case Studies Data:", case_studies); // Log the case_studies prop to inspect its structure
-  }, [case_studies]);
-
-  useEffect(() => {
-    console.log("Images Data:", image_case_study); // Log the image_case_study prop to inspect its structure
-  }, [image_case_study]);
-
-  useEffect(() => {
-    console.log("Workshops Data:", workshops); // Log the workshops prop to inspect its structure
-  }, [workshops]);
-
   return (
     <div className="casestudy-page">
       <div className="page-hero" id="case_studies-bg">

@@ -7,11 +7,11 @@ import footerLogo from "../images/footer-logo.svg";
 function Footer() {
   return (
     <div>
-      <div class="footer">
-        <div class="footer-content">
-          <div class="footer-body">
-            <div class="project-name">
-              <div class="heading">
+      <div className="footer">
+        <div className="footer-content">
+          <div className="footer-body">
+            <div className="project-name">
+              <div className="heading">
                 <img src={footerLogo} alt="" />
                 <p>An initiative by IIT Roorkee</p>
               </div>
@@ -19,7 +19,7 @@ function Footer() {
               <p>APN</p>
               <p>IIT Roorkee</p>
             </div>
-            <div class="quicklinks">
+            <div className="quicklinks">
               <h4>Quick Link</h4>
               <p>Home</p>
               <p>Workshops</p>
@@ -28,19 +28,19 @@ function Footer() {
               <p>About</p>
               <p>Case Studies</p>
             </div>
-            <div class="get-in-touch">
+            <div className="get-in-touch">
               <h4>Get In Touch</h4>
               <p>+91-1332-23124</p>
               <p>example@gmail.com</p>
             </div>
-            <div class="address">
+            <div className="address">
               <h4>Get In Touch</h4>
               <p>
                 Department of Architecture and Planning, Indian Institute of
                 Technology (IIT), Roorkee Uttarakhand- 247667, India
               </p>
             </div>
-            <div class="dept-img">
+            <div className="dept-img">
               <h2>
                 Department Of Architecture and Planning,
                 <span>IIT Roorkee</span>

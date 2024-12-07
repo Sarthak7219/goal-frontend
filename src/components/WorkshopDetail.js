@@ -7,9 +7,6 @@ import { NavLink, useParams } from "react-router-dom";
 import iconImg from "../images/icon.png";
 
 function WorkshopDetail({ workshops, image_workshop }) {
-  useEffect(() => {
-    console.log("image_workshop Data:", image_workshop); // Log the case_studies prop to inspect its structure
-  }, [image_workshop]);
   const { id } = useParams();
   const [workshop, setWorkshop] = useState(null);
 
@@ -121,7 +118,7 @@ function WorkshopDetail({ workshops, image_workshop }) {
                   filteredWorkshops.map((r_workshop) => (
                     <NavLink to={`/workshops/workshop-detail/${r_workshop.id}`}>
                       <div className="card" key={r_workshop.id}>
-                        <img src={r_workshop.image} />
+                        <img src={r_workshop.image} alt="img" />
                         <div className="desc">
                           <h5>
                             {r_workshop.title.length > 20
