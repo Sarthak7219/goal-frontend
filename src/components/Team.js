@@ -1,20 +1,79 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./global.css";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
-
+import TeamShimmer from "./TeamShimmer";
 import iconImg from "../images/icon.png";
 import resourceCardBg from "../images/Rectangle 5995.png"; // Import background image for member card
 
-function Team({ team_members }) {
-  useEffect(() => {
-    const cleanup = scrollSpy();
+const Team = ({ team_members }) => {
+  const [loading, setLoading] = useState(true);
+  const [dataFetched, setDataFetched] = useState(false);
 
-    return () => {
-      cleanup();
-    };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);  // Stop showing shimmer after the time has passed
+      setDataFetched(true); // Data fetch time ended
+    }, 5500);  // Shimmer will show for 1500ms (1.5 seconds)
+
+    return () => clearTimeout(timer);
   }, []);
+
+  const renderTeamSection = (category, sectionId, title) => {
+    const filteredMembers = team_members.filter(
+      (team_member) => team_member.category === category
+    );
+
+    return (
+      <section className="team" id={sectionId}>
+        <h2>{title}</h2>
+        {loading || !dataFetched ? (
+          <TeamShimmer /> // Show shimmer effect while loading or before data is fetched
+        ) : filteredMembers.length === 0 ? (
+          <p>Data not found!</p> // Show if no data available after loading
+        ) : (
+          <div className="photo-container">
+            {filteredMembers.map((team_member) => (
+              <NavLink
+                to={`/team-member-detail/${team_member.id}`}
+                key={team_member.id}
+              >
+                <div className="member-card">
+                  <img
+                    src={team_member.image}
+                    className="member-img"
+                    alt=""
+                  />
+                  <img
+                    src={resourceCardBg}
+                    className="member-card-bg"
+                    alt=""
+                  />
+                  <div className="member-details">
+                    <h3>{team_member.name}</h3>
+                    <div className="member-line"></div>
+                    <p className="position">{team_member.position}</p>
+                    <p className="institute">{team_member.organisation}</p>
+                    <div className="social-icons">
+                      <i
+                        className="fa-regular fa-envelope"
+                        style={{ color: "#ec028c" }}
+                      ></i>
+                      <i
+                        className="fa-brands fa-linkedin"
+                        style={{ color: "#ec028c" }}
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </NavLink>
+            ))}
+          </div>
+        )}
+      </section>
+    );
+  };
 
   return (
     <div className="team-page">
@@ -54,273 +113,15 @@ function Team({ team_members }) {
         </div>
 
         <div className="right" id="team-right">
-          <section className="team" id="collaborators">
-            <h2>Collaborators</h2>
-
-            <div className="photo-container">
-              {team_members.filter(
-                (team_member) => team_member.category === "collaborator"
-              ).length === 0 ? (
-                <p>Data not found !</p>
-              ) : (
-                team_members
-                  .filter(
-                    (team_member) => team_member.category === "collaborator"
-                  )
-                  .map((team_member) => (
-                    <NavLink
-                      to={`/team-member-detail/${team_member.id}`}
-                      key={team_member.id}
-                    >
-                      <div className="member-card">
-                        <img
-                          src={team_member.image}
-                          className="member-img"
-                          alt=""
-                        />
-                        <img
-                          src={resourceCardBg}
-                          className="member-card-bg"
-                          alt=""
-                        />
-                        <div className="member-details">
-                          <h3>{team_member.name}</h3>
-                          <div className="member-line"></div>
-                          <p className="position">{team_member.position}</p>
-                          <p className="institute">
-                            {team_member.organisation}
-                          </p>
-                          <div className="social-icons">
-                            <i
-                              className="fa-regular fa-envelope"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                            <i
-                              className="fa-brands fa-linkedin"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                          </div>
-                        </div>
-                      </div>
-                    </NavLink>
-                  ))
-              )}
-            </div>
-          </section>
-          <section className="team" id="research_associates">
-            <h2>Research Associates</h2>
-
-            <div className="photo-container">
-              {team_members.filter(
-                (team_member) => team_member.category === "research_associate"
-              ).length === 0 ? (
-                <p>Data not found !</p>
-              ) : (
-                team_members
-                  .filter(
-                    (team_member) =>
-                      team_member.category === "research_associate"
-                  )
-                  .map((team_member) => (
-                    <NavLink
-                      to={`/team-member-detail/${team_member.id}`}
-                      key={team_member.id}
-                    >
-                      <div className="member-card">
-                        <img
-                          src={team_member.image}
-                          className="member-img"
-                          alt=""
-                        />
-                        <img
-                          src={resourceCardBg}
-                          className="member-card-bg"
-                          alt=""
-                        />
-                        <div className="member-details">
-                          <h3>{team_member.name}</h3>
-                          <div className="member-line"></div>
-                          <p className="position">{team_member.position}</p>
-                          <p className="institute">
-                            {team_member.organisation}
-                          </p>
-                          <div className="social-icons">
-                            <i
-                              className="fa-regular fa-envelope"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                            <i
-                              className="fa-brands fa-linkedin"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                          </div>
-                        </div>
-                      </div>
-                    </NavLink>
-                  ))
-              )}
-            </div>
-          </section>
-          <section className="team" id="community_trainers">
-            <h2>Community Trainers</h2>
-
-            <div className="photo-container">
-              {team_members.filter(
-                (team_member) => team_member.category === "community_trainer"
-              ).length === 0 ? (
-                <p>Data not found !</p>
-              ) : (
-                team_members
-                  .filter(
-                    (team_member) =>
-                      team_member.category === "community_trainer"
-                  )
-                  .map((team_member) => (
-                    <NavLink
-                      to={`/team-member-detail/${team_member.id}`}
-                      key={team_member.id}
-                    >
-                      <div className="member-card">
-                        <img
-                          src={team_member.image}
-                          className="member-img"
-                          alt=""
-                        />
-                        <img
-                          src={resourceCardBg}
-                          className="member-card-bg"
-                          alt=""
-                        />
-                        <div className="member-details">
-                          <h3>{team_member.name}</h3>
-                          <div className="member-line"></div>
-                          <p className="position">{team_member.position}</p>
-                          <p className="institute">
-                            {team_member.organisation}
-                          </p>
-                          <div className="social-icons">
-                            <i
-                              className="fa-regular fa-envelope"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                            <i
-                              className="fa-brands fa-linkedin"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                          </div>
-                        </div>
-                      </div>
-                    </NavLink>
-                  ))
-              )}
-            </div>
-          </section>
-          <section className="team" id="interns">
-            <h2>Interns</h2>
-
-            <div className="photo-container">
-              {team_members.filter(
-                (team_member) => team_member.category === "intern"
-              ).length === 0 ? (
-                <p>Data not found !</p>
-              ) : (
-                team_members
-                  .filter((team_member) => team_member.category === "intern")
-                  .map((team_member) => (
-                    <NavLink
-                      to={`/team-member-detail/${team_member.id}`}
-                      key={team_member.id}
-                    >
-                      <div className="member-card">
-                        <img
-                          src={team_member.image}
-                          className="member-img"
-                          alt=""
-                        />
-                        <img
-                          src={resourceCardBg}
-                          className="member-card-bg"
-                          alt=""
-                        />
-                        <div className="member-details">
-                          <h3>{team_member.name}</h3>
-                          <div className="member-line"></div>
-                          <p className="position">{team_member.position}</p>
-                          <p className="institute">
-                            {team_member.organisation}
-                          </p>
-                          <div className="social-icons">
-                            <i
-                              className="fa-regular fa-envelope"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                            <i
-                              className="fa-brands fa-linkedin"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                          </div>
-                        </div>
-                      </div>
-                    </NavLink>
-                  ))
-              )}
-            </div>
-          </section>
-          <section className="team" id="students">
-            <h2>Students</h2>
-
-            <div className="photo-container">
-              {team_members.filter(
-                (team_member) => team_member.category === "student"
-              ).length === 0 ? (
-                <p>Data not found !</p>
-              ) : (
-                team_members
-                  .filter((team_member) => team_member.category === "student")
-                  .map((team_member) => (
-                    <NavLink
-                      to={`/team-member-detail/${team_member.id}`}
-                      key={team_member.id}
-                    >
-                      <div className="member-card">
-                        <img
-                          src={team_member.image}
-                          className="member-img"
-                          alt=""
-                        />
-                        <img
-                          src={resourceCardBg}
-                          className="member-card-bg"
-                          alt=""
-                        />
-                        <div className="member-details">
-                          <h3>{team_member.name}</h3>
-                          <div className="member-line"></div>
-                          <p className="position">{team_member.position}</p>
-                          <p className="institute">
-                            {team_member.organisation}
-                          </p>
-                          <div className="social-icons">
-                            <i
-                              className="fa-regular fa-envelope"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                            <i
-                              className="fa-brands fa-linkedin"
-                              style={{ color: "#ec028c" }}
-                            ></i>
-                          </div>
-                        </div>
-                      </div>
-                    </NavLink>
-                  ))
-              )}
-            </div>
-          </section>
+          {renderTeamSection("collaborator", "collaborators", "Collaborators")}
+          {renderTeamSection("research_associate", "research_associates", "Research Associates")}
+          {renderTeamSection("community_trainer", "community_trainers", "Community Trainers")}
+          {renderTeamSection("intern", "interns", "Interns")}
+          {renderTeamSection("student", "students", "Students")}
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Team;
