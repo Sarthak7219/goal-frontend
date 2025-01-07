@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style.css";
 import "./global.css";
 import { NavLink } from "react-router-dom";
@@ -9,14 +9,13 @@ import cancelIcon from "../images/cancel_icon.svg";
 
 function Base({ case_studies, workshops }) {
   const [isActive, setIsActive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  
 
   // Combine workshops and case_studies into one array for easier search
   const getCombinedData = () => [
-    ...workshops.map(item => ({ ...item, type: 'workshops' })),
-    ...case_studies.map(item => ({ ...item, type: 'casestudy' })),
+    ...workshops.map((item) => ({ ...item, type: "workshops" })),
+    ...case_studies.map((item) => ({ ...item, type: "casestudy" })),
   ];
 
   // Activate searchbar when clicked
@@ -28,14 +27,13 @@ function Base({ case_studies, workshops }) {
   const toggleActiveClass = (e) => {
     e.stopPropagation();
     setIsActive(false);
-    setSearchQuery('');
+    setSearchQuery("");
     setSearchResults([]);
   };
 
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query); // Update the search query
-
 
     // Filter results based on the search query
     const combinedData = getCombinedData();
@@ -64,10 +62,14 @@ function Base({ case_studies, workshops }) {
               <NavLink to="/team#collaborators">Collaborators</NavLink>
             </li>
             <li>
-              <NavLink to="/team#research_associates">Research Associates</NavLink>
+              <NavLink to="/team#research_associates">
+                Research Associates
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/team#community_trainers">Community Trainers</NavLink>
+              <NavLink to="/team#community_trainers">
+                Community Trainers
+              </NavLink>
             </li>
             <li>
               <NavLink to="/team#intern">Interns</NavLink>
@@ -90,7 +92,9 @@ function Base({ case_studies, workshops }) {
               <NavLink to="/resources#publications">Publications</NavLink>
             </li>
             <li>
-              <NavLink to="/resources#training_manuals">Training Manuals</NavLink>
+              <NavLink to="/resources#training_manuals">
+                Training Manuals
+              </NavLink>
             </li>
           </ul>
         </li>
@@ -101,22 +105,34 @@ function Base({ case_studies, workshops }) {
           </NavLink>
           <ul className="dropdown">
             <li>
-              <NavLink to="/themes">Theme 1 - Review of Climate Change and Disaster Risk</NavLink>
+              <NavLink to="/themes">
+                Theme 1 - Review of Climate Change and Disaster Risk
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">Theme 2 - Review of Gender Inequality</NavLink>
+              <NavLink to="/themes">
+                Theme 2 - Review of Gender Inequality
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">Theme 3 - Gender-wise Determination of CC Impact</NavLink>
+              <NavLink to="/themes">
+                Theme 3 - Gender-wise Determination of CC Impact
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">Theme 4 - Gender-wise Determination of Disaster Risk</NavLink>
+              <NavLink to="/themes">
+                Theme 4 - Gender-wise Determination of Disaster Risk
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">Theme 5 - Strategies for CC Adaptation</NavLink>
+              <NavLink to="/themes">
+                Theme 5 - Strategies for CC Adaptation
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">Theme 6 - Strategies for Disaster Risk Reduction</NavLink>
+              <NavLink to="/themes">
+                Theme 6 - Strategies for Disaster Risk Reduction
+              </NavLink>
             </li>
           </ul>
         </li>
@@ -170,19 +186,19 @@ function Base({ case_studies, workshops }) {
         >
           <img src={searchImg} alt="Search Icon" />
           <form>
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={handleSearch} // Update search query on input change
-          />
-          {isActive && (
-            <img
-              src={cancelIcon}
-              onClick={toggleActiveClass} // Clear search and close on cancel icon click
-              alt="Cancel"
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearch} // Update search query on input change
             />
-          )}
+            {isActive && (
+              <img
+                src={cancelIcon}
+                onClick={toggleActiveClass} // Clear search and close on cancel icon click
+                alt="Cancel"
+              />
+            )}
           </form>
           {isActive && searchQuery && searchResults.length > 0 && (
             <ul className="dropdown search-results-dropdown">

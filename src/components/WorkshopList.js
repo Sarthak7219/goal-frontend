@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./global.css";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import iconImg from "../images/icon.png";
 
 function WorkshopList({ workshops }) {
-  console.log("workshopss Data:", workshops); // Log the case_studies prop to inspect its structure
-  // useEffect(() => {
-  // }, [workshops]);
   return (
     <div className="workshops-page">
       <div className="page-hero" id="team-bg">

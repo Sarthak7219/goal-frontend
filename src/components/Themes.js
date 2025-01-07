@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import iconImg from "../images/icon.png";
 import "./global.css";
 import "./style.css";
-import img_bg from "../images/img-bg.jpg";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
 
 function Themes({ themes, case_study_theme_descriptions }) {
-  console.log(themes)
-  
   useEffect(() => {
     const cleanup = scrollSpy();
     return () => {
@@ -33,7 +30,7 @@ function Themes({ themes, case_study_theme_descriptions }) {
   //Fetching themes data
   const [Themes, setThemes] = useState([]);
   useEffect(() => {
-    const API_URL_THEMES = `${process.env.REACT_APP_API_URL}themes/`;
+    const API_URL_THEMES = `${process.env.REACT_APP_API_URL}/themes/`;
     fetch(API_URL_THEMES)
       .then((response) => response.json())
       .then((Themes) => {
@@ -132,7 +129,7 @@ function Themes({ themes, case_study_theme_descriptions }) {
                     theme.case_studies_images.length > 0 ? (
                       theme.case_studies_images.map((image, index) => (
                         <div className="img-hover-div" key={index}>
-                          <img src={image.image} alt={`Image`} />
+                          <img src={image.image} alt={`img`} />
                           <div className="image-info">
                             <p className="date">{image.date}</p>
                             <p className="location">{image.caption}</p>

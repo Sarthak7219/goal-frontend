@@ -5,17 +5,8 @@ import { scrollSpy } from "./scrollSpy";
 
 function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
   useEffect(() => {
-    // Trigger handleClick for the first box on component mount
     handleClick("gal-cs-box-1");
   }, []);
-
-  useEffect(() => {
-    console.log("image_workshop Gallery:", image_workshop);
-  }, [image_workshop]);
-
-  useEffect(() => {
-    console.log("image_casestudy Gallery:", image_casestudy);
-  }, [image_casestudy]);
 
   useEffect(() => {
     const cleanup = scrollSpy();
@@ -29,7 +20,7 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
   const [filteredCaseStudyImages, setFilteredCaseStudyImages] = useState([]);
   const [current_visit_page, setcurrent_visit_page] = useState(1);
   const [current_workshop_page, setcurrent_workshop_page] = useState(1);
-  const [imagesperpage, setimagesperpage] = useState(8);
+  const imagesperpage = 8;
 
   const handleClick = (boxId) => {
     setActiveBox(boxId);

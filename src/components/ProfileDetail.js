@@ -55,7 +55,11 @@ function ProfileDetail({ team_members }) {
               <p>{profile.email}</p>
             </li>
             <li>
-              <a href={profile.apn_profile_link} target="_blank">
+              <a
+                href={profile.apn_profile_link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 APN Profile
               </a>
             </li>

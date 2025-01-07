@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom'; // Import NavLink for links
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom"; // Import NavLink for links
 import searchImg from "../images/search_icon.svg";
 
 function SearchPage({ workshops = [], case_studies = [] }) {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Combine data in a single function to avoid duplicating it
   const getCombinedData = () => [
-    ...workshops.map(item => ({ ...item, type: 'workshops' })),
-    ...case_studies.map(item => ({ ...item, type: 'casestudy' })),
+    ...workshops.map((item) => ({ ...item, type: "workshops" })),
+    ...case_studies.map((item) => ({ ...item, type: "casestudy" })),
   ];
 
   useEffect(() => {
     const combinedData = getCombinedData();
-    
+
     if (combinedData.length > 0) {
       setSearchResults(combinedData);
       setLoading(false);
     } else {
-      setError('No data available');
+      setError("No data available");
       setLoading(false);
     }
   }, [workshops, case_studies]);
@@ -37,11 +37,6 @@ function SearchPage({ workshops = [], case_studies = [] }) {
     );
     setSearchResults(filteredResults);
   };
-
-  // Use console log in useEffect to debug the latest query value
-  useEffect(() => {
-    console.log(`Updated search query: ${searchQuery}`);
-  }, [searchQuery]);
 
   return (
     <div className="search-page">

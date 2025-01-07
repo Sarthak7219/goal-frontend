@@ -29,20 +29,22 @@ function App() {
   const [workshopImages, setWorkshopImages] = useState([]);
   const [casestudyImages, setCasestudyImages] = useState([]);
 
+  const API_URL = process.env.REACT_APP_API_URL.replace(/\/+$/, "");
+
   useEffect(() => {
-    const API_URL = process.env.REACT_APP_API_URL;
     fetch(API_URL)
       .then((response) => response.json())
-      .then((data) => setData(data))
+      .then((data) => {
+        setData(data);
+      })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   useEffect(() => {
-    const API_URL_WORKSHOP_IMAGES = `${process.env.REACT_APP_API_URL}/workshop_images/`;
+    const API_URL_WORKSHOP_IMAGES = `${API_URL}/workshop_images/`;
     fetch(API_URL_WORKSHOP_IMAGES)
       .then((response) => response.json())
       .then((workshopImages) => {
-        console.log("Fetched workshop images:", workshopImages);
         setWorkshopImages(workshopImages);
       })
       .catch((error) =>
@@ -51,11 +53,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const API_URL_CASESTUDY_IMAGES = `${process.env.REACT_APP_API_URL}/casestudy_images/`;
+    const API_URL_CASESTUDY_IMAGES = `${API_URL}/casestudy_images/`;
     fetch(API_URL_CASESTUDY_IMAGES)
       .then((response) => response.json())
       .then((casestudyImages) => {
-        console.log("Fetched case study images:", casestudyImages);
         setCasestudyImages(casestudyImages);
       })
       .catch((error) =>
@@ -64,11 +65,6 @@ function App() {
   }, []);
 
   const allImages = [...workshopImages, ...casestudyImages];
-  const caseStudyList = data.case_studies.map((cs) => ({
-    study_area: cs.study_area,
-    country: cs.country,
-  }));
-
   return (
     <div className="App">
       <Base case_studies={data.case_studies} workshops={data.workshops} />
@@ -135,8 +131,25 @@ function App() {
           path="/team-member-detail/:id"
           element={<ProfileDetail team_members={data.team_members} />}
         />
-        <Route path="/search" element={<SearchPage case_studies={data.case_studies} workshops={data.workshops} themes={data.themes} />} />
-        <Route path="/themes" element={<Theme  themes={data.themes} case_study_theme_descriptions={data.case_study_theme_descriptions}/>} />
+        <Route
+          path="/search"
+          element={
+            <SearchPage
+              case_studies={data.case_studies}
+              workshops={data.workshops}
+              themes={data.themes}
+            />
+          }
+        />
+        <Route
+          path="/themes"
+          element={
+            <Theme
+              themes={data.themes}
+              case_study_theme_descriptions={data.case_study_theme_descriptions}
+            />
+          }
+        />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
