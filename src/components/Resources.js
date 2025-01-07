@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
-import "./global.css";
-import "./style.css";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
-
 import iconImg from "../images/icon.png";
+import ResourcesShimmer from "./ResourcesShimmer";
 
 function Resources({ resources }) {
+  const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
+  
   useEffect(() => {
     const cleanup = scrollSpy();
+    setTimeout(() => setIsLoading(false), 2000); // Simulate loading delay
 
     return () => {
       cleanup();
@@ -21,6 +22,39 @@ function Resources({ resources }) {
   const training_tools = resources.filter(
     (resource) => resource.category === "training_tool"
   );
+
+  // Reusable function for rendering resource lists
+  const renderResourceList = (resourceArray, type) => {
+    return (
+      <div className="resources-container">
+        {resourceArray.length > 0 ? (
+          resourceArray.map((resource) => (
+            <div className="resource-box" key={resource.id}>
+              <div className="detail">
+                <div>
+                  <p>{resource.publisher || ""}</p>
+                  <p className="date">{resource.date_of_publishing || ""}</p>
+                </div>
+                <h3>{resource.title}</h3>
+                {resource.pdf && (
+                  <a href={resource.pdf} target="_blank" rel="noopener noreferrer">
+                    Open PDF
+                  </a>
+                )}
+                {resource.link && (
+                  <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                    Open Link
+                  </a>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No {type} found</p>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="resources-page">
@@ -37,7 +71,7 @@ function Resources({ resources }) {
             </NavLink>
           </p>
         </div>
-        <img src={iconImg} alt="Icon" /> {/* Use imported icon image */}
+        <img src={iconImg} alt="Icon" />
       </div>
 
       <div className="container">
@@ -53,84 +87,24 @@ function Resources({ resources }) {
         <div className="right" id="resources-right">
           <section className="resources" id="publications">
             <div className="section-head">
-              {/* <div>
-                <p>Publications</p>
-                <div className="line"></div>
-              </div> */}
               <h1>Publications</h1>
             </div>
-
-            <div className="resources-container">
-              {publications.length > 0 ? (
-                publications.map((publication) => (
-                  <div className="resource-box" key={publication.id}>
-                    <div className="detail">
-                      <div>
-                        <p>{publication.publisher}</p>
-                        <p className="date">{publication.date_of_publishing}</p>
-                      </div>
-                      <h3>{publication.title}</h3>
-
-                      {publication.pdf && (
-                        <a
-                          href={publication.pdf}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Open PDF
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>Data not found</p> // Display this message if no resources match the filter
-              )}
-            </div>
+            {isLoading ? (
+              <ResourcesShimmer/> // Shimmer effect while loading
+            ) : (
+              renderResourceList(publications, "publications") // Render publications
+            )}
           </section>
 
           <section className="resources" id="training-manuels">
             <div className="section-head">
-              {/* <div>
-                <p>Training Manuels</p>
-                <div className="line"></div>
-              </div> */}
-
               <h1>Training Tools</h1>
             </div>
-
-            <div className="resources-container">
-              {training_tools.length > 0 ? (
-                training_tools.map((training_tool) => (
-                  <div className="resource-box" key={training_tool.id}>
-                    <div className="detail">
-                      <h3>{training_tool.title}</h3>
-
-                      {training_tool.pdf && (
-                        <a
-                          href={training_tool.pdf}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Open File
-                        </a>
-                      )}
-                      {training_tool.link && (
-                        <a
-                          href={training_tool.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Open Link
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>Data not found</p> // Display this message if no resources match the filter
-              )}
-            </div>
+            {isLoading ? (
+              <ResourcesShimmer/> // Shimmer effect while loading
+            ) : (
+              renderResourceList(training_tools, "training tools") // Render training tools
+            )}
           </section>
         </div>
       </div>

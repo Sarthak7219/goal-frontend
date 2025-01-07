@@ -1,17 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import iconImg from "../images/icon.png";
 import "./global.css";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
-
+import CaseStudeyShimmer from "./CaseStudeyShimmer"
 function Casestudy({
   case_studies = [],
   workshops = [],
   image_case_study = [],
 }) {
+  const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
+  
   useEffect(() => {
     const cleanup = scrollSpy();
+    setTimeout(() => setIsLoading(false), 2000); // Simulate loading delay
+
     return () => {
       cleanup();
     };
@@ -57,7 +61,7 @@ function Casestudy({
       </div>
 
       <div className="right" id="case_studies-right">
-        {case_studies.length > 0 &&
+        {isLoading?<CaseStudeyShimmer/>:case_studies.length > 0 &&
           case_studies.map((case_study) => (
             <section
               className="case_studies"
@@ -161,6 +165,7 @@ function Casestudy({
               </NavLink>
             </section>
           ))}
+        
       </div>
     </div>
   );
