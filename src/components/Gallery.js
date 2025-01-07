@@ -176,7 +176,7 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
                     key={index}
                     onClick={() => setCurrentVisitPage(page)}
                     className={`page-number-btn ${
-                      setCurrentVisitPage === page ? "active" : ""
+                      currentVisitPage === page ? "active" : ""
                     }`}
                   >
                     {page}
@@ -212,7 +212,7 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
                     key={index}
                     onClick={() => setCurrentWorkshopPage(page)}
                     className={`page-number-btn ${
-                      setCurrentWorkshopPage === page ? "active" : ""
+                      currentWorkshopPage === page ? "active" : ""
                     }`}
                   >
                     {page}
