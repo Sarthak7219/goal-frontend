@@ -26,43 +26,37 @@ function App() {
     case_study_theme_descriptions: [],
   });
 
+  console.log("App component called");
   const [workshopImages, setWorkshopImages] = useState([]);
   const [casestudyImages, setCasestudyImages] = useState([]);
 
   const API_URL = process.env.REACT_APP_API_URL.replace(/\/+$/, "");
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const dataResponse = await fetch(API_URL);
+        const data = await dataResponse.json();
         setData(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
 
-  useEffect(() => {
-    const API_URL_WORKSHOP_IMAGES = `${API_URL}/workshop_images/`;
-    fetch(API_URL_WORKSHOP_IMAGES)
-      .then((response) => response.json())
-      .then((workshopImages) => {
+        const workshopImagesResponse = await fetch(
+          `${API_URL}/workshop_images/`
+        );
+        const workshopImages = await workshopImagesResponse.json();
         setWorkshopImages(workshopImages);
-      })
-      .catch((error) =>
-        console.error("Error fetching workshop image data:", error)
-      );
-  }, []);
 
-  useEffect(() => {
-    const API_URL_CASESTUDY_IMAGES = `${API_URL}/casestudy_images/`;
-    fetch(API_URL_CASESTUDY_IMAGES)
-      .then((response) => response.json())
-      .then((casestudyImages) => {
+        const casestudyImagesResponse = await fetch(
+          `${API_URL}/casestudy_images/`
+        );
+        const casestudyImages = await casestudyImagesResponse.json();
         setCasestudyImages(casestudyImages);
-      })
-      .catch((error) =>
-        console.error("Error fetching case study image data:", error)
-      );
-  }, []);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array ensures this runs only once
 
   const allImages = [...workshopImages, ...casestudyImages];
   return (
@@ -75,7 +69,7 @@ function App() {
             <Home
               data={data}
               homepageData={data.homepage_data}
-              images={allImages}
+              images={allImages.slice(0, 8)}
             />
           }
         />

@@ -1,6 +1,7 @@
 import React from "react";
 import "./global.css";
 import "./style.css";
+import { NavLink } from "react-router-dom";
 
 import archdeptImg from "../images/archdept.png";
 import footerLogo from "../images/footer-logo.svg";
@@ -16,17 +17,41 @@ function Footer() {
                 <p>An initiative by IIT Roorkee</p>
               </div>
               <h3>APN funded project IIT Roorkee</h3>
-              <p>APN</p>
-              <p>IIT Roorkee</p>
+              <a
+                href="https://www.apn-gcr.org/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <p>APN</p>
+              </a>
+              <a
+                href="https://www.iitr.ac.in/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <p>IIT Roorkee</p>
+              </a>
             </div>
             <div className="quicklinks">
               <h4>Quick Link</h4>
-              <p>Home</p>
-              <p>Workshops</p>
-              <p>Team</p>
-              <p>gallery</p>
-              <p>About</p>
-              <p>Case Studies</p>
+              <NavLink to="/">
+                <p>Home</p>
+              </NavLink>
+              <NavLink to="/workshops">
+                <p>Workshops</p>
+              </NavLink>
+              <NavLink to="team">
+                <p>Team</p>
+              </NavLink>
+              <NavLink to="gallery">
+                <p>gallery</p>
+              </NavLink>
+              <NavLink to="about">
+                <p>About</p>
+              </NavLink>
+              <NavLink to="/casestudy">
+                <p>Case Studies</p>
+              </NavLink>
             </div>
             <div className="get-in-touch">
               <h4>Get In Touch</h4>
@@ -34,7 +59,7 @@ function Footer() {
               <p>example@gmail.com</p>
             </div>
             <div className="address">
-              <h4>Get In Touch</h4>
+              <h4>Address</h4>
               <p>
                 Department of Architecture and Planning, Indian Institute of
                 Technology (IIT), Roorkee Uttarakhand- 247667, India

@@ -54,16 +54,17 @@ function ProfileDetail({ team_members }) {
               <h4>Email</h4>
               <p>{profile.email}</p>
             </li>
-            <li>
-              <a
-                href={profile.apn_profile_link}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                APN Profile
-              </a>
-            </li>
-
+            {profile.apn_profile_link && (
+              <li>
+                <a
+                  href={profile.apn_profile_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  APN Profile
+                </a>
+              </li>
+            )}
             {profile.website_link && (
               <li>
                 <a

@@ -814,7 +814,9 @@ transition: 0.4s ease-in-out;
     font-family: "Poppins", sans-serif;
     font-size: 10px;
     font-weight: 500;
-    padding: 0px 19.388px 0px 19.388px;
+    padding: 0px 19.388px;
+    line-height: 20px !important;
+
 }
 
 .member-details .social-icons{
@@ -825,6 +827,7 @@ transition: 0.4s ease-in-out;
 
 .member-details .position, .member-details .member-line, .member-details .institute, .member-details .social-icons{
     margin-top: 8.976px;
+    line-height: normal;
 }
 
 

@@ -20,17 +20,8 @@ import Click_Carousel from "./click_carousel";
 import Workshop_Carousel from "./workshop_carousel";
 
 function Home({ data, homepageData, images }) {
-  const [current_page, setcurrent_page] = useState(1);
-  const imagesperpage = 8;
-  const last_Index = current_page * imagesperpage;
-  const first_Index = last_Index - imagesperpage;
-  let current_images = [];
-  if (images.length > 0) current_images = images.slice(first_Index, last_Index);
+  console.log("Home component called");
 
-  let pages = [];
-
-  for (let i = 1; i <= Math.ceil(images.length / imagesperpage); i++)
-    pages.push(i);
   const videoRef = useRef(null);
   const institutes = homepageData?.institutes || [];
   return (
@@ -222,21 +213,18 @@ function Home({ data, homepageData, images }) {
         <div className="gallery-home">
           <h2>Our Gallery</h2>
           <div className="image-grid">
-            {current_images.map((image, index) => (
+            {images.map((image, index) => (
               <div className="img-hover-div" key={index}>
-                <img src={image.image} alt={`Image ${index + 1}`} />
+                <img
+                  src={image.image}
+                  alt={`Image ${index + 1}`}
+                  loading="lazy"
+                />
                 <div className="image-info">
                   <p className="date">Date: {image.date}</p>
                   <p className="location">{image.caption}</p>
                 </div>
               </div>
-            ))}
-          </div>
-          <div className="page-number-wrapper">
-            {pages.map((page, index) => (
-              <button key={index} onClick={() => setcurrent_page(page)}>
-                {page}
-              </button>
             ))}
           </div>
           <NavLink to="/gallery">
