@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./global.css";
 import "./style.css";
 import { NavLink, useParams } from "react-router-dom";
-
+import Markdown from "react-markdown";
 import iconImg from "../images/icon.png";
 
 function WorkshopDetail({ workshops, image_workshop }) {
@@ -56,7 +56,7 @@ function WorkshopDetail({ workshops, image_workshop }) {
       <div className="workshop-content">
         <div className="section-head">
           <div>
-            <p>Workshop #1</p>
+            <p>Workshop #{workshop.id}</p>
             <div className="line"></div>
           </div>
           <h1>{workshop.title}</h1>
@@ -79,7 +79,11 @@ function WorkshopDetail({ workshops, image_workshop }) {
 
             <div>
               <h2>About the workshop</h2>
-              <p>{workshop.description}</p>
+              <p>
+                <Markdown className="markdown-text">
+                  {workshop.description}
+                </Markdown>
+              </p>
             </div>
             <div>
               <h2>Speakers</h2>
@@ -92,7 +96,11 @@ function WorkshopDetail({ workshops, image_workshop }) {
 
             <div>
               <h2>Key takeaways</h2>
-              <p>{workshop.key_takeaways}</p>
+              <p>
+                <Markdown className="markdown-text">
+                  {workshop.key_takeaways}
+                </Markdown>
+              </p>
             </div>
           </div>
           <div className="right-container">

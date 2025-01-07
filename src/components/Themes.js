@@ -4,6 +4,7 @@ import "./global.css";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
+import Markdown from "react-markdown";
 
 function Themes({ themes, case_study_theme_descriptions }) {
   useEffect(() => {
@@ -90,7 +91,12 @@ function Themes({ themes, case_study_theme_descriptions }) {
                 </div>
                 <section className="themes" id="description">
                   <h1>Description</h1>
-                  <p>{theme.description}</p>
+                  <p>
+                    {" "}
+                    <Markdown className="markdown-text">
+                      {theme.description}
+                    </Markdown>
+                  </p>
                 </section>
                 <section className="themes" id="theme-case-studies">
                   <h1>Examples From Case Studies</h1>
@@ -113,10 +119,13 @@ function Themes({ themes, case_study_theme_descriptions }) {
                     </div>
                     <div className="theme-cs-desc">
                       <p>
-                        {
-                          theme.case_studies_description[activeOption]
-                            .description
-                        }
+                        {" "}
+                        <Markdown className="markdown-text">
+                          {
+                            theme.case_studies_description[activeOption]
+                              .description
+                          }
+                        </Markdown>
                       </p>
                     </div>
                   </div>

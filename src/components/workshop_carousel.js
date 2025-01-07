@@ -52,6 +52,7 @@ const Workshop_Carousel = ({ workshops = [] }) => {
           >
             {workshops.map((workshop, index) => (
               <li className="worshop-detail-home" key={index}>
+                <div className="title">Workshop #{workshop.id}</div>
                 <div className="detail">
                   <h2>{workshop.title}</h2>
                   <div className="venue">

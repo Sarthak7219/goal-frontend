@@ -239,6 +239,10 @@ body{
         list-style-type: none;
         
     }
+
+    .markdown-text li{
+        list-style-type: disc;
+    }
     .navbar a{
         text-decoration: none;
         color: #DDD;
@@ -558,7 +562,7 @@ right: 0px;
     display: flex;
     max-width: 1200px;
     gap: 14px;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     margin: auto;
     margin-top: 60px;
@@ -574,7 +578,11 @@ right: 0px;
     box-shadow: 0px 0px 8.187px 1.688px rgba(0, 0, 0, 0.15);
     padding-bottom:10px ;
     cursor: pointer;
+    max-width: 228px;
+}
 
+.gal-cs-box.active{
+    outline: 6px solid #EC028C;
 }
 
 .gal-cs-box:hover{
@@ -603,7 +611,25 @@ right: 0px;
     display: block;
 }
 
+.page-number-btn{
+    color: #FFF;
+    font-family: "Poppins";
+    font-size: 13.333px;
+    font-weight: 700;
+    line-height: 100%; /* 13.333px */
+    display: flex;
+    width: 30px;
+    padding: 9.5px 0px 8px 0px;
+    justify-content: center;
+    align-items: center;
+    background: #D9D9D9;
+    border: none;
+    cursor: pointer;
+}
 
+.page-number-btn.active{
+    background: #EC028C;
+}
 
 
 .gal-cs-box p{
@@ -614,6 +640,7 @@ right: 0px;
     text-align: center;
     font-weight: 300;
     height: 40px;
+    line-height: 18px;
 
 }
 
@@ -1751,7 +1778,7 @@ head{
 width: 310.673px;
 height: 232px;
 position: relative;
-background-image: url('../images/about1.jpg');
+background-image: url('../images/workshop-thumbnail2.png');
 background-repeat: no-repeat;
 background-size: cover;
 flex-shrink: 0;
@@ -1760,6 +1787,16 @@ cursor: pointer;
 overflow: hidden;
 }
 
+.worshop-detail-home .title{
+    font-family: 'Poppins';
+    color: white;
+    position: absolute;
+    left: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    top: 10px;
+    transition: transform 0.5s ease, opacity 0.4s ease; 
+}
 
 .worshop-detail-home .detail{
     flex-direction: column;
@@ -1767,9 +1804,12 @@ overflow: hidden;
     justify-content: space-between;
     position: absolute;
     z-index: 2;
-    display: none;
+    display: flex;
     padding: 25px;
     height: 100%;
+    transform: translateY(20px); /* Start the 'detail' div slightly below the container */
+    opacity: 0; /* Initially invisible */
+    transition: transform 0.5s ease, opacity 0.5s ease; 
 }
 
 
@@ -1794,7 +1834,13 @@ overflow: hidden;
 }
 
 .worshop-detail-home:hover .detail{
-    display: flex;
+    transform: translateY(0); /* Move it back to the normal position */
+    opacity: 1; /* Make it visible */
+  
+}
+
+.worshop-detail-home:hover .title{
+    opacity: 0;
 }
 
 .worshop-detail-home:hover .image-info{
@@ -2706,3 +2752,29 @@ text-transform: capitalize;
     height: 180px;
     width: 235px;
 }
+
+/* Search Results CSS*/
+
+.search-results-dropdown {
+    position: absolute;
+    top: 100%; /* Directly below the search bar */
+    right: 0;
+    background-color: #fff; /* White background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Dropdown shadow */
+    z-index: 1000; /* Ensure it appears above other elements */
+    width: 300px;
+  }
+
+  .search-results-dropdown a{
+    text-align: left;
+  }
+  
+  .search-results-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .search-results-dropdown li:hover {
+    background-color: #f0f0f0;
+  }

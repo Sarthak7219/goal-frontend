@@ -5,6 +5,7 @@ import "./style.css";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
 import AboutShimmer from "./AboutShimmer";
+import Markdown from "react-markdown";
 
 function About({ about_data }) {
   const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
@@ -66,7 +67,11 @@ function About({ about_data }) {
                 <h1>Abstract</h1>
                 {about_data ? (
                   <div className="about-abs">
-                    <div className="content">{about_data.abstract}</div>
+                    <div className="content">
+                      <Markdown className="markdown-text">
+                        {about_data.abstract}
+                      </Markdown>
+                    </div>
                     <div className="about-image">
                       <div className="image-grid">
                         <img src={about_data.img1} alt="Image 1" />
@@ -84,7 +89,11 @@ function About({ about_data }) {
                 <h1>Description</h1>
                 {about_data ? (
                   <div className="about-desc">
-                    <div className="content">{about_data.description}</div>
+                    <div className="content">
+                      <Markdown className="markdown-text">
+                        {about_data.description}
+                      </Markdown>
+                    </div>
                   </div>
                 ) : (
                   <p>Loading...</p> // or display a default message

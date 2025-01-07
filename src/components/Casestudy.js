@@ -1,17 +1,19 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import iconImg from "../images/icon.png";
 import "./global.css";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import { scrollSpy } from "./scrollSpy";
-import CaseStudeyShimmer from "./CaseStudeyShimmer"
+import CaseStudeyShimmer from "./CaseStudeyShimmer";
+import Markdown from "react-markdown";
+
 function Casestudy({
   case_studies = [],
   workshops = [],
   image_case_study = [],
 }) {
   const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
-  
+
   useEffect(() => {
     const cleanup = scrollSpy();
     setTimeout(() => setIsLoading(false), 2000); // Simulate loading delay
@@ -61,7 +63,10 @@ function Casestudy({
       </div>
 
       <div className="right" id="case_studies-right">
-        {isLoading?<CaseStudeyShimmer/>:case_studies.length > 0 &&
+        {isLoading ? (
+          <CaseStudeyShimmer />
+        ) : (
+          case_studies.length > 0 &&
           case_studies.map((case_study) => (
             <section
               className="case_studies"
@@ -82,9 +87,13 @@ function Casestudy({
                 Description
               </h3>
               <div className="column">
-                <p>{case_study.description}</p>
+                <p>
+                  <Markdown className="markdown-text">
+                    {case_study.description}
+                  </Markdown>
+                </p>
                 <div className="recent-workshops">
-                  <h2>Related Workshops</h2>
+                  <h2>Relevant Workshops</h2>
                   <div className="workshop-cards">
                     {/* Filter workshops based on case study ID */}
                     {workshops.filter(
@@ -127,45 +136,49 @@ function Casestudy({
               >
                 Case Study Photos
               </h3>
-              <div className="photos">
-                {image_case_study && image_case_study.length > 0 ? (
-                  (() => {
-                    const filteredImages = image_case_study
-                      .filter((image) => image.case_study === case_study.id)
-                      .slice(0, 4);
 
-                    return filteredImages.length > 0 ? (
-                      filteredImages.map((image, index) => (
-                        <div key={index} className="img-hover-div">
-                          <img src={image.image} alt={`Image ${index}`} />
-                          <div className="image-info">
-                            <p className="date">Date: {image.date}</p>
-                            <p className="location">{image.caption}</p>
+              {image_case_study && image_case_study.length > 0 ? (
+                (() => {
+                  const filteredImages = image_case_study
+                    .filter((image) => image.case_study === case_study.id)
+                    .slice(0, 4);
+
+                  return filteredImages.length > 0 ? (
+                    <>
+                      <div className="photos">
+                        {filteredImages.map((image, index) => (
+                          <div key={index} className="img-hover-div">
+                            <img src={image.image} alt={`Image ${index}`} />
+                            <div className="image-info">
+                              <p className="date">Date: {image.date}</p>
+                              <p className="location">{image.caption}</p>
+                            </div>
                           </div>
-                        </div>
-                      ))
-                    ) : (
-                      <p>No images available for this case study.</p>
-                    );
-                  })()
-                ) : (
-                  <p>No images available.</p>
-                )}
-              </div>
-
-              <NavLink
-                to="/gallery"
-                style={{
-                  fontSize: "14px",
-                  textDecoration: "underline",
-                  color: "#172f5c",
-                }}
-              >
-                See All Photos
-              </NavLink>
+                        ))}
+                      </div>
+                      {image_case_study.length > 0 && (
+                        <NavLink
+                          to="/gallery"
+                          style={{
+                            fontSize: "14px",
+                            textDecoration: "underline",
+                            color: "#172f5c",
+                          }}
+                        >
+                          See All Photos
+                        </NavLink>
+                      )}
+                    </>
+                  ) : (
+                    <p>No images available for this case study.</p>
+                  );
+                })()
+              ) : (
+                <p>No images available.</p>
+              )}
             </section>
-          ))}
-        
+          ))
+        )}
       </div>
     </div>
   );

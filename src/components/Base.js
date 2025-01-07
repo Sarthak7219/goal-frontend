@@ -12,7 +12,6 @@ function Base({ case_studies, workshops }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  // Combine workshops and case_studies into one array for easier search
   const getCombinedData = () => [
     ...workshops.map((item) => ({ ...item, type: "workshops" })),
     ...case_studies.map((item) => ({ ...item, type: "casestudy" })),
@@ -200,17 +199,29 @@ function Base({ case_studies, workshops }) {
               />
             )}
           </form>
-          {isActive && searchQuery && searchResults.length > 0 && (
-            <ul className="dropdown search-results-dropdown">
-              {searchResults.map((result, index) => (
-                <li key={index}>
-                  <NavLink to={`/${result.type.toLowerCase()}`}>
-                    {result.title || result.study_area} ({result.type})
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          )}
+          {isActive && searchQuery ? (
+            <>
+              <ul className="dropdown search-results-dropdown">
+                {searchResults.length > 0 ? (
+                  searchResults.map((result, index) => (
+                    <li key={index}>
+                      <NavLink
+                        to={
+                          result.type.toLowerCase() === "workshops"
+                            ? `/workshops/workshop-detail/${result.id}`
+                            : `/${result.type.toLowerCase()}`
+                        }
+                      >
+                        {result.title || result.study_area} ({result.type})
+                      </NavLink>
+                    </li>
+                  ))
+                ) : (
+                  <li>No results found</li>
+                )}
+              </ul>
+            </>
+          ) : null}
         </div>
       </div>
     </div>

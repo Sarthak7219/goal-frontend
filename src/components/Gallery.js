@@ -3,6 +3,13 @@ import "./global.css";
 import "./style.css";
 import { scrollSpy } from "./scrollSpy";
 
+//Thumbnail Images
+import dumkaTh from "../images/thumbnails/Dumka-cs.jpeg";
+import uttarakhandTh from "../images/thumbnails/uttarakhand-cs.jpg";
+import bishnupurTh from "../images/thumbnails/Bishnupur-cs.jpeg";
+import nepalTh from "../images/thumbnails/Nepal-cs.jpeg";
+import SLTh from "../images/thumbnails/Sri Lanka-cs.jpeg";
+
 function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
   useEffect(() => {
     handleClick("gal-cs-box-1");
@@ -14,6 +21,14 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
       cleanup();
     };
   }, []);
+
+  const CaseStudyImageMapping = {
+    1: dumkaTh,
+    2: uttarakhandTh,
+    3: bishnupurTh,
+    4: nepalTh,
+    6: SLTh,
+  };
 
   const [activeBox, setActiveBox] = useState("gal-cs-box-1");
   const [filteredWorkshopImages, setFilteredWorkshopImages] = useState([]);
@@ -94,7 +109,10 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
             onClick={() => handleClick(`gal-cs-box-${index + 1}`)}
             key={box.id}
           >
-            <img src={box.image || ""} alt="" />
+            <img
+              src={CaseStudyImageMapping[box.id] || box.image || ""}
+              alt=""
+            />
             <h2>{box.country}</h2>
             <p>{box.study_area}</p>
           </div>
@@ -145,6 +163,9 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
                   <button
                     key={index}
                     onClick={() => setcurrent_visit_page(page)}
+                    className={`page-number-btn ${
+                      current_visit_page === page ? "active" : ""
+                    }`}
                   >
                     {page}
                   </button>
@@ -181,6 +202,9 @@ function Gallery({ case_studies, workshops, image_workshop, image_casestudy }) {
                   <button
                     key={index}
                     onClick={() => setcurrent_workshop_page(page)}
+                    className={`page-number-btn ${
+                      current_workshop_page === page ? "active" : ""
+                    }`}
                   >
                     {page}
                   </button>
