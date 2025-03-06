@@ -130,7 +130,7 @@ function Home() {
               <div className="collab-box">
                 {loadingHomeData ? (
                   <p>Loading...</p>
-                ) : institutes.length > 0 ? (
+                ) : institutes && institutes.length > 0 ? (
                   institutes.map((institute, index) => (
                     <img
                       key={index}
@@ -247,7 +247,7 @@ function Home() {
             ) : (
               <>
                 <WorkshopCarousel workshops={workshops} />
-                {workshops.length > 0 && (
+                {workshops && workshops.length > 0 && (
                   <NavLink
                     to="/workshops"
                     style={{
@@ -378,7 +378,7 @@ function Home() {
           <ul>
             {loadingHomeData ? (
               <p>Loading...</p>
-            ) : institutes.length > 0 ? (
+            ) : institutes && institutes.length > 0 ? (
               institutes.map((institute, index) => (
                 <li className="logo" key={index}>
                   <img src={institute.logo} alt={institute.name} />
