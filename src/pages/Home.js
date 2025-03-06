@@ -311,7 +311,11 @@ function Home() {
               galleryPhotos.length > 0 &&
               galleryPhotos.map((image, index) => (
                 <div className="img-hover-div" key={index}>
-                  <img src={image.image} alt={`img-${index + 1}`} />
+                  <img
+                    src={image.image}
+                    alt={`img-${index + 1}`}
+                    loading="lazy"
+                  />
                   <div className="image-info">
                     <p className="date">Date: {image.formatted_date}</p>
                     <p className="location">{image.caption}</p>

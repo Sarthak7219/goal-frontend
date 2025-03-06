@@ -113,7 +113,11 @@ function Gallery() {
           list.map((box) => (
             <div
               className={`gal-cs-box ${currItemId === box.id ? "active" : ""}`}
-              onClick={() => fetchImages(box.id)}
+              onClick={() => {
+                if (currItemId !== box.id) {
+                  fetchImages(box.id);
+                }
+              }}
               key={box.id}
             >
               <img
@@ -154,7 +158,11 @@ function Gallery() {
                 <div className="photo-container gallery-container">
                   {visitPhotos.map((image, index) => (
                     <div key={index} className="img-hover-div">
-                      <img src={image.image} alt={`img-${index}`} />
+                      <img
+                        src={image.image}
+                        alt={`img-${index}`}
+                        loading="lazy"
+                      />
                       <div className="image-info">
                         <p className="date">Date: {image.date}</p>
                         <p className="location">{image.caption}</p>
@@ -194,7 +202,11 @@ function Gallery() {
                 <div className="photo-container gallery-container">
                   {workshopPhotos.map((image, index) => (
                     <div key={index} className="img-hover-div">
-                      <img src={image.image} alt={`img-${index}`} />
+                      <img
+                        src={image.image}
+                        alt={`img-${index}`}
+                        loading="lazy"
+                      />
                       <div className="image-info">
                         <p className="date">Date: {image.date}</p>
                         <p className="location">{image.caption}</p>
