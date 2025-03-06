@@ -68,7 +68,7 @@ function Themes() {
         <div className="quick-link-box" id="themes-sidebox">
           {loadingList ? (
             <div className="theme-quicklink">Loading...</div>
-          ) : list.length > 0 ? (
+          ) : list && list.length > 0 ? (
             list.map((theme, index) => (
               <NavLink
                 key={index}
@@ -108,17 +108,18 @@ function Themes() {
                 <h1>Examples From Case Studies</h1>
                 <div className="theme-cs-box">
                   <div className="cs-select">
-                    {currItem.case_studies.map((item, index) => (
-                      <div
-                        key={index}
-                        className={`cs ${
-                          index === activeOption ? "active" : ""
-                        }`}
-                        onClick={() => setActiveOption(index)}
-                      >
-                        <p>{item.case_study}</p>{" "}
-                      </div>
-                    ))}
+                    {currItem.case_studies &&
+                      currItem.case_studies.map((item, index) => (
+                        <div
+                          key={index}
+                          className={`cs ${
+                            index === activeOption ? "active" : ""
+                          }`}
+                          onClick={() => setActiveOption(index)}
+                        >
+                          <p>{item.case_study}</p>{" "}
+                        </div>
+                      ))}
                   </div>
                   <div className="theme-cs-desc">
                     <div className="markdown">

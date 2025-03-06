@@ -144,7 +144,21 @@ function Base() {
           </NavLink>
           <ul className="dropdown">
             <li>
-              <NavLink to="/casestudy/1">Dumka</NavLink>
+              <NavLink to="/casestudy/1">Dumka, Jharkhand</NavLink>
+            </li>
+            <li>
+              <NavLink to="/casestudy/2">
+                Udham Singh Nagar, Uttarakhand
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/casestudy/3">Bishnupur, Manipur</NavLink>
+            </li>
+            <li>
+              <NavLink to="/casestudy/4">Chitwan, Nepal</NavLink>
+            </li>
+            <li>
+              <NavLink to="/casestudy/5">Gampaha, Sri Lanka</NavLink>
             </li>
           </ul>
         </li>
