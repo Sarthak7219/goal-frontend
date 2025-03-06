@@ -1,5 +1,4 @@
 import React from "react";
-import "./shimmer.css"; // Add shimmer-specific styles here
 
 const GalleryShimmer = () => {
   return (

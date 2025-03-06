@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import leftArrowImg from "../images/rightarrow.png";
-import rightArrowImg from "../images/rightarrow.png";
-import calendarIcon from "../images/calendar.svg";
-import location_icon from "../images/location_icon.svg";
-import selected_dot from "../images/selected_dot.svg";
-import unselected_dot from "../images/unselected_dot.svg";
-import "./style.css";
 
-const Workshop_Carousel = ({ workshops = [] }) => {
+const WorkshopCarousel = ({ workshops = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const workshopsPerPage = 3;
@@ -27,13 +20,13 @@ const Workshop_Carousel = ({ workshops = [] }) => {
     <div className="stories-body">
       <div className="left-right-icons">
         <img
-          src={leftArrowImg}
+          src="/static/images/rightarrow.png"
           className="left-arrow"
           alt="Previous"
           onClick={prevSlide}
         />
         <img
-          src={rightArrowImg}
+          src="/static/images/rightarrow.png"
           className="right-arrow"
           alt="Next"
           onClick={nextSlide}
@@ -57,12 +50,12 @@ const Workshop_Carousel = ({ workshops = [] }) => {
                   <h2>{workshop.title}</h2>
                   <div className="venue">
                     <div>
-                      <img src={location_icon} alt="icon" />
+                      <img src="/static/images/location_icon.svg" alt="icon" />
                       <p>{workshop.venue}</p>
                     </div>
                     <div>
-                      <img src={calendarIcon} alt="icon" />
-                      <p>{workshop.date}</p>
+                      <img src="/static/images/calendar.svg" alt="icon" />
+                      <p>{workshop.formatted_date}</p>
                     </div>
                   </div>
                   <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
@@ -81,7 +74,11 @@ const Workshop_Carousel = ({ workshops = [] }) => {
           {Array.from({ length: totalDots }).map((_, index) => (
             <img
               key={index}
-              src={index === currentIndex ? selected_dot : unselected_dot}
+              src={
+                index === currentIndex
+                  ? "/static/images/selected_dot.svg"
+                  : "/static/images/unselected_dot.svg"
+              }
               alt={`Dot ${index + 1}`}
               onClick={() => setCurrentIndex(index)}
             />
@@ -92,4 +89,4 @@ const Workshop_Carousel = ({ workshops = [] }) => {
   );
 };
 
-export default Workshop_Carousel;
+export default WorkshopCarousel;

@@ -1,10 +1,6 @@
 import React from "react";
-import "./global.css";
-import "./style.css";
 import { NavLink } from "react-router-dom";
 
-import archdeptImg from "../images/archdept.png";
-import footerLogo from "../images/footer-logo.svg";
 function Footer() {
   return (
     <div>
@@ -13,7 +9,7 @@ function Footer() {
           <div className="footer-body">
             <div className="project-name">
               <div className="heading">
-                <img src={footerLogo} alt="" />
+                <img src="/static/images/footer-logo.svg" alt="" />
                 <p>An initiative by IIT Roorkee</p>
               </div>
               <h3>APN funded project IIT Roorkee</h3>
@@ -40,23 +36,26 @@ function Footer() {
               <NavLink to="/workshops">
                 <p>Workshops</p>
               </NavLink>
+              <NavLink to="/theme/1">
+                <p>Themes</p>
+              </NavLink>
+              <NavLink to="/casestudy/1">
+                <p>Case Studies</p>
+              </NavLink>
               <NavLink to="team">
                 <p>Team</p>
               </NavLink>
               <NavLink to="gallery">
-                <p>gallery</p>
+                <p>Gallery</p>
               </NavLink>
               <NavLink to="about">
                 <p>About</p>
               </NavLink>
-              <NavLink to="/casestudy">
-                <p>Case Studies</p>
-              </NavLink>
             </div>
             <div className="get-in-touch">
               <h4>Get In Touch</h4>
-              <p>+91-1332-23124</p>
-              <p>example@gmail.com</p>
+              <p>---</p>
+              <p>---</p>
             </div>
             <div className="address">
               <h4>Address</h4>
@@ -71,7 +70,7 @@ function Footer() {
                 <span>IIT Roorkee</span>
               </h2>
               <img
-                src={archdeptImg}
+                src="/static/images/archdept.png"
                 alt=""
                 width="216.21px"
                 height="193.21px"

@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
-
-import "./global.css";
-import "./style.css";
 import { useParams } from "react-router-dom";
+import { get_team_member_detail } from "../api/endpoints";
 
-function ProfileDetail({ team_members }) {
+function ProfileDetail() {
   const { id } = useParams();
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const selectedProfile = team_members.find(
-      (profile) => profile.id === parseInt(id)
-    );
-    setProfile(selectedProfile);
-  }, [id, team_members]);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await get_team_member_detail(id);
+        setProfile(data);
+      } catch (error) {
+        alert("Error fetching member data");
+        // console.log("Error fetching about data:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [id]);
 
   if (!profile) {
     return <div>Profile not found</div>;
   }
 
-  return (
+  return loading ? (
+    <p>Loading...</p>
+  ) : (
     <div className="profile-detail-container">
       <div
         className="page-hero"

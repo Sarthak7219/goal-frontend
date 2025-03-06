@@ -1,51 +1,50 @@
-import React, { useState } from "react";
-import "./style.css";
-import "./global.css";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import logoImg from "../images/logo (2).png";
-import downArrowImg from "../images/down_arrow.svg";
-import searchImg from "../images/search_icon.svg";
-import cancelIcon from "../images/cancel_icon.svg";
+import { search } from "../api/endpoints";
+import GoogleTranslate from "../components/GoogleTranslate";
 
-function Base({ case_studies, workshops }) {
+function Base() {
   const [isActive, setIsActive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const getCombinedData = () => [
-    ...workshops.map((item) => ({ ...item, type: "workshops" })),
-    ...case_studies.map((item) => ({ ...item, type: "casestudy" })),
-  ];
-
-  // Activate searchbar when clicked
-  const handleSearchClick = () => {
-    setIsActive(true);
-  };
-
-  // Deactivate search and reset inputs
   const toggleActiveClass = (e) => {
     e.stopPropagation();
     setIsActive(false);
-    setSearchQuery("");
-    setSearchResults([]);
+    setQuery("");
+    setResults([]);
   };
 
-  const handleSearch = (e) => {
-    const query = e.target.value;
-    setSearchQuery(query); // Update the search query
+  useEffect(() => {
+    const handleSearch = async () => {
+      try {
+        setLoading(true);
+        const data = await search(query);
+        setResults(data.results);
+      } catch (error) {
+        alert("Server error");
+        // console.error("Error fetching search results:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (query.trim() === "") {
+      setResults([]);
+      return;
+    }
 
-    // Filter results based on the search query
-    const combinedData = getCombinedData();
-    const filteredResults = combinedData.filter((result) =>
-      result.description?.toLowerCase().includes(query.toLowerCase())
-    );
-    setSearchResults(filteredResults);
-  };
+    const timer = setTimeout(() => {
+      handleSearch();
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [query]);
 
   return (
     <div className="navbar">
       <NavLink to="/">
-        <img src={logoImg} alt="Logo" />
+        <img src="/static/images/logo (2).png" alt="Logo" />
       </NavLink>
       <ul className="navlist">
         <li>
@@ -54,7 +53,7 @@ function Base({ case_studies, workshops }) {
         <li className="dropdown-menu">
           <NavLink to="/team" className="team">
             Team
-            <img src={downArrowImg} alt="Dropdown Arrow" />
+            <img src="/static/images/down_arrow.svg" alt="Dropdown Arrow" />
           </NavLink>
           <ul className="dropdown">
             <li>
@@ -84,7 +83,7 @@ function Base({ case_studies, workshops }) {
         <li className="dropdown-menu">
           <NavLink to="/resources" className="Resources">
             Resources
-            <img src={downArrowImg} alt="Dropdown Arrow" />
+            <img src="/static/images/down_arrow.svg" alt="Dropdown Arrow" />
           </NavLink>
           <ul className="dropdown">
             <li>
@@ -98,38 +97,38 @@ function Base({ case_studies, workshops }) {
           </ul>
         </li>
         <li className="dropdown-menu">
-          <NavLink to="/themes" id="themes-dropdown">
+          <NavLink to="/theme/1" id="themes-dropdown">
             Themes
-            <img src={downArrowImg} alt="Dropdown Arrow" />
+            <img src="/static/images/down_arrow.svg" alt="Dropdown Arrow" />
           </NavLink>
           <ul className="dropdown">
             <li>
-              <NavLink to="/themes">
+              <NavLink to="/theme/1">
                 Theme 1 - Review of Climate Change and Disaster Risk
               </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
+              <NavLink to="/theme/2">
                 Theme 2 - Review of Gender Inequality
               </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
+              <NavLink to="/theme/3">
                 Theme 3 - Gender-wise Determination of CC Impact
               </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
+              <NavLink to="/theme/4">
                 Theme 4 - Gender-wise Determination of Disaster Risk
               </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
+              <NavLink to="/theme/5">
                 Theme 5 - Strategies for CC Adaptation
               </NavLink>
             </li>
             <li>
-              <NavLink to="/themes">
+              <NavLink to="/theme/6">
                 Theme 6 - Strategies for Disaster Risk Reduction
               </NavLink>
             </li>
@@ -139,80 +138,59 @@ function Base({ case_studies, workshops }) {
           <NavLink to="/gallery">Gallery</NavLink>
         </li>
         <li className="dropdown-menu">
-          <NavLink to="/casestudy">
+          <NavLink to="/casestudy/1">
             Case Studies
-            <img src={downArrowImg} alt="Dropdown Arrow" />
+            <img src="/static/images/down_arrow.svg" alt="Dropdown Arrow" />
           </NavLink>
           <ul className="dropdown">
-            {case_studies && case_studies.length > 0 ? (
-              case_studies.map((case_study, index) => (
-                <li key={index}>
-                  <NavLink to="/casestudy">
-                    {case_study.study_area}, {case_study.country}
-                  </NavLink>
-                </li>
-              ))
-            ) : (
-              <p>No case studies found</p>
-            )}
+            <li>
+              <NavLink to="/casestudy/1">Dumka</NavLink>
+            </li>
           </ul>
         </li>
       </ul>
       <div className="nav-right">
-        <div className="dropdown-menu">
-          <NavLink to="#" className="language">
-            English
-            <img src={downArrowImg} alt="Dropdown Arrow" />
-          </NavLink>
-          <ul className="dropdown">
-            <li>
-              <NavLink to="#">Hindi</NavLink>
-            </li>
-            <li>
-              <NavLink to="#">Sinhali</NavLink>
-            </li>
-            <li>
-              <NavLink to="#">Nepali</NavLink>
-            </li>
-            <li>
-              <NavLink to="#">Japanese</NavLink>
-            </li>
-          </ul>
-        </div>
         <div
           className={`searchbar ${isActive ? "active" : ""}`}
-          onClick={handleSearchClick}
+          onClick={() => setIsActive(true)}
         >
-          <img src={searchImg} alt="Search Icon" />
+          <img src="/static/images/search_icon.svg" alt="Search Icon" />
           <form>
             <input
               type="text"
               placeholder="Search"
-              value={searchQuery}
-              onChange={handleSearch} // Update search query on input change
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
             />
             {isActive && (
               <img
-                src={cancelIcon}
+                src="/static/images/cancel_icon.svg"
                 onClick={toggleActiveClass} // Clear search and close on cancel icon click
                 alt="Cancel"
               />
             )}
           </form>
-          {isActive && searchQuery ? (
+          {isActive && query ? (
             <>
               <ul className="dropdown search-results-dropdown">
-                {searchResults.length > 0 ? (
-                  searchResults.map((result, index) => (
+                {loading ? (
+                  <p>Loading...</p>
+                ) : results.length > 0 ? (
+                  results.map((result, index) => (
                     <li key={index}>
                       <NavLink
                         to={
-                          result.type.toLowerCase() === "workshops"
+                          result.type === "workshop"
                             ? `/workshops/workshop-detail/${result.id}`
+                            : result.type === "case_study"
+                            ? `/casestudy/${result.id}`
+                            : result.type === "theme"
+                            ? `/theme/${result.id}`
                             : `/${result.type.toLowerCase()}`
                         }
                       >
-                        {result.title || result.study_area} ({result.type})
+                        {result.title} ({result.type})
                       </NavLink>
                     </li>
                   ))
@@ -223,6 +201,7 @@ function Base({ case_studies, workshops }) {
             </>
           ) : null}
         </div>
+        <GoogleTranslate />
       </div>
     </div>
   );

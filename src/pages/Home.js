@@ -1,29 +1,93 @@
-import React from "react";
-import "./global.css";
-import "./style.css";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import oneImg from "../images/1.png";
-import twoImg from "../images/2.png";
-import threeImg from "../images/3.png";
-import videoSrc from "../images/video.mp4";
-import img_bg from "../images/img-bg.jpg";
-import back_to_top_arrow from "../images/back_to_top_arrow.svg";
-import designleftImg from "../images/designleft.png";
-import designrightImg from "../images/designright.png";
-import line172Img from "../images/Line 172.png";
-import apnLogo1Img from "../images/APN Logo-c-v 1 (1).png";
-import linkarrowImg from "../images/linkarrow.png";
-import verticalineImg from "../images/verticaline.png";
 import { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import Click_Carousel from "./click_carousel";
-import Workshop_Carousel from "./workshop_carousel";
+import ClickCarousel from "../components/ClickCarousel";
+import WorkshopCarousel from "../components/WorkshopCarousel";
+import { SERVER_URL } from "../constants/constants";
+import {
+  get_homepage_data,
+  get_about_data,
+  get_stories,
+  get_workshops,
+  get_case_studies,
+} from "../api/endpoints";
 
-function Home({ data, homepageData, images }) {
-  console.log("Home component called");
-
+function Home() {
   const videoRef = useRef(null);
-  const institutes = homepageData?.institutes || [];
+  const [institutes, setInstitutes] = useState([]);
+  const [mapImage, setMapImage] = useState("");
+  const [about, setAbout] = useState("");
+  const [caseStudies, setCaseStudies] = useState([]);
+  const [workshops, setWorkshops] = useState([]);
+  const [stories, setStories] = useState([]);
+  const [galleryPhotos, setGalleryPhotos] = useState([]);
+  const [loadingHomeData, setLoadingHomeData] = useState(true);
+  const [loadingCaseStudies, setLoadingCaseStudies] = useState(true);
+  const [loadingWorkshops, setLoadingWorkshops] = useState(true);
+
+  const fetchData = async () => {
+    setLoadingHomeData(true);
+    setLoadingCaseStudies(true);
+    setLoadingWorkshops(true);
+    try {
+      const results = await Promise.allSettled([
+        get_homepage_data(),
+        get_about_data(),
+        get_case_studies(),
+        get_workshops(),
+        get_stories(),
+      ]);
+
+      if (results[0].status === "fulfilled") {
+        setInstitutes(results[0].value.institutes);
+        setMapImage(results[0].value.map_image);
+        setGalleryPhotos(results[0].value.gallery_photos);
+      } else {
+        // alert("Error fetching institutes");
+        // console.error("Error fetching homepage data:", results[0].reason);
+      }
+
+      if (results[1].status === "fulfilled") {
+        setAbout(results[1].value);
+      } else {
+        // alert("Error fetching about");
+        // console.error("Error fetching about:", results[1].reason);
+      }
+      if (results[2].status === "fulfilled") {
+        setCaseStudies(results[2].value);
+      } else {
+        // alert("Error fetching case studies");
+        // console.error("Error fetching case studies:", results[2].reason);
+      }
+
+      if (results[3].status === "fulfilled") {
+        setWorkshops(results[3].value);
+      } else {
+        // alert("Error fetching workshops");
+        // console.error("Error fetching workshops:", results[3].reason);
+      }
+
+      if (results[4].status === "fulfilled") {
+        setStories(results[4].value);
+      } else {
+        // alert("Error fetching stories");
+        // console.error("Error fetching stories:", results[4].reason);
+      }
+    } catch (error) {
+      alert("Error fetching homepage data");
+      console.log("Error fetching homepage data:", error.message);
+    } finally {
+      setLoadingHomeData(false);
+      setLoadingCaseStudies(false);
+      setLoadingWorkshops(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div className="homepage">
@@ -37,7 +101,7 @@ function Home({ data, homepageData, images }) {
               playsInline
               className="back-video"
             >
-              <source src={videoSrc} type="video/mp4" />
+              <source src="/static/images/video.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay"></div>
           </div>
@@ -64,7 +128,9 @@ function Home({ data, homepageData, images }) {
             <div className="collab-container">
               <h5>Collaborating Institutes</h5>
               <div className="collab-box">
-                {institutes.length > 0 ? (
+                {loadingHomeData ? (
+                  <p>Loading...</p>
+                ) : institutes.length > 0 ? (
                   institutes.map((institute, index) => (
                     <img
                       key={index}
@@ -80,23 +146,27 @@ function Home({ data, homepageData, images }) {
           </div>
         </div>
         <a href="#hero">
-          <img src={back_to_top_arrow} className="back_to_top_arrow" />
+          <img
+            src="/static/images/back_to_top_arrow.svg"
+            className="back_to_top_arrow"
+            alt="arrow-img"
+          />
         </a>
         <div className="about-page" id="about-home">
           <div className="about-image">
-            {data && data.about_data ? (
+            {about ? (
               <div className="image-grid">
-                <img src={data.about_data.img1} alt="Image 1" />
-                <img src={data.about_data.img2} alt="Image 2" />
-                <img src={data.about_data.img3} alt="Image 3" />
-                <img src={data.about_data.img4} alt="Image 4" />
+                <img src={`${SERVER_URL}${about.img1}`} alt="img-1" />
+                <img src={`${SERVER_URL}${about.img2}`} alt="img-2" />
+                <img src={`${SERVER_URL}${about.img3}`} alt="img-3" />
+                <img src={`${SERVER_URL}${about.img4}`} alt="img-4" />
               </div>
             ) : (
               <div className="image-grid">
-                <img src={img_bg} alt="Image 1" />
-                <img src={img_bg} alt="Image 2" />
-                <img src={img_bg} alt="Image 3" />
-                <img src={img_bg} alt="Image 4" />
+                <img src="/static/images/img-bg.jpg" alt="img-1" />
+                <img src="/static/images/img-bg.jpg" alt="img-2" />
+                <img src="/static/images/img-bg.jpg" alt="img-3" />
+                <img src="/static/images/img-bg.jpg" alt="img-4" />
               </div>
             )}
           </div>
@@ -105,7 +175,7 @@ function Home({ data, homepageData, images }) {
               <div className="overview-body">
                 <div className="headline">
                   <h5>Overview</h5>
-                  <img src={line172Img} alt="" />
+                  <img src="/static/images/Line 172.png" alt="" />
                 </div>
                 <h2>Know About Our Project</h2>
                 <p>
@@ -130,7 +200,7 @@ function Home({ data, homepageData, images }) {
             <div className="area-head">
               <div className="headline">
                 <h3>Study Areas</h3>
-                <img src={line172Img} alt="" />
+                <img src="/static/images/Line 172.png" alt="" />
               </div>
               <h1>Case Studies in Spotlight</h1>
               <p>
@@ -139,8 +209,10 @@ function Home({ data, homepageData, images }) {
               </p>
             </div>
             <div className="area-cards">
-              {data.case_studies && data.case_studies.length > 0 ? (
-                data.case_studies.map((case_study, index) => (
+              {loadingCaseStudies ? (
+                <p>Loading...</p>
+              ) : caseStudies && caseStudies.length > 0 ? (
+                caseStudies.map((case_study, index) => (
                   <div key={index} className="area-card">
                     <div className="card-head">
                       <span>{case_study.country}</span>
@@ -157,7 +229,7 @@ function Home({ data, homepageData, images }) {
             </NavLink>
           </div>
           <div className="maps">
-            <img src={homepageData?.map_image} alt="" />
+            <img src={mapImage ? mapImage : null} alt="" />
           </div>
         </div>
         <div className="workshop-page">
@@ -165,67 +237,88 @@ function Home({ data, homepageData, images }) {
             <div className="head">
               <div className="headline">
                 <h3>Recent workshops</h3>
-                <img src={line172Img} alt="" />
+                <img src="/static/images/Line 172.png" alt="" />
               </div>
 
               <h2>We conduct regular workshops</h2>
             </div>
-            <Workshop_Carousel workshops={data.workshops} />
-            <NavLink
-              to="/workshops"
-              style={{ textDecoration: "underline", color: "rgb(23, 47, 92)" }}
-            >
-              {" "}
-              See All Workshops
-            </NavLink>
+            {loadingWorkshops ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <WorkshopCarousel workshops={workshops} />
+                {workshops.length > 0 && (
+                  <NavLink
+                    to="/workshops"
+                    style={{
+                      textDecoration: "underline",
+                      color: "rgb(23, 47, 92)",
+                    }}
+                  >
+                    {" "}
+                    See All Workshops
+                  </NavLink>
+                )}
+              </>
+            )}
           </div>
         </div>
         <div className="objective-page">
-          <img src={designleftImg} alt="" className="designleft" />
+          <img
+            src="/static/images/designleft.png"
+            alt=""
+            className="designleft"
+          />
           <div className="objective-head">
-            <img src={line172Img} alt="" />
+            <img src="/static/images/Line 172.png" alt="" />
             <h5>Objectives</h5>
-            <img src={line172Img} alt="" />
+            <img src="/static/images/Line 172.png" alt="" />
           </div>
           <h2>Objectives of the GoAL project</h2>
           <div className="objectives-card">
             <div className="obj-card">
-              <img src={oneImg} alt="" />
+              <img src="/static/images/1.png" alt="" />
               <p>
                 Co-designing of Case Study Framework & Training of community
                 Trainers
               </p>
             </div>
             <div className="obj-card">
-              <img src={twoImg} alt="" />
+              <img src="/static/images/2.png" alt="" />
               <p>
                 Build case studies on Gender-sensitive adaptive transformation
                 in CCA & DRR& prepare training resource
               </p>
             </div>
             <div className="obj-card">
-              <img src={threeImg} alt="" />
+              <img src="/static/images/3.png" alt="" />
               <p>Knowledge sharing & co-leaming</p>
             </div>
           </div>
-          <img src={designrightImg} alt="" className="designright" />
+          <img
+            src="/static/images/designleft.png"
+            alt=""
+            className="designright"
+          />
         </div>
         <div className="gallery-home">
           <h2>Our Gallery</h2>
           <div className="image-grid">
-            {images.map((image, index) => (
-              <div className="img-hover-div" key={index}>
-                <img
-                  src={image.image}
-                  alt={`Image ${index + 1}`}
-                  loading="lazy"
-                />
-                <div className="image-info">
-                  <p className="date">Date: {image.date}</p>
-                  <p className="location">{image.caption}</p>
+            {loadingHomeData ? (
+              <p>Loading...</p>
+            ) : (
+              galleryPhotos &&
+              galleryPhotos.length > 0 &&
+              galleryPhotos.map((image, index) => (
+                <div className="img-hover-div" key={index}>
+                  <img src={image.image} alt={`img-${index + 1}`} />
+                  <div className="image-info">
+                    <p className="date">Date: {image.formatted_date}</p>
+                    <p className="location">{image.caption}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
           <NavLink to="/gallery">
             {" "}
@@ -237,11 +330,11 @@ function Home({ data, homepageData, images }) {
             <div className="head">
               <div className="headline">
                 <h3>stories</h3>
-                <img src={line172Img} alt="" />
+                <img src="/static/images/Line 172.png" alt="" />
               </div>
               <h2>Hear from the people themselves</h2>
             </div>
-            <Click_Carousel stories={data.stories} />
+            <ClickCarousel stories={stories} />
           </div>
         </div>
         <div className="funding-agency">
@@ -250,7 +343,7 @@ function Home({ data, homepageData, images }) {
 
             <div className="fund-body">
               <div className="left-image">
-                <img src={apnLogo1Img} alt="" />
+                <img src="/static/images/APN Logo-c-v 1 (1).png" alt="" />
               </div>
               <div className="right-content">
                 <p>
@@ -265,16 +358,16 @@ function Home({ data, homepageData, images }) {
                     rel="noreferrer"
                   >
                     APN Website
-                    <img src={linkarrowImg} alt="" />
+                    <img src="/static/images/linkarrow.png" alt="" />
                   </a>
-                  <img src={verticalineImg} alt="" />
+                  <img src="/static/images/verticaline.png" alt="" />
                   <a
                     href="https://www.apn-gcr.org/project/goal-gender-orientated-adaptive-transformation-cross-learning-for-climate-change-and-disaster-risk-resilience-among-india-nepal-sri-lanka-and-japan/"
                     target="_blank"
                     rel="noreferrer"
                   >
                     Project Website
-                    <img src={linkarrowImg} alt="" />
+                    <img src="/static/images/linkarrow.png" alt="" />
                   </a>
                 </div>
               </div>
@@ -283,7 +376,9 @@ function Home({ data, homepageData, images }) {
         </div>
         <div className="logos" style={{ margin: "auto", marginTop: "90px" }}>
           <ul>
-            {institutes.length > 0 ? (
+            {loadingHomeData ? (
+              <p>Loading...</p>
+            ) : institutes.length > 0 ? (
               institutes.map((institute, index) => (
                 <li className="logo" key={index}>
                   <img src={institute.logo} alt={institute.name} />
@@ -294,7 +389,7 @@ function Home({ data, homepageData, images }) {
               <p>No collaborating institutes found.</p>
             )}
             <li className="logo">
-              <img src={apnLogo1Img} alt="" />
+              <img src="/static/images/APN Logo-c-v 1 (1).png" alt="" />
               <p>APN</p>
             </li>
           </ul>

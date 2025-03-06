@@ -1,6 +1,4 @@
 import React from "react";
-import "./style.css"; // Make sure to include the CSS file
-import "./shimmer.css"; // Make sure to include the CSS file
 
 function TeamShimmer() {
   const shimmerArray = [1, 2, 3, 4]; // Array to simulate multiple loading cards

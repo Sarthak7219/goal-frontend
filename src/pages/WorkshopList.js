@@ -1,10 +1,27 @@
-import React from "react";
-import "./global.css";
-import "./style.css";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import iconImg from "../images/icon.png";
+import { get_workshops } from "../api/endpoints";
 
-function WorkshopList({ workshops }) {
+function WorkshopList() {
+  const [workshops, setWorkshops] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await get_workshops();
+        setWorkshops(data);
+      } catch (error) {
+        alert("Error fetching workshops");
+        // console.log("Error fetching workshops:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="workshops-page">
       <div className="page-hero" id="team-bg">
@@ -20,18 +37,20 @@ function WorkshopList({ workshops }) {
             </NavLink>
           </p>
         </div>
-        <img src={iconImg} alt="Icon" />
+        <img src="/static/images/icon.png" alt="Icon" />
       </div>
 
       <div className="workshops-list">
         <h1>See All Workshops</h1>
 
         <div className="workshops-list-wrapper">
-          {workshops.length === 0 ? (
-            <p>No workshops found !</p>
+          {loading ? (
+            <p>Loading...</p>
+          ) : workshops.length === 0 ? (
+            <p>No workshops found</p>
           ) : (
-            workshops.map((workshop) => (
-              <div>
+            workshops.map((workshop, index) => (
+              <div key={index}>
                 <div className="line"></div>
                 <div className="box">
                   {/* <img src={workshop.image} alt="" /> */}

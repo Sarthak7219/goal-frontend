@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { scrollSpy } from "./scrollSpy";
-import iconImg from "../images/icon.png";
-import ResourcesShimmer from "./ResourcesShimmer";
+import ResourcesShimmer from "../components/ResourcesShimmer";
+import { get_resources } from "../api/endpoints";
+import { SERVER_URL } from "../constants/constants";
 
-function Resources({ resources }) {
-  const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
-  
+function Resources() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [resources, setResources] = useState([]);
+
   useEffect(() => {
-    const cleanup = scrollSpy();
-    setTimeout(() => setIsLoading(false), 2000); // Simulate loading delay
-
-    return () => {
-      cleanup();
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await get_resources();
+        setResources(data);
+      } catch (error) {
+        alert("Error fetching resources");
+        // console.log("Error fetching resources:", error.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
-  }, []);
+    fetchData();
 
-  const publications = resources.filter(
-    (resource) => resource.category === "publication"
-  );
-  const training_tools = resources.filter(
-    (resource) => resource.category === "training_tool"
-  );
+    setTimeout(() => setIsLoading(false), 2000);
+  }, []);
 
   // Reusable function for rendering resource lists
   const renderResourceList = (resourceArray, type) => {
     return (
       <div className="resources-container">
-        {resourceArray.length > 0 ? (
+        {resourceArray && resourceArray.length > 0 ? (
           resourceArray.map((resource) => (
             <div className="resource-box" key={resource.id}>
               <div className="detail">
@@ -37,12 +40,20 @@ function Resources({ resources }) {
                 </div>
                 <h3>{resource.title}</h3>
                 {resource.pdf && (
-                  <a href={resource.pdf} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`${SERVER_URL}${resource.pdf}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Open PDF
                   </a>
                 )}
                 {resource.link && (
-                  <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={`${SERVER_URL}${resource.link}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Open Link
                   </a>
                 )}
@@ -71,12 +82,12 @@ function Resources({ resources }) {
             </NavLink>
           </p>
         </div>
-        <img src={iconImg} alt="Icon" />
+        <img src="/static/images/icon.png" alt="Icon" />
       </div>
 
       <div className="container">
         <div className="quick-link-box" id="resources-sidebox">
-          <a href="#publications" className="quicklink active">
+          <a href="#publications" className="quicklink">
             - Publications
           </a>
           <a href="#training-manuels" className="quicklink">
@@ -90,9 +101,9 @@ function Resources({ resources }) {
               <h1>Publications</h1>
             </div>
             {isLoading ? (
-              <ResourcesShimmer/> // Shimmer effect while loading
+              <ResourcesShimmer /> // Shimmer effect while loading
             ) : (
-              renderResourceList(publications, "publications") // Render publications
+              renderResourceList(resources.publication, "publications") // Render publications
             )}
           </section>
 
@@ -101,9 +112,9 @@ function Resources({ resources }) {
               <h1>Training Tools</h1>
             </div>
             {isLoading ? (
-              <ResourcesShimmer/> // Shimmer effect while loading
+              <ResourcesShimmer /> // Shimmer effect while loading
             ) : (
-              renderResourceList(training_tools, "training tools") // Render training tools
+              renderResourceList(resources.training_manual, "training tools") // Render training tools
             )}
           </section>
         </div>

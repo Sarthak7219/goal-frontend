@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import leftArrowImg from "../images/rightarrow.png";
-import rightArrowImg from "../images/rightarrow.png";
-import selected_dot from "../images/selected_dot.svg";
-import unselected_dot from "../images/unselected_dot.svg";
-import about1 from "../images/about1.jpg";
-import "./style.css";
 
-const Click_Carousel = ({ stories = [] }) => {
+const ClickCarousel = ({ stories = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const totalStories = stories.length;
@@ -25,13 +19,13 @@ const Click_Carousel = ({ stories = [] }) => {
     <div className="stories-body">
       <div className="left-right-icons">
         <img
-          src={leftArrowImg}
+          src="/static/images/rightarrow.png"
           className="left-arrow"
           alt="Previous"
           onClick={prevSlide}
         />
         <img
-          src={rightArrowImg}
+          src="/static/images/rightarrow.png"
           className="right-arrow"
           alt="Next"
           onClick={nextSlide}
@@ -61,7 +55,7 @@ const Click_Carousel = ({ stories = [] }) => {
                     title="Workshop Video"
                   ></iframe>
                 ) : (
-                  <img src={about1} alt="Story" />
+                  <img src="/static/images/about1.jpg" alt="Story" />
                 )}
                 <p>
                   <b>Date: </b>
@@ -82,7 +76,11 @@ const Click_Carousel = ({ stories = [] }) => {
           {Array.from({ length: totalDots }).map((_, index) => (
             <img
               key={index}
-              src={index === currentIndex ? selected_dot : unselected_dot}
+              src={
+                index === currentIndex
+                  ? "/static/images/selected_dot.svg"
+                  : "/static/images/unselected_dot.svg"
+              }
               alt={`Dot ${index + 1}`}
               onClick={() => setCurrentIndex(index)}
             />
@@ -93,4 +91,4 @@ const Click_Carousel = ({ stories = [] }) => {
   );
 };
 
-export default Click_Carousel;
+export default ClickCarousel;
