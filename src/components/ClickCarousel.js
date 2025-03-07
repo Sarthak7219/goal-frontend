@@ -46,9 +46,12 @@ const ClickCarousel = ({ stories = [] }) => {
               <li key={index} className="story">
                 <a href={story.link ? story.link : "#"}>
                   <img
-                    src={story.thumbnail ? story.thumbnail : null}
+                    src={story.link && story.thumbnail ? story.thumbnail : null}
                     className="thumbnail"
                     alt="story-thumbnail"
+                    style={{
+                      border: !story.thumbnail ? "1px solid #252A34" : "none",
+                    }}
                   />
                   <img
                     src="/static/images/youtube.svg"

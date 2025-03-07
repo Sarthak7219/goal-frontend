@@ -2113,7 +2113,7 @@ text-transform: capitalize;
     align-items: center;
     justify-content: center;
     width: 310px;
-    border: 1px solid var(--text-black);
+    
 }
 
 .story .thumbnail{
