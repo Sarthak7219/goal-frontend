@@ -6,7 +6,7 @@ import { get_themes, get_theme_detail } from "../api/endpoints";
 function Themes() {
   const { itemId } = useParams();
   const [list, setList] = useState([]);
-  const [currItem, setCurrItem] = useState("");
+  const [currItem, setCurrItem] = useState(null);
   const [activeOption, setActiveOption] = useState(0);
   const [loadingList, setLoadingList] = useState(true);
   const [loadingDetail, setLoadingDetail] = useState(true);
@@ -73,7 +73,7 @@ function Themes() {
               <NavLink
                 key={index}
                 className={`theme-quicklink ${
-                  currItem.id === theme.id ? "active" : ""
+                  currItem.id && currItem.id === theme.id ? "active" : ""
                 }`}
                 to={`/theme/${theme.id}`}
               >
