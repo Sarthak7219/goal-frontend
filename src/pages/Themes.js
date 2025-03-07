@@ -106,30 +106,34 @@ function Themes() {
               </section>
               <section className="themes" id="theme-case-studies">
                 <h1>Examples From Case Studies</h1>
-                <div className="theme-cs-box">
-                  <div className="cs-select">
-                    {currItem.case_studies &&
-                      currItem.case_studies.map((item, index) => (
-                        <div
-                          key={index}
-                          className={`cs ${
-                            index === activeOption ? "active" : ""
-                          }`}
-                          onClick={() => setActiveOption(index)}
-                        >
-                          <p>{item.case_study}</p>{" "}
-                        </div>
-                      ))}
-                  </div>
-                  <div className="theme-cs-desc">
-                    <div className="markdown">
-                      {" "}
-                      <Markdown className="markdown-text">
-                        {currItem.case_studies[activeOption].description}
-                      </Markdown>
+                {currItem.case_studies ? (
+                  <div className="theme-cs-box">
+                    <div className="cs-select">
+                      {currItem.case_studies &&
+                        currItem.case_studies.map((item, index) => (
+                          <div
+                            key={index}
+                            className={`cs ${
+                              index === activeOption ? "active" : ""
+                            }`}
+                            onClick={() => setActiveOption(index)}
+                          >
+                            <p>{item.case_study}</p>{" "}
+                          </div>
+                        ))}
+                    </div>
+                    <div className="theme-cs-desc">
+                      <div className="markdown">
+                        {" "}
+                        <Markdown className="markdown-text">
+                          {currItem.case_studies[activeOption].description}
+                        </Markdown>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <p>No case studies found</p>
+                )}
               </section>
               <section className="themes">
                 <h1>Photos</h1>

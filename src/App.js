@@ -13,10 +13,12 @@ import Casestudy from "./pages/Casestudy";
 import About from "./pages/About";
 import PageNotFound from "./pages/PageNotFound";
 import Theme from "./pages/Themes";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <div className="App">
+      <ScrollToTop />
       <Base />
       <Routes>
         <Route path="/" element={<Home />} />

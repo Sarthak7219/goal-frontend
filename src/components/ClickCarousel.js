@@ -44,19 +44,18 @@ const ClickCarousel = ({ stories = [] }) => {
           >
             {stories.map((story, index) => (
               <li key={index} className="story">
-                {story.link ? (
-                  <iframe
-                    width="310"
-                    height="232"
-                    src={story.link}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    title="Workshop Video"
-                  ></iframe>
-                ) : (
-                  <img src="/static/images/about1.jpg" alt="Story" />
-                )}
+                <a href={story.link ? story.link : "#"}>
+                  <img
+                    src={story.thumbnail ? story.thumbnail : null}
+                    className="thumbnail"
+                    alt="story-thumbnail"
+                  />
+                  <img
+                    src="/static/images/youtube.svg"
+                    className="yt-icon"
+                    alt="yt-icon"
+                  />
+                </a>
                 <p>
                   <b>Date: </b>
                   {story.date}
