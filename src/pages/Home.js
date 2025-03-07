@@ -296,7 +296,7 @@ function Home() {
             </div>
           </div>
           <img
-            src="/static/images/designleft.png"
+            src="/static/images/designright.png"
             alt=""
             className="designright"
           />

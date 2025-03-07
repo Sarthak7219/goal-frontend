@@ -139,7 +139,9 @@ function Themes() {
                 <h1>Photos</h1>
 
                 <div className="photos" style={{ marginTop: "20px" }}>
-                  {currItem.case_studies[activeOption].images &&
+                  {currItem.case_studies &&
+                  currItem.case_studies[activeOption] &&
+                  currItem.case_studies[activeOption].images &&
                   currItem.case_studies[activeOption].images.length > 0 ? (
                     currItem.case_studies[activeOption].images.map(
                       (image, index) => (
