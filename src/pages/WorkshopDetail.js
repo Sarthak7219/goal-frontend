@@ -92,7 +92,7 @@ function WorkshopDetail() {
                   title="Workshop Video"
                 ></iframe>
               ) : workshop.thumbnail ? (
-                <img src={workshop.thumbnail} alt="Workshop" />
+                <img src={workshop.thumbnail} alt="Workshop" loading="lazy" />
               ) : (
                 <></>
               )}

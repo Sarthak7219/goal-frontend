@@ -123,6 +123,7 @@ function Gallery() {
               <img
                 src={box.thumbnail ? box.thumbnail : null}
                 alt="case-study-img"
+                loading="lazy"
               />
               <h2>{box.country}</h2>
               <p>{box.study_area}</p>

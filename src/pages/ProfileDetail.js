@@ -42,7 +42,7 @@ function ProfileDetail() {
         }}
       ></div>
       <div className="name-section">
-        <img src={profile.image} alt="" />
+        <img src={profile.image} alt="" loading="lazy" />
         <div className="profile-heading">
           <h2>{profile.name}</h2>
           <h5>{profile.organisation}</h5>

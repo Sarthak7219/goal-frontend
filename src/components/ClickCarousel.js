@@ -52,6 +52,7 @@ const ClickCarousel = ({ stories = [] }) => {
                     style={{
                       border: !story.thumbnail ? "1px solid #252A34" : "none",
                     }}
+                    loading="lazy"
                   />
                   <img
                     src="/static/images/youtube.svg"

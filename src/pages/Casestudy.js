@@ -123,6 +123,7 @@ function Casestudy() {
                           <img
                             src={workshop.thumbnail ? workshop.thumbnail : null}
                             alt={workshop.title}
+                            loading="lazy"
                           />
                           <div className="desc">
                             <h5>
@@ -155,7 +156,11 @@ function Casestudy() {
                 <div className="photos">
                   {currItem.photos.map((image, index) => (
                     <div key={index} className="img-hover-div">
-                      <img src={image.image} alt={`img-${index}`} />
+                      <img
+                        src={image.image}
+                        alt={`img-${index}`}
+                        loading="lazy"
+                      />
                       <div className="image-info">
                         <p className="date">Date: {image.formatted_date}</p>
                         <p className="location">{image.caption}</p>

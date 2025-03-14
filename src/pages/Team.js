@@ -47,7 +47,12 @@ const Team = () => {
                 key={team_member.id}
               >
                 <div className="member-card">
-                  <img src={team_member.image} className="member-img" alt="" />
+                  <img
+                    src={team_member.image}
+                    className="member-img"
+                    alt=""
+                    loading="lazy"
+                  />
                   <img
                     src="/static/images/Rectangle 5995.png"
                     className="member-card-bg"

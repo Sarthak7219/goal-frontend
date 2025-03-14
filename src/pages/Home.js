@@ -136,6 +136,7 @@ function Home() {
                       key={index}
                       src={institute.logo}
                       alt={institute.name}
+                      loading="lazy"
                     />
                   ))
                 ) : (
@@ -156,17 +157,49 @@ function Home() {
           <div className="about-image">
             {about ? (
               <div className="image-grid">
-                <img src={`${SERVER_URL}${about.img1}`} alt="img-1" />
-                <img src={`${SERVER_URL}${about.img2}`} alt="img-2" />
-                <img src={`${SERVER_URL}${about.img3}`} alt="img-3" />
-                <img src={`${SERVER_URL}${about.img4}`} alt="img-4" />
+                <img
+                  src={`${SERVER_URL}${about.img1}`}
+                  alt="img-1"
+                  loading="lazy"
+                />
+                <img
+                  src={`${SERVER_URL}${about.img2}`}
+                  alt="img-2"
+                  loading="lazy"
+                />
+                <img
+                  src={`${SERVER_URL}${about.img3}`}
+                  alt="img-3"
+                  loading="lazy"
+                />
+                <img
+                  src={`${SERVER_URL}${about.img4}`}
+                  alt="img-4"
+                  loading="lazy"
+                />
               </div>
             ) : (
               <div className="image-grid">
-                <img src="/static/images/img-bg.jpg" alt="img-1" />
-                <img src="/static/images/img-bg.jpg" alt="img-2" />
-                <img src="/static/images/img-bg.jpg" alt="img-3" />
-                <img src="/static/images/img-bg.jpg" alt="img-4" />
+                <img
+                  src="/static/images/img-bg.jpg"
+                  alt="img-1"
+                  loading="lazy"
+                />
+                <img
+                  src="/static/images/img-bg.jpg"
+                  alt="img-2"
+                  loading="lazy"
+                />
+                <img
+                  src="/static/images/img-bg.jpg"
+                  alt="img-3"
+                  loading="lazy"
+                />
+                <img
+                  src="/static/images/img-bg.jpg"
+                  alt="img-4"
+                  loading="lazy"
+                />
               </div>
             )}
           </div>
@@ -224,7 +257,7 @@ function Home() {
                 <p>Add case study in database</p>
               )}
             </div>
-            <NavLink to="/casestudy">
+            <NavLink to="/casestudy/1">
               <button className="btn">See case studies</button>
             </NavLink>
           </div>
