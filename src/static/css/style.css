@@ -2804,7 +2804,7 @@ text-transform: capitalize;
 }
 
 
-.case_studies .photos, .themes .photos{
+.case_studies .photos, .themes .photos, .workshop-photos-container .photos{
     display: flex;
     align-items: flex-start;
     width: 100%;

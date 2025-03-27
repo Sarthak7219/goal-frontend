@@ -70,7 +70,9 @@ function WorkshopDetail() {
         <img src="/static/images/icon.png" alt="" />
       </div>
 
-      {workshop ? (
+      {loading ? (
+        <p>Loading...</p>
+      ) : workshop ? (
         <div className="workshop-content">
           <div className="section-head">
             <div>
@@ -173,9 +175,51 @@ function WorkshopDetail() {
               </div>
             </div>
           </div>
+          <div className="workshop-photos-container">
+            <h3
+              style={{
+                marginTop: "30px",
+              }}
+            >
+              Workshop Photos
+            </h3>
+            {workshop.workshop_photos && workshop.workshop_photos.length > 0 ? (
+              <>
+                <div className="photos" style={{ marginTop: "12px" }}>
+                  {workshop.workshop_photos.map((image, index) => (
+                    <div key={index} className="img-hover-div">
+                      <img
+                        src={image.image}
+                        alt={`img-${index}`}
+                        loading="lazy"
+                      />
+                      <div className="image-info">
+                        <p className="date">Date: {image.formatted_date}</p>
+                        <p className="location">{image.caption}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <NavLink
+                  to="/gallery"
+                  style={{
+                    fontSize: "14px",
+                    textDecoration: "underline",
+                    color: "#172f5c",
+                    marginTop: "12px",
+                  }}
+                >
+                  See All Photos
+                </NavLink>
+              </>
+            ) : (
+              <p>No images available for this workshop.</p>
+            )}
+          </div>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Workshop data not found</p>
       )}
     </div>
   );
