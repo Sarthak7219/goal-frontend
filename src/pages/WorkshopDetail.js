@@ -94,7 +94,12 @@ function WorkshopDetail() {
                   title="Workshop Video"
                 ></iframe>
               ) : workshop.thumbnail ? (
-                <img src={workshop.thumbnail} alt="Workshop" loading="lazy" />
+                <img
+                  src={workshop.thumbnail}
+                  alt="Workshop"
+                  loading="lazy"
+                  style={{ objectFit: "contain", backgroundColor: "black" }}
+                />
               ) : (
                 <></>
               )}
@@ -130,7 +135,9 @@ function WorkshopDetail() {
                 <h2>Workshop Details</h2>
                 <div>
                   <h4>Date:</h4>
-                  <p>{workshop.formatted_date}</p>
+                  <p>
+                    {workshop.formatted_date} - {workshop.formatted_end_date}
+                  </p>
                 </div>
                 <div>
                   <h4>Mode:</h4>
@@ -153,7 +160,9 @@ function WorkshopDetail() {
                         <div className="card" key={r_workshop.id}>
                           <img
                             src={
-                              r_workshop.thumbnail ? r_workshop.thumbnail : null
+                              r_workshop.thumbnail
+                                ? r_workshop.thumbnail
+                                : "/static/images/workshop-thumbnail.jpg"
                             }
                             alt="img"
                           />
@@ -163,7 +172,10 @@ function WorkshopDetail() {
                                 ? r_workshop.title.substring(0, 20) + ". . ."
                                 : r_workshop.title}
                             </h5>
-                            <p>{r_workshop.formatted_date}</p>
+                            <p>
+                              {r_workshop.formatted_date} -{" "}
+                              {r_workshop.formatted_end_date}
+                            </p>
                           </div>
                         </div>
                       </NavLink>

@@ -57,7 +57,7 @@ function WorkshopList() {
                   <div>
                     <div className="flex">
                       <p>Workshop</p>
-                      <p className="pink-date">{workshop.date}</p>
+                      <p className="pink-date">{`${workshop.formatted_date} - ${workshop.formatted_end_date}`}</p>
                     </div>
                     <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
                       <h1>{workshop.title}</h1>

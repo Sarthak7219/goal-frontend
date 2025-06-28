@@ -45,6 +45,14 @@ const WorkshopCarousel = ({ workshops = [] }) => {
           >
             {workshops.map((workshop, index) => (
               <li className="worshop-detail-home" key={index}>
+                <img
+                  src={
+                    workshop.thumbnail
+                      ? workshop.thumbnail
+                      : "/static/images/workshop-thumbnail.jpg"
+                  }
+                  className="thumbnail-img"
+                />
                 <div className="title">Workshop #{workshop.id}</div>
                 <div className="detail">
                   <h2>{workshop.title}</h2>
@@ -55,7 +63,10 @@ const WorkshopCarousel = ({ workshops = [] }) => {
                     </div>
                     <div>
                       <img src="/static/images/calendar.svg" alt="icon" />
-                      <p>{workshop.formatted_date}</p>
+                      <p>
+                        {workshop.formatted_date} -{" "}
+                        {workshop.formatted_end_date}
+                      </p>
                     </div>
                   </div>
                   <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>

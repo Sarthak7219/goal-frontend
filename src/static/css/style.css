@@ -1100,7 +1100,7 @@ gap: 18px;
     display: block;
     width: 112.5px;
     height: 82.5px;
-
+    object-fit: cover;
 }
 
 .desc{
@@ -1828,13 +1828,20 @@ head{
 width: 310.673px;
 height: 232px;
 position: relative;
-background-image: url('../images/workshop-thumbnail2.png');
 background-repeat: no-repeat;
 background-size: cover;
 flex-shrink: 0;
 transition: all 0.3s ease;
 cursor: pointer;
 overflow: hidden;
+}
+
+.worshop-detail-home .thumbnail-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    object-fit: cover;
 }
 
 .worshop-detail-home .title{
@@ -1853,7 +1860,7 @@ overflow: hidden;
     align-items: flex-start;
     justify-content: space-between;
     position: absolute;
-    z-index: 2;
+    z-index: 10;
     display: flex;
     padding: 25px;
     height: 100%;
@@ -1930,6 +1937,7 @@ line-height: normal;
 
 .venue img{
     display: block;
+    margin-top: 2px;
 }
 .worshop-detail-home p{
     color: var(--goal-gray, #D0D0D0);
