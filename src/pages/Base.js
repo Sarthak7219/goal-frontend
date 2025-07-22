@@ -112,7 +112,7 @@ function Base() {
                 Theme 2 - Review of Gender Inequality
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/theme/3">
                 Theme 3 - Gender-wise Determination of CC Impact
               </NavLink>
@@ -131,7 +131,7 @@ function Base() {
               <NavLink to="/theme/6">
                 Theme 6 - Strategies for Disaster Risk Reduction
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </li>
         <li>
