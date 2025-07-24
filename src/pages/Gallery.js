@@ -165,7 +165,7 @@ function Gallery() {
                         loading="lazy"
                       />
                       <div className="image-info">
-                        <p className="date">Date: {image.date}</p>
+                        <p className="date">Date: {image.formatted_date}</p>
                         <p className="location">{image.caption}</p>
                       </div>
                     </div>
@@ -209,7 +209,7 @@ function Gallery() {
                         loading="lazy"
                       />
                       <div className="image-info">
-                        <p className="date">Date: {image.date}</p>
+                        <p className="date">Date: {image.formatted_date}</p>
                         <p className="location">{image.caption}</p>
                       </div>
                     </div>
