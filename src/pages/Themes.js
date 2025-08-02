@@ -73,7 +73,7 @@ function Themes() {
               <NavLink
                 key={index}
                 className={`theme-quicklink ${
-                  currItem.id && currItem.id === theme.id ? "active" : ""
+                  currItem && currItem.id && currItem.id === theme.id ? "active" : ""
                 }`}
                 to={`/theme/${theme.id}`}
               >
