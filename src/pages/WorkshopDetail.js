@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import Markdown from "react-markdown";
 import { get_workshops, get_workshop_detail } from "../api/endpoints";
+import WorkshopMap from "../components/WorkshopMap";
 
 function WorkshopDetail() {
   const { id } = useParams();
@@ -105,7 +106,37 @@ function WorkshopDetail() {
               )}
 
               <div>
-                <h2>About the workshop</h2>
+                <div
+                  style={{ display: "flex", gap: "10px", alignItems: "center" }}
+                >
+                  <h2>About the workshop</h2>
+                  {workshop.pdf && (
+                    <a
+                      href={workshop.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        padding: "4px 8px",
+                        borderRadius: "5px",
+                        border: "2px solid #EC028C",
+                        backgroundColor: "white",
+                        cursor: "pointer",
+                        display: "flex",
+                        gap: "6px",
+                      }}
+                    >
+                      <img
+                        src="/static/images/download_icon.svg"
+                        style={{ width: "14px", height: "auto" }}
+                      />
+                      <div className="btn-text" style={{ margin: "0" }}>
+                        <p style={{ color: "#EC028C", margin: "0" }}>
+                          Dowload PDF
+                        </p>
+                      </div>
+                    </a>
+                  )}
+                </div>
                 <div className="markdown" style={{ marginTop: "12px" }}>
                   <Markdown className="markdown-text">
                     {workshop.description}
@@ -115,6 +146,10 @@ function WorkshopDetail() {
               <div>
                 <h2>Speakers</h2>
                 <p>{workshop.speakers}</p>
+              </div>
+              <div>
+                <h2>Lead institution</h2>
+                <p>{workshop.lead_institution}</p>
               </div>
               <div>
                 <h2>Organised by</h2>
@@ -147,7 +182,27 @@ function WorkshopDetail() {
                   <h4>Venue:</h4>
                   <p>{workshop.venue}</p>
                 </div>
+                <div>
+                  <h4>Case study:</h4>
+                  <p>{workshop.case_study_name}</p>
+                </div>
               </div>
+              {workshop.latitude && workshop.longitude && (
+                <div
+                  className="workshop-detail"
+                  style={{
+                    backgroundColor: "white",
+                    padding: 0,
+                    height: "fit-content",
+                  }}
+                >
+                  <h2>See on map</h2>
+                  <WorkshopMap
+                    latitude={workshop?.latitude}
+                    longitude={workshop?.longitude}
+                  />
+                </div>
+              )}
               <div className="recent-workshops">
                 <h2>Recent Workshops</h2>
                 <div className="workshop-cards">

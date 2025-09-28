@@ -6,6 +6,18 @@ import { get_team_members } from "../api/endpoints";
 const Team = () => {
   const [loading, setLoading] = useState(true);
   const [teamMembers, setTeamMembers] = useState([]);
+  const [active, setActive] = useState("collaborators");
+
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top, behavior: "smooth" });
+      setActive(id);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +26,6 @@ const Team = () => {
         setTeamMembers(data);
       } catch (error) {
         alert("Error fetching team data");
-        // console.log("Error fetching team data:", error.message);
       } finally {
         setLoading(false);
       }
@@ -36,9 +47,9 @@ const Team = () => {
       <section className="team" id={sectionId}>
         <h2>{title}</h2>
         {loading ? (
-          <TeamShimmer /> // Show shimmer effect while loading or before data is fetched
+          <TeamShimmer />
         ) : filteredMembers.length === 0 ? (
-          <p>Data not found</p> // Show if no data available after loading
+          <p>Data not found</p>
         ) : (
           <div className="photo-container">
             {filteredMembers.map((team_member) => (
@@ -103,21 +114,76 @@ const Team = () => {
 
       <div className="container">
         <div className="quick-link-box" id="team-sidebox">
-          <a href="#collaborators" className="quicklink">
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("collaborators")}
+            style={{
+              color:
+                active === "collaborators"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Collaborators
-          </a>
-          <a href="#research_associates" className="quicklink">
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("research_associates")}
+            style={{
+              color:
+                active === "research_associates"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Research Associates
-          </a>
-          <a href="#community_trainers" className="quicklink">
-            - Community Trainers
-          </a>
-          <a href="#interns" className="quicklink">
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("community_trainers")}
+            style={{
+              color:
+                active === "community_trainers"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
+            - Community Knowledge Partners
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("interns")}
+            style={{
+              color:
+                active === "interns" ? "var(--text-pink)" : "var(--text-black)",
+            }}
+          >
             - Interns
-          </a>
-          <a href="#students" className="quicklink">
-            - Students
-          </a>
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("students")}
+            style={{
+              color:
+                active === "students"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
+            - Classroom Integration Partners
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("icimod_huc_partners")}
+            style={{
+              color:
+                active === "icimod_huc_partners"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
+            - HUC–ICIMOD Partners
+          </div>
         </div>
 
         <div className="right" id="team-right">
@@ -130,10 +196,19 @@ const Team = () => {
           {renderTeamSection(
             "community_trainer",
             "community_trainers",
-            "Community Trainers"
+            "Community Knowledge Partners"
           )}
           {renderTeamSection("intern", "interns", "Interns")}
-          {renderTeamSection("student", "students", "Students")}
+          {renderTeamSection(
+            "student",
+            "students",
+            "Classroom Integration Partners"
+          )}
+          {renderTeamSection(
+            "icimod_huc_partners",
+            "icimod_huc_partners",
+            "HUC–ICIMOD Partners"
+          )}
         </div>
       </div>
     </div>

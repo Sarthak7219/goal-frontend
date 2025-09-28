@@ -16,6 +16,22 @@ function Gallery() {
   const [workshopPhotos, setWorkPhotos] = useState([]);
   const [nextVisitPage, setNextVisitPage] = useState(1);
   const [nextWorkshopPage, setNextWorkshopPage] = useState(1);
+  const [active, setActive] = useState("visit-pics");
+
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top, behavior: "smooth" });
+      setActive(id);
+    }
+  };
+
+  useEffect(() => {
+    setActive("visit-pics");
+  }, [currItemId]);
 
   const fetchVisitImages = async (id) => {
     if (nextVisitPage === null) return;
@@ -136,12 +152,30 @@ function Gallery() {
 
       <div className="container" id="gal-container">
         <div className="quick-link-box" id="gallery-sidebox">
-          <a href="#visit-pics" className="quicklink">
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("visit-pics")}
+            style={{
+              color:
+                active === "visit-pics"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Visit Photos
-          </a>
-          <a href="#workshop-pics" className="quicklink">
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("workshop-pics")}
+            style={{
+              color:
+                active === "workshop-pics"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Workshop Photos
-          </a>
+          </div>
         </div>
 
         <div className="right active" id="gallery-right">

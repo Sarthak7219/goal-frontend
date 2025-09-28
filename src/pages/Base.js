@@ -24,7 +24,6 @@ function Base() {
         setResults(data.results);
       } catch (error) {
         alert("Server error");
-        // console.error("Error fetching search results:", error);
       } finally {
         setLoading(false);
       }
@@ -66,14 +65,21 @@ function Base() {
             </li>
             <li>
               <NavLink to="/team#community_trainers">
-                Community Trainers
+                Community Knowledge Partners
               </NavLink>
             </li>
             <li>
-              <NavLink to="/team#intern">Interns</NavLink>
+              <NavLink to="/team#interns">Interns</NavLink>
             </li>
             <li>
-              <NavLink to="/team#students">Students</NavLink>
+              <NavLink to="/team#students">
+                Classroom Integration Partners
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/team#icimod_huc_partners">
+                HUC–ICIMOD Partners
+              </NavLink>
             </li>
           </ul>
         </li>
@@ -90,9 +96,13 @@ function Base() {
               <NavLink to="/resources#publications">Publications</NavLink>
             </li>
             <li>
-              <NavLink to="/resources#training_manuals">
-                Training Manuals
-              </NavLink>
+              <NavLink to="/resources#training_manuels">Training Tools</NavLink>
+            </li>
+            <li>
+              <NavLink to="/resources#flashcards">Flashcards</NavLink>
+            </li>
+            <li>
+              <NavLink to="/resources#maps">Maps</NavLink>
             </li>
           </ul>
         </li>
@@ -112,26 +122,26 @@ function Base() {
                 Theme 2 - Review of Gender Inequality
               </NavLink>
             </li>
-            {/* <li>
+            <li>
               <NavLink to="/theme/3">
-                Theme 3 - Gender-wise Determination of CC Impact
+                Theme 3 - Gender-wise Determination of Climate Change Impact
               </NavLink>
             </li>
             <li>
               <NavLink to="/theme/4">
-                Theme 4 - Gender-wise Determination of Disaster Risk
+                Theme 4 - Gender-wise Determination of Disaster Impact
               </NavLink>
             </li>
             <li>
               <NavLink to="/theme/5">
-                Theme 5 - Strategies for CC Adaptation
+                Theme 5 - Strategies for Climate Change Adaptation
               </NavLink>
             </li>
             <li>
               <NavLink to="/theme/6">
                 Theme 6 - Strategies for Disaster Risk Reduction
               </NavLink>
-            </li> */}
+            </li>
           </ul>
         </li>
         <li>

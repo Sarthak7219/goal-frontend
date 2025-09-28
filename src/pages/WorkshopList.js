@@ -53,10 +53,21 @@ function WorkshopList() {
               <div key={index}>
                 <div className="line"></div>
                 <div className="box">
-                  {/* <img src={workshop.image} alt="" /> */}
+                  <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>
+                    <img
+                      className="workshop-list-item-img"
+                      src={
+                        workshop.thumbnail
+                          ? workshop.thumbnail
+                          : "/static/images/workshop-thumbnail.jpg"
+                      }
+                    />
+                  </NavLink>
                   <div>
                     <div className="flex">
-                      <p>Workshop</p>
+                      <p className="workshop-list-item-venue">
+                        <b>Venue:</b> {workshop.venue}
+                      </p>
                       <p className="pink-date">{`${workshop.formatted_date} - ${workshop.formatted_end_date}`}</p>
                     </div>
                     <NavLink to={`/workshops/workshop-detail/${workshop.id}`}>

@@ -7,6 +7,18 @@ import { SERVER_URL } from "../constants/constants";
 function Resources() {
   const [isLoading, setIsLoading] = useState(true);
   const [resources, setResources] = useState([]);
+  const [active, setActive] = useState("publications");
+
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top, behavior: "smooth" });
+      setActive(id);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +28,6 @@ function Resources() {
         setResources(data);
       } catch (error) {
         alert("Error fetching resources");
-        // console.log("Error fetching resources:", error.message);
       } finally {
         setIsLoading(false);
       }
@@ -26,40 +37,53 @@ function Resources() {
     setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
-  // Reusable function for rendering resource lists
   const renderResourceList = (resourceArray, type) => {
     return (
       <div className="resources-container">
         {resourceArray && resourceArray.length > 0 ? (
-          resourceArray.map((resource) => (
-            <div className="resource-box" key={resource.id}>
-              <div className="detail">
-                <div>
-                  <p>{resource.publisher || ""}</p>
-                  <p className="date">{resource.date_of_publishing || ""}</p>
+          type !== "flashcards" && type !== "maps" ? (
+            resourceArray.map((resource) => (
+              <div className="resource-box" key={resource.id}>
+                <div className="detail">
+                  <div>
+                    <p>{resource.publisher || ""}</p>
+                    <p className="date">{resource.date_of_publishing || ""}</p>
+                  </div>
+                  <h3>{resource.title}</h3>
+
+                  {resource.pdf && (
+                    <a
+                      href={resource.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open PDF
+                    </a>
+                  )}
+
+                  {resource.link && (
+                    <a
+                      href={resource.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open Link
+                    </a>
+                  )}
                 </div>
-                <h3>{resource.title}</h3>
-                {resource.pdf && (
-                  <a
-                    href={`${SERVER_URL}${resource.pdf}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open PDF
-                  </a>
-                )}
-                {resource.link && (
-                  <a
-                    href={`${SERVER_URL}${resource.link}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Open Link
-                  </a>
-                )}
               </div>
-            </div>
-          ))
+            ))
+          ) : (
+            resourceArray.map(
+              (resource) =>
+                resource.image && (
+                  <div className="resource-img-box">
+                    <img src={resource.image} />
+                    <p>{resource.title}</p>
+                  </div>
+                )
+            )
+          )
         ) : (
           <p>No {type} found</p>
         )}
@@ -87,12 +111,52 @@ function Resources() {
 
       <div className="container">
         <div className="quick-link-box" id="resources-sidebox">
-          <a href="#publications" className="quicklink">
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("publications")}
+            style={{
+              color:
+                active === "publications"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Publications
-          </a>
-          <a href="#training-manuels" className="quicklink">
-            - Training Manuels
-          </a>
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("training_manuels")}
+            style={{
+              color:
+                active === "training_manuels"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
+            - Training Tools
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("flashcards")}
+            style={{
+              color:
+                active === "flashcards"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
+            - Flashcards
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("maps")}
+            style={{
+              color:
+                active === "maps" ? "var(--text-pink)" : "var(--text-black)",
+            }}
+          >
+            - Maps
+          </div>
         </div>
 
         <div className="right" id="resources-right">
@@ -101,20 +165,42 @@ function Resources() {
               <h1>Publications</h1>
             </div>
             {isLoading ? (
-              <ResourcesShimmer /> // Shimmer effect while loading
+              <ResourcesShimmer />
             ) : (
-              renderResourceList(resources.publication, "publications") // Render publications
+              renderResourceList(resources.publication, "publications")
             )}
           </section>
 
-          <section className="resources" id="training-manuels">
+          <section className="resources" id="training_manuels">
             <div className="section-head">
               <h1>Training Tools</h1>
             </div>
             {isLoading ? (
-              <ResourcesShimmer /> // Shimmer effect while loading
+              <ResourcesShimmer />
             ) : (
-              renderResourceList(resources.training_manual, "training tools") // Render training tools
+              renderResourceList(resources.training_manual, "training tools")
+            )}
+          </section>
+
+          <section className="resources" id="flashcards">
+            <div className="section-head">
+              <h1>Flashcards</h1>
+            </div>
+            {isLoading ? (
+              <ResourcesShimmer />
+            ) : (
+              renderResourceList(resources.flashcard, "flashcards")
+            )}
+          </section>
+
+          <section className="resources" id="maps">
+            <div className="section-head">
+              <h1>Maps</h1>
+            </div>
+            {isLoading ? (
+              <ResourcesShimmer />
+            ) : (
+              renderResourceList(resources.map, "maps")
             )}
           </section>
         </div>

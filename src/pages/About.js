@@ -6,8 +6,20 @@ import { get_about_data } from "../api/endpoints";
 import { SERVER_URL } from "../constants/constants";
 
 function About() {
-  const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
+  const [isLoading, setIsLoading] = useState(true);
   const [aboutData, setAboutData] = useState("");
+  const [active, setActive] = useState("abstract");
+
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top, behavior: "smooth" });
+      setActive(id);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,14 +28,13 @@ function About() {
         setAboutData(data);
       } catch (error) {
         alert("Server error");
-        // console.log("Error fetching about data:", error.message);
       } finally {
         setIsLoading(false);
       }
     };
     fetchData();
 
-    setTimeout(() => setIsLoading(false), 2000); // Simulate loading delay
+    setTimeout(() => setIsLoading(false), 2000);
   }, []);
 
   return (
@@ -57,12 +68,30 @@ function About() {
 
       <div className="container" id="about">
         <div className="quick-link-box" id="about-sidebox">
-          <a href="#abstract" className="quicklink">
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("abstract")}
+            style={{
+              color:
+                active === "abstract"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Abstract
-          </a>
-          <a href="#description" className="quicklink">
+          </div>
+          <div
+            className="quicklink"
+            onClick={() => handleScroll("description")}
+            style={{
+              color:
+                active === "description"
+                  ? "var(--text-pink)"
+                  : "var(--text-black)",
+            }}
+          >
             - Description
-          </a>
+          </div>
         </div>
 
         <div className="right" id="about-right">
@@ -117,7 +146,7 @@ function About() {
                     </div>
                   </div>
                 ) : (
-                  <p>Data not found</p> // or display a default message
+                  <p>Data not found</p>
                 )}
               </section>
               <section className="about" id="description">
@@ -131,7 +160,7 @@ function About() {
                     </div>
                   </div>
                 ) : (
-                  <p>Data not found</p> // or display a default message
+                  <p>Data not found</p>
                 )}
               </section>
             </>
