@@ -168,7 +168,10 @@ function Base() {
               <NavLink to="/casestudy/4">Chitwan, Nepal</NavLink>
             </li>
             <li>
-              <NavLink to="/casestudy/5">Gampaha, Sri Lanka</NavLink>
+              <NavLink to="/casestudy/6">Gampaha, Sri Lanka</NavLink>
+            </li>
+            <li>
+              <NavLink to="/casestudy/7">Kolapara, Patuakhali</NavLink>
             </li>
           </ul>
         </li>
