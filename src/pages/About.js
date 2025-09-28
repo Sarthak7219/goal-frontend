@@ -4,22 +4,12 @@ import AboutShimmer from "../components/AboutShimmer";
 import Markdown from "react-markdown";
 import { get_about_data } from "../api/endpoints";
 import { SERVER_URL } from "../constants/constants";
-import ZoomableImage from "../pages/ZoomableImage";
+import ZoomImage from "../pages/ZoomImage"; // ✅ Use from components folder
+
+// ...
 function About() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true); // Loading state for shimmer effect
   const [aboutData, setAboutData] = useState("");
-  const [active, setActive] = useState("abstract");
-
-  const handleScroll = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 100;
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-
-      window.scrollTo({ top, behavior: "smooth" });
-      setActive(id);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +18,14 @@ function About() {
         setAboutData(data);
       } catch (error) {
         alert("Server error");
+        // console.log("Error fetching about data:", error.message);
       } finally {
         setIsLoading(false);
       }
     };
     fetchData();
 
-    setTimeout(() => setIsLoading(false), 2000);
+    setTimeout(() => setIsLoading(false), 2000); // Simulate loading delay
   }, []);
 
   return (
@@ -68,30 +59,12 @@ function About() {
 
       <div className="container" id="about">
         <div className="quick-link-box" id="about-sidebox">
-          <div
-            className="quicklink"
-            onClick={() => handleScroll("abstract")}
-            style={{
-              color:
-                active === "abstract"
-                  ? "var(--text-pink)"
-                  : "var(--text-black)",
-            }}
-          >
+          <a href="#abstract" className="quicklink">
             - Abstract
-          </div>
-          <div
-            className="quicklink"
-            onClick={() => handleScroll("description")}
-            style={{
-              color:
-                active === "description"
-                  ? "var(--text-pink)"
-                  : "var(--text-black)",
-            }}
-          >
+          </a>
+          <a href="#description" className="quicklink">
             - Description
-          </div>
+          </a>
         </div>
 
         <div className="right" id="about-right">
@@ -109,21 +82,39 @@ function About() {
                       </Markdown>
                     </div>
                     <div className="about-image">
-                      <div className="image-grid">
-  <ZoomableImage
-    src={aboutData.img1 ? `${SERVER_URL}${aboutData.img1}` : "/static/images/img-bg.jpg"}
+                    
+
+<div className="image-grid">
+  <ZoomImage
+    src={
+      aboutData.img1
+        ? `${SERVER_URL}${aboutData.img1}`
+        : "/static/images/img-bg.jpg"
+    }
     alt="img-1"
   />
-  <ZoomableImage
-    src={aboutData.img2 ? `${SERVER_URL}${aboutData.img2}` : "/static/images/img-bg.jpg"}
+  <ZoomImage
+    src={
+      aboutData.img2
+        ? `${SERVER_URL}${aboutData.img2}`
+        : "/static/images/img-bg.jpg"
+    }
     alt="img-2"
   />
-  <ZoomableImage
-    src={aboutData.img3 ? `${SERVER_URL}${aboutData.img3}` : "/static/images/img-bg.jpg"}
+  <ZoomImage
+    src={
+      aboutData.img3
+        ? `${SERVER_URL}${aboutData.img3}`
+        : "/static/images/img-bg.jpg"
+    }
     alt="img-3"
   />
-  <ZoomableImage
-    src={aboutData.img4 ? `${SERVER_URL}${aboutData.img4}` : "/static/images/img-bg.jpg"}
+  <ZoomImage
+    src={
+      aboutData.img4
+        ? `${SERVER_URL}${aboutData.img4}`
+        : "/static/images/img-bg.jpg"
+    }
     alt="img-4"
   />
 </div>
@@ -131,7 +122,7 @@ function About() {
                     </div>
                   </div>
                 ) : (
-                  <p>Data not found</p>
+                  <p>Data not found</p> // or display a default message
                 )}
               </section>
               <section className="about" id="description">
@@ -145,7 +136,7 @@ function About() {
                     </div>
                   </div>
                 ) : (
-                  <p>Data not found</p>
+                  <p>Data not found</p> // or display a default message
                 )}
               </section>
             </>

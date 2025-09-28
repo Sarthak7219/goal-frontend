@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import ClickCarousel from "../components/ClickCarousel";
 import WorkshopCarousel from "../components/WorkshopCarousel";
 import { SERVER_URL } from "../constants/constants";
+import ZoomImage from "../pages/ZoomImage";
 import {
   get_homepage_data,
   get_about_data,
@@ -158,11 +159,11 @@ function Home() {
           <div className="about-image">
             {about ? (
               <div className="image-grid">
-  <GalleryZoomableImage src={`${SERVER_URL}${about.img1}`} alt="img-1" wrapperClass="">
-  </GalleryZoomableImage>
-  <GalleryZoomableImage src={`${SERVER_URL}${about.img2}`} alt="img-2" />
-  <GalleryZoomableImage src={`${SERVER_URL}${about.img3}`} alt="img-3" />
-  <GalleryZoomableImage src={`${SERVER_URL}${about.img4}`} alt="img-4" />
+  <ZoomImage src={`${SERVER_URL}${about.img1}`} alt="img-1" wrapperClass="">
+  </ZoomImage>
+  <ZoomImage src={`${SERVER_URL}${about.img2}`} alt="img-2" />
+  <ZoomImage src={`${SERVER_URL}${about.img3}`} alt="img-3" />
+  <ZoomImage src={`${SERVER_URL}${about.img4}`} alt="img-4" />
 </div>
 
             ) : (
