@@ -4,7 +4,7 @@ import AboutShimmer from "../components/AboutShimmer";
 import Markdown from "react-markdown";
 import { get_about_data } from "../api/endpoints";
 import { SERVER_URL } from "../constants/constants";
-
+import ZoomableImage from "../pages/ZoomableImage";
 function About() {
   const [isLoading, setIsLoading] = useState(true);
   const [aboutData, setAboutData] = useState("");
@@ -110,39 +110,24 @@ function About() {
                     </div>
                     <div className="about-image">
                       <div className="image-grid">
-                        <img
-                          src={
-                            aboutData.img1
-                              ? `${SERVER_URL}${aboutData.img1}`
-                              : "/static/images/img-bg.jpg"
-                          }
-                          alt="img-1"
-                        />
-                        <img
-                          src={
-                            aboutData.img2
-                              ? `${SERVER_URL}${aboutData.img2}`
-                              : "/static/images/img-bg.jpg"
-                          }
-                          alt="img-2"
-                        />
-                        <img
-                          src={
-                            aboutData.img3
-                              ? `${SERVER_URL}${aboutData.img3}`
-                              : "/static/images/img-bg.jpg"
-                          }
-                          alt="img-3"
-                        />
-                        <img
-                          src={
-                            aboutData.img4
-                              ? `${SERVER_URL}${aboutData.img4}`
-                              : "/static/images/img-bg.jpg"
-                          }
-                          alt="img-4"
-                        />
-                      </div>
+  <ZoomableImage
+    src={aboutData.img1 ? `${SERVER_URL}${aboutData.img1}` : "/static/images/img-bg.jpg"}
+    alt="img-1"
+  />
+  <ZoomableImage
+    src={aboutData.img2 ? `${SERVER_URL}${aboutData.img2}` : "/static/images/img-bg.jpg"}
+    alt="img-2"
+  />
+  <ZoomableImage
+    src={aboutData.img3 ? `${SERVER_URL}${aboutData.img3}` : "/static/images/img-bg.jpg"}
+    alt="img-3"
+  />
+  <ZoomableImage
+    src={aboutData.img4 ? `${SERVER_URL}${aboutData.img4}` : "/static/images/img-bg.jpg"}
+    alt="img-4"
+  />
+</div>
+
                     </div>
                   </div>
                 ) : (

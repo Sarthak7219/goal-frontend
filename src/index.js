@@ -6,6 +6,8 @@ import "./static/css/index.css";
 import "./static/css/style.css";
 import "./static/css/shimmer.css";
 
+
+
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 

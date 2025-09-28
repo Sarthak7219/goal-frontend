@@ -12,7 +12,7 @@ import {
   get_workshops,
   get_case_studies,
 } from "../api/endpoints";
-
+import GalleryZoomableImage from "../pages/ZoomableImage";
 function Home() {
   const videoRef = useRef(null);
   const [institutes, setInstitutes] = useState([]);
@@ -132,13 +132,14 @@ function Home() {
                   <p>Loading...</p>
                 ) : institutes && institutes.length > 0 ? (
                   institutes.map((institute, index) => (
-                    <img
-                      key={index}
-                      src={institute.logo}
-                      alt={institute.name}
-                      loading="lazy"
-                    />
-                  ))
+    <img
+      key={index}
+      src={institute.logo}
+      alt={institute.name}
+      caption={institute.name}
+    />
+  ))
+                 
                 ) : (
                   <p>No collaborating institutes found.</p>
                 )}
@@ -157,27 +158,13 @@ function Home() {
           <div className="about-image">
             {about ? (
               <div className="image-grid">
-                <img
-                  src={`${SERVER_URL}${about.img1}`}
-                  alt="img-1"
-                  loading="lazy"
-                />
-                <img
-                  src={`${SERVER_URL}${about.img2}`}
-                  alt="img-2"
-                  loading="lazy"
-                />
-                <img
-                  src={`${SERVER_URL}${about.img3}`}
-                  alt="img-3"
-                  loading="lazy"
-                />
-                <img
-                  src={`${SERVER_URL}${about.img4}`}
-                  alt="img-4"
-                  loading="lazy"
-                />
-              </div>
+  <GalleryZoomableImage src={`${SERVER_URL}${about.img1}`} alt="img-1" wrapperClass="">
+  </GalleryZoomableImage>
+  <GalleryZoomableImage src={`${SERVER_URL}${about.img2}`} alt="img-2" />
+  <GalleryZoomableImage src={`${SERVER_URL}${about.img3}`} alt="img-3" />
+  <GalleryZoomableImage src={`${SERVER_URL}${about.img4}`} alt="img-4" />
+</div>
+
             ) : (
               <div className="image-grid">
                 <img
@@ -343,17 +330,19 @@ function Home() {
               galleryPhotos &&
               galleryPhotos.length > 0 &&
               galleryPhotos.map((image, index) => (
-                <div className="img-hover-div" key={index}>
-                  <img
-                    src={image.image}
-                    alt={`img-${index + 1}`}
-                    loading="lazy"
-                  />
-                  <div className="image-info">
-                    <p className="date">Date: {image.formatted_date}</p>
-                    <p className="location">{image.caption}</p>
-                  </div>
-                </div>
+    <GalleryZoomableImage
+      key={index}
+      src={image.image}
+      alt={`img-${index + 1}`}
+      caption={image.caption}
+      date={image.formatted_date}
+      wrapperClass="img-hover-div"
+    >
+      <div className="image-info">
+        <p className="date">Date: {image.formatted_date}</p>
+        <p className="location">{image.caption}</p>
+      </div>
+    </GalleryZoomableImage>
               ))
             )}
           </div>

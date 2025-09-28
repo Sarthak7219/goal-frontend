@@ -1180,7 +1180,7 @@ background: #EC028C;
 
 
 .img-hover-div{
-    height: 188px;
+    
     width: 250px;
     position: relative;
 }
@@ -2887,3 +2887,77 @@ text-transform: capitalize;
   .search-results-dropdown li:hover {
     background-color: #f0f0f0;
   }
+.zoom-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zoom-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zoomed-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+}
+
+.zoom-caption {
+  margin-top: 10px;
+  color: #fff;
+  text-align: center;
+}
+
+.zoom-date,
+.zoom-text {
+  margin: 0;
+}
+
+.zoom-close-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #fff;
+  color: #333;
+  border: none;
+  font-size: 24px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  line-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gallery-img { cursor: pointer; }
+.img-hover-div img { display: block; }
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.zoom-in {
+  animation: zoomIn 0.3s ease;
+}
+

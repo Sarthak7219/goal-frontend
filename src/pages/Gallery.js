@@ -1,3 +1,4 @@
+// Gallery.jsx
 import React, { useState, useEffect } from "react";
 import GalleryShimmer from "../components/GalleryShimmer";
 import {
@@ -5,6 +6,8 @@ import {
   get_visit_photos,
   get_workshop_photos,
 } from "../api/endpoints";
+import { SERVER_URL } from "../constants/constants";
+import GalleryZoomableImage from "../pages/ZoomableImage";
 
 function Gallery() {
   const [list, setList] = useState([]);
@@ -36,14 +39,12 @@ function Gallery() {
   const fetchVisitImages = async (id) => {
     if (nextVisitPage === null) return;
     setLoadingVisitImages(true);
-
     try {
       const data1 = await get_visit_photos(id, nextVisitPage);
       setVisitPhotos((prevPhotos) => [...prevPhotos, ...data1.results]);
       setNextVisitPage(data1.next ? nextVisitPage + 1 : null);
     } catch (error) {
       alert("Error fetching visit images");
-      // console.error("Error fetching visit images", error.message);
     } finally {
       setLoadingVisitImages(false);
     }
@@ -52,26 +53,19 @@ function Gallery() {
   const fetchWorkshopImages = async (id) => {
     if (nextWorkshopPage === null) return;
     setLoadingWorkshopImages(true);
-
     try {
       const data2 = await get_workshop_photos(id, nextWorkshopPage);
       setWorkPhotos((prevPhotos) => [...prevPhotos, ...data2.results]);
       setNextWorkshopPage(data2.next ? nextWorkshopPage + 1 : null);
     } catch (error) {
       alert("Error fetching workshop images");
-      // console.error("Error fetching workshop images", error.message);
     } finally {
       setLoadingWorkshopImages(false);
     }
   };
 
-  const loadMoreVisitPhotos = (id) => {
-    fetchVisitImages(id);
-  };
-
-  const loadMoreWorkshopPhotos = (id) => {
-    fetchWorkshopImages(id);
-  };
+  const loadMoreVisitPhotos = (id) => fetchVisitImages(id);
+  const loadMoreWorkshopPhotos = (id) => fetchWorkshopImages(id);
 
   const fetchImages = async (id) => {
     setCurrItemId(id);
@@ -122,25 +116,20 @@ function Gallery() {
   return (
     <div className="gallery-page">
       <h1>See photos from all case studies</h1>
+
       <div className="gallery-cs-select">
         {loadingList ? (
           <p>Loading...</p>
         ) : list.length > 0 ? (
           list.map((box) => (
             <div
+              key={box.id}
               className={`gal-cs-box ${currItemId === box.id ? "active" : ""}`}
               onClick={() => {
-                if (currItemId !== box.id) {
-                  fetchImages(box.id);
-                }
+                if (currItemId !== box.id) fetchImages(box.id);
               }}
-              key={box.id}
             >
-              <img
-                src={box.thumbnail ? box.thumbnail : null}
-                alt="case-study-img"
-                loading="lazy"
-              />
+              <img src={box.thumbnail || ""} alt="case-study-img" loading="lazy" />
               <h2>{box.country}</h2>
               <p>{box.study_area}</p>
             </div>
@@ -189,37 +178,34 @@ function Gallery() {
               <div className="section-head2">
                 <h1>Visit Photos</h1>
               </div>
+
               {visitPhotos.length > 0 ? (
                 <div className="photo-container gallery-container">
-                  {visitPhotos.map((image, index) => (
-                    <div key={index} className="img-hover-div">
-                      <img
-                        src={image.image}
-                        alt={`img-${index}`}
-                        loading="lazy"
+                  {visitPhotos.map((image, index) => {
+                    // Use the image URL as-is since it's already a complete URL
+                    const src = image.image || "/static/images/img-bg.jpg";
+                    return (
+                      <GalleryZoomableImage
+                        key={image.id || index}
+                        src={src}
+                        alt={image.caption || `visit-img-${index}`}
+                        caption={image.caption}
+                        date={image.formatted_date}
                       />
-                      <div className="image-info">
-                        <p className="date">Date: {image.formatted_date}</p>
-                        <p className="location">{image.caption}</p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p>No visit photos available for this case study.</p>
               )}
-              {visitPhotos.length > 0 &&
-                nextVisitPage !== null &&
-                !loadingVisitImages && (
-                  <div className="page-number-wrapper">
-                    <button
-                      className="btn"
-                      onClick={() => loadMoreVisitPhotos(currItemId)}
-                    >
-                      Show More
-                    </button>
-                  </div>
-                )}
+
+              {visitPhotos.length > 0 && nextVisitPage !== null && !loadingVisitImages && (
+                <div className="page-number-wrapper">
+                  <button className="btn" onClick={() => loadMoreVisitPhotos(currItemId)}>
+                    Show More
+                  </button>
+                </div>
+              )}
             </section>
           )}
 
@@ -233,37 +219,34 @@ function Gallery() {
               <div className="section-head2">
                 <h1>Workshop Photos</h1>
               </div>
+
               {workshopPhotos.length > 0 ? (
                 <div className="photo-container gallery-container">
-                  {workshopPhotos.map((image, index) => (
-                    <div key={index} className="img-hover-div">
-                      <img
-                        src={image.image}
-                        alt={`img-${index}`}
-                        loading="lazy"
+                  {workshopPhotos.map((image, index) => {
+                    // Use the image URL as-is since it's already a complete URL
+                    const src = image.image || "/static/images/img-bg.jpg";
+                    return (
+                      <GalleryZoomableImage
+                        key={image.id || index}
+                        src={src}
+                        alt={image.caption || `workshop-img-${index}`}
+                        caption={image.caption}
+                        date={image.formatted_date}
                       />
-                      <div className="image-info">
-                        <p className="date">Date: {image.formatted_date}</p>
-                        <p className="location">{image.caption}</p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p>No workshop photos available for this case study.</p>
               )}
-              {workshopPhotos.length > 0 &&
-                nextWorkshopPage !== null &&
-                !loadingWorkshopImages && (
-                  <div className="page-number-wrapper">
-                    <button
-                      className="btn"
-                      onClick={() => loadMoreWorkshopPhotos(currItemId)}
-                    >
-                      Show More
-                    </button>
-                  </div>
-                )}
+
+              {workshopPhotos.length > 0 && nextWorkshopPage !== null && !loadingWorkshopImages && (
+                <div className="page-number-wrapper">
+                  <button className="btn" onClick={() => loadMoreWorkshopPhotos(currItemId)}>
+                    Show More
+                  </button>
+                </div>
+              )}
             </section>
           )}
         </div>
