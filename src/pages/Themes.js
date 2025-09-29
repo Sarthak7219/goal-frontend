@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import Markdown from "react-markdown";
 import { get_themes, get_theme_detail } from "../api/endpoints";
-
+import GalleryZoomableImage from "../pages/ZoomableImage";
 function Themes() {
   const { itemId } = useParams();
   const [list, setList] = useState([]);
@@ -145,13 +145,13 @@ function Themes() {
                   currItem.case_studies[activeOption].images.length > 0 ? (
                     currItem.case_studies[activeOption].images.map(
                       (image, index) => (
-                        <div className="img-hover-div" key={index}>
-                          <img src={image.image} alt={`img`} />
-                          <div className="image-info">
-                            <p className="date">{image.formatted_date}</p>
-                            <p className="location">{image.caption}</p>
-                          </div>
-                        </div>
+                        <GalleryZoomableImage
+                                                key={image.id || index}
+                                                src={image.image}
+                                                alt={image.caption || `visit-img-${index}`}
+                                                caption={image.caption}
+                                                date={image.formatted_date}
+                                              />
                       )
                     )
                   ) : (
