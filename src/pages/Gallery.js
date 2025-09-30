@@ -129,7 +129,11 @@ function Gallery() {
                 if (currItemId !== box.id) fetchImages(box.id);
               }}
             >
-              <img src={box.thumbnail || ""} alt="case-study-img" loading="lazy" />
+              <img
+                src={box.thumbnail || ""}
+                alt="case-study-img"
+                loading="lazy"
+              />
               <h2>{box.country}</h2>
               <p>{box.study_area}</p>
             </div>
@@ -199,13 +203,18 @@ function Gallery() {
                 <p>No visit photos available for this case study.</p>
               )}
 
-              {visitPhotos.length > 0 && nextVisitPage !== null && !loadingVisitImages && (
-                <div className="page-number-wrapper">
-                  <button className="btn" onClick={() => loadMoreVisitPhotos(currItemId)}>
-                    Show More
-                  </button>
-                </div>
-              )}
+              {visitPhotos.length > 0 &&
+                nextVisitPage !== null &&
+                !loadingVisitImages && (
+                  <div className="page-number-wrapper">
+                    <button
+                      className="btn"
+                      onClick={() => loadMoreVisitPhotos(currItemId)}
+                    >
+                      Show More
+                    </button>
+                  </div>
+                )}
             </section>
           )}
 
@@ -240,13 +249,18 @@ function Gallery() {
                 <p>No workshop photos available for this case study.</p>
               )}
 
-              {workshopPhotos.length > 0 && nextWorkshopPage !== null && !loadingWorkshopImages && (
-                <div className="page-number-wrapper">
-                  <button className="btn" onClick={() => loadMoreWorkshopPhotos(currItemId)}>
-                    Show More
-                  </button>
-                </div>
-              )}
+              {workshopPhotos.length > 0 &&
+                nextWorkshopPage !== null &&
+                !loadingWorkshopImages && (
+                  <div className="page-number-wrapper">
+                    <button
+                      className="btn"
+                      onClick={() => loadMoreWorkshopPhotos(currItemId)}
+                    >
+                      Show More
+                    </button>
+                  </div>
+                )}
             </section>
           )}
         </div>

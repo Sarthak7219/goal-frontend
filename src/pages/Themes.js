@@ -38,7 +38,6 @@ function Themes() {
         }
       } catch (error) {
         alert("Error fetching theme data");
-        // console.log("Error fetching themes:", error.message);
       } finally {
         setLoadingList(false);
       }
@@ -73,7 +72,9 @@ function Themes() {
               <NavLink
                 key={index}
                 className={`theme-quicklink ${
-                  currItem && currItem.id && currItem.id === theme.id ? "active" : ""
+                  currItem && currItem.id && currItem.id === theme.id
+                    ? "active"
+                    : ""
                 }`}
                 to={`/theme/${theme.id}`}
               >
@@ -146,12 +147,12 @@ function Themes() {
                     currItem.case_studies[activeOption].images.map(
                       (image, index) => (
                         <GalleryZoomableImage
-                                                key={image.id || index}
-                                                src={image.image}
-                                                alt={image.caption || `visit-img-${index}`}
-                                                caption={image.caption}
-                                                date={image.formatted_date}
-                                              />
+                          key={image.id || index}
+                          src={image.image}
+                          alt={image.caption || `visit-img-${index}`}
+                          caption={image.caption}
+                          date={image.formatted_date}
+                        />
                       )
                     )
                   ) : (

@@ -5,7 +5,6 @@ export default function ZoomableImage({ src, alt = "image" }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const prevOverflowRef = useRef(null);
 
-  // Lock/unlock scroll
   useEffect(() => {
     if (isZoomed) {
       prevOverflowRef.current = document.body.style.overflow;
@@ -21,7 +20,6 @@ export default function ZoomableImage({ src, alt = "image" }) {
     };
   }, [isZoomed]);
 
-  // Close on Escape
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape") setIsZoomed(false);
@@ -40,7 +38,6 @@ export default function ZoomableImage({ src, alt = "image" }) {
     setIsZoomed(false);
   };
 
-  // Styles (same as GalleryZoomableImage)
   const overlayStyle = {
     position: "fixed",
     inset: 0,

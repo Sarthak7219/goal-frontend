@@ -2,7 +2,6 @@ import axios from "axios";
 import { SERVER_URL } from "../constants/constants";
 
 const BASE_URL = SERVER_URL;
-console.log("BASE_URL:", BASE_URL);
 export const api = axios.create({
   baseURL: `${BASE_URL}/api`,
 });
