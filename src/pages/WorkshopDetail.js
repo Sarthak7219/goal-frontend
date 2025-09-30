@@ -176,7 +176,9 @@ function WorkshopDetail() {
                 </div>
                 <div>
                   <h4>Mode:</h4>
-                  <p>{workshop.mode}</p>
+                  <p>
+                    {workshop.mode === "offline" ? "In person" : workshop.mode}
+                  </p>
                 </div>
                 <div>
                   <h4>Venue:</h4>
